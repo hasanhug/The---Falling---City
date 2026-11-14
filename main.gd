@@ -38,7 +38,7 @@ func _physics_process(delta: float) -> void:
 
 	# 3. Swing the hook across the gap: low near the first roof, high by the tower.
 	var swing := sin(_time * HOOK_SPEED)
-	hook.position = Vector3(-32.0, 15.15 - 2.65 * swing, -19.0 + 4.5 * swing)
+	hook.position = Vector3(-32.0, 14.55 - 2.55 * swing, -19.0 + 4.5 * swing)
 	_update_cable()
 
 	# 4. Rotate the crane arm slowly, like a clock hand.

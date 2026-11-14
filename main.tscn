@@ -335,7 +335,7 @@ roughness = 0.8
 size = Vector3(2, 0.9, 6)
 
 [sub_resource type="BoxShape3D" id="ContainerShape"]
-size = Vector3(2, 1.6, 3.4)
+size = Vector3(2, 1.1, 3.4)
 
 [sub_resource type="BoxShape3D" id="CabShape"]
 size = Vector3(2, 1.4, 1.6)
@@ -1037,13 +1037,13 @@ position = Vector3(0, 0.45, 0)
 shape = SubResource("ChassisShape")
 
 [node name="Container" type="MeshInstance3D" parent="Parkour/Truck"]
-position = Vector3(0, 1.8, 1.2)
-scale = Vector3(2, 1.6, 3.4)
+position = Vector3(0, 1.45, 1.2)
+scale = Vector3(2, 1.1, 3.4)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TruckMat")
 
 [node name="ContainerCollision" type="CollisionShape3D" parent="Parkour/Truck"]
-position = Vector3(0, 1.8, 1.2)
+position = Vector3(0, 1.45, 1.2)
 shape = SubResource("ContainerShape")
 
 [node name="Cab" type="MeshInstance3D" parent="Parkour/Truck"]
@@ -1198,7 +1198,7 @@ mesh = SubResource("CableMesh")
 surface_material_override/0 = SubResource("WornGrey")
 
 [node name="ArmPivot" type="Node3D" parent="Parkour"]
-position = Vector3(-30, 19.9, -30)
+position = Vector3(-30, 19.3, -30)
 
 [node name="Motor" type="MeshInstance3D" parent="Parkour/ArmPivot"]
 position = Vector3(0, 0.6, 0)
@@ -1223,7 +1223,7 @@ mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("WornGrey")
 
 [node name="EndPlatform" type="StaticBody3D" parent="Parkour"]
-position = Vector3(-42, 19.35, -30)
+position = Vector3(-42, 18.85, -30)
 
 [node name="Mesh" type="MeshInstance3D" parent="Parkour/EndPlatform"]
 mesh = SubResource("EndShape")

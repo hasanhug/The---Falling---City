@@ -145,14 +145,17 @@ func _add_wall(tool: SurfaceTool, upper_ring: PackedVector3Array, lower_ring: Pa
 
 
 ## Adds one triangle to the mesh and remembers it for the collision shape.
+## Note: b and c are added in swapped order on purpose — it flips every
+## face so the top surface and outer walls face the player (the original
+## winding rendered inside-out). Collision is two-sided, so it is unaffected.
 ## Zero-area (degenerate) triangles are skipped: they render as nothing and
 ## can upset the physics engine's shape building.
 func _add_triangle(tool: SurfaceTool, a: Vector3, b: Vector3, c: Vector3) -> void:
 	if (b - a).cross(c - a).length_squared() < 0.000001:
 		return
 	tool.add_vertex(a)
-	tool.add_vertex(b)
 	tool.add_vertex(c)
+	tool.add_vertex(b)
 	_faces.append(a)
-	_faces.append(b)
 	_faces.append(c)
+	_faces.append(b)

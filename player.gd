@@ -4,8 +4,15 @@ extends CharacterBody3D
 const SPEED := 6.0
 ## How much faster the player moves while sprinting.
 const SPRINT_MULTIPLIER := 1.6
-## Upward speed given to the player when jumping.
-const JUMP_VELOCITY := 6.5
+## Upward speed given to the player when jumping (reaches ~1.5 m).
+const JUMP_VELOCITY := 4.6
+## Player gravity while rising: lower than real gravity for a light jump.
+const GRAVITY_UP := 7.0
+## Falling gravity multiplier: drops stay fast and weighty, never floaty.
+const FALL_GRAVITY_MULT := 1.8
+## Near the apex (rising slower than this), extra gravity kills the hang.
+const APEX_THRESHOLD := 1.2
+const APEX_EXTRA_MULT := 1.5
 ## How quickly the player model turns to face the direction it moves in.
 const TURN_SPEED := 10.0
 ## If the player falls below this height, respawn at the start.
@@ -84,7 +91,7 @@ func _physics_process(delta: float) -> void:
 		# 2a. Climbing: Space leaps off, S lets go, otherwise keep scaling the wall.
 		if Input.is_action_just_pressed("jump"):
 			_climbing = false
-			velocity = _wall_normal * 3.5 + Vector3.UP * 5.0
+			velocity = _wall_normal * 3.5 + Vector3.UP * 4.4
 		elif input_dir.y > 0.3:
 			_climbing = false
 			velocity = Vector3.ZERO
@@ -96,7 +103,13 @@ func _physics_process(delta: float) -> void:
 	else:
 		# 2b. Normal movement: gravity and jumping.
 		if not is_on_floor():
-			velocity += get_gravity() * delta
+			# Asymmetric gravity: light rise, snappy fall, no apex hang.
+			var gravity := GRAVITY_UP
+			if velocity.y <= 0.0:
+				gravity *= FALL_GRAVITY_MULT
+			elif velocity.y < APEX_THRESHOLD:
+				gravity *= APEX_EXTRA_MULT
+			velocity.y -= gravity * delta
 		if Input.is_action_just_pressed("jump") and is_on_floor():
 			velocity.y = JUMP_VELOCITY
 
