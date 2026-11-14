@@ -13,6 +13,8 @@ const SHAKE_PEAK := 0.5
 const PILLAR_WOBBLE := 1.2
 ## The fall: how far the camera lurches down, per second.
 const FALL_DROP := 30.0
+## How long the objective text shows once control begins.
+const OBJECTIVE_TIME := 4.5
 
 @onready var player: Node = get_node("../Player")
 @onready var camera_pivot: Node3D = get_node("../Player/CameraPivot")
@@ -20,11 +22,13 @@ const FALL_DROP := 30.0
 @onready var timer_label: Label = $UI/TimerLabel
 @onready var fade_rect: ColorRect = $UI/FadeRect
 @onready var end_label: Label = $UI/EndLabel
+@onready var objective_label: Label = $UI/ObjectiveLabel
 
 var _started := false
 var _fallen := false
 var _time_left := COUNTDOWN_TIME
 var _fall_time := 0.0
+var _objective_time := 0.0
 var _pivot_base := Vector3.ZERO
 var _pillar_bases: Array[Vector3] = []
 var _rng := RandomNumberGenerator.new()
@@ -54,8 +58,11 @@ func _process(delta: float) -> void:
 	if not _started:
 		if get_node_or_null("../Cutscene") == null:
 			_started = true
+			_objective_time = OBJECTIVE_TIME
 		else:
 			return
+
+	_update_objective(delta)
 
 	if not _fallen:
 		_countdown(delta)
@@ -127,3 +134,17 @@ func _update_timer_label() -> void:
 	else:
 		timer_label.modulate = Color(1, 1, 1, 1)
 		timer_label.scale = Vector2.ONE
+
+
+## The objective text: quick fade in, hold, fade out after control begins.
+func _update_objective(delta: float) -> void:
+	if _objective_time <= 0.0:
+		objective_label.modulate.a = 0.0
+		return
+	_objective_time -= delta
+	var alpha := 1.0
+	if _objective_time > OBJECTIVE_TIME - 0.7:
+		alpha = (OBJECTIVE_TIME - _objective_time) / 0.7
+	elif _objective_time < 0.7:
+		alpha = _objective_time / 0.7
+	objective_label.modulate.a = clampf(alpha, 0.0, 1.0)

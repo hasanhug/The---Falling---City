@@ -2916,6 +2916,16 @@ anchor_bottom = 1.0
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
 
+[node name="ObjectiveLabel" type="Label" parent="Rumble/UI"]
+anchor_top = 0.14
+anchor_right = 1.0
+anchor_bottom = 0.24
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 40
+modulate = Color(1, 1, 1, 0)
+text = "Find the parkour course and escape"
+
 [node name="EndLabel" type="Label" parent="Rumble/UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
