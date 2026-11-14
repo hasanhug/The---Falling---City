@@ -1,8 +1,12 @@
-[gd_scene load_steps=68 format=3]
+[gd_scene load_steps=70 format=3]
 
 [ext_resource type="Script" path="res://main.gd" id="1_main_script"]
 
 [ext_resource type="PackedScene" path="res://player.tscn" id="1_player"]
+
+[ext_resource type="PackedScene" path="res://car.tscn" id="2_car"]
+
+[ext_resource type="PackedScene" path="res://tree.tscn" id="3_tree"]
 
 [sub_resource type="ProceduralSkyMaterial" id="SkyMat"]
 sky_top_color = Color(0.05, 0.04, 0.18, 1)
@@ -276,6 +280,171 @@ size = Vector3(1.2, 24, 1.2)
 [sub_resource type="BoxShape3D" id="CraneArmShape"]
 size = Vector3(1, 0.4, 23)
 
+[sub_resource type="StandardMaterial3D" id="PalBrick"]
+albedo_color = Color(0.55, 0.28, 0.22, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="PalTerra"]
+albedo_color = Color(0.65, 0.4, 0.3, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="PalBeige"]
+albedo_color = Color(0.76, 0.7, 0.58, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="PalCream"]
+albedo_color = Color(0.82, 0.79, 0.7, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="PalBrown"]
+albedo_color = Color(0.45, 0.35, 0.28, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="PalSage"]
+albedo_color = Color(0.55, 0.58, 0.48, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="PalSlate"]
+albedo_color = Color(0.45, 0.48, 0.55, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="PalOffWhite"]
+albedo_color = Color(0.85, 0.85, 0.82, 1)
+roughness = 0.85
+
+[sub_resource type="BoxShape3D" id="I1Shape"]
+size = Vector3(10, 11, 10)
+
+[sub_resource type="BoxShape3D" id="I2Shape"]
+size = Vector3(10, 7, 10)
+
+[sub_resource type="BoxShape3D" id="I4Shape"]
+size = Vector3(5, 6, 5)
+
+[sub_resource type="StandardMaterial3D" id="TruckMat"]
+albedo_color = Color(0.3, 0.34, 0.4, 1)
+roughness = 0.7
+
+[sub_resource type="StandardMaterial3D" id="BillboardMat"]
+albedo_color = Color(0.15, 0.15, 0.18, 1)
+roughness = 0.8
+
+[sub_resource type="BoxShape3D" id="ChassisShape"]
+size = Vector3(2, 0.9, 6)
+
+[sub_resource type="BoxShape3D" id="ContainerShape"]
+size = Vector3(2, 1.6, 3.4)
+
+[sub_resource type="BoxShape3D" id="CabShape"]
+size = Vector3(2, 1.4, 1.6)
+
+[sub_resource type="CylinderMesh" id="WheelMesh"]
+top_radius = 0.45
+bottom_radius = 0.45
+height = 0.3
+
+[sub_resource type="BoxMesh" id="BillboardMesh"]
+size = Vector3(6, 4.5, 0.25)
+
+[sub_resource type="BoxMesh" id="PlankMesh"]
+size = Vector3(1.4, 0.2, 2.2)
+
+[sub_resource type="BoxShape3D" id="PlankShape"]
+size = Vector3(1.4, 0.2, 2.2)
+
+[sub_resource type="BoxMesh" id="HookMesh"]
+size = Vector3(0.9, 0.5, 0.9)
+
+[sub_resource type="BoxShape3D" id="HookShape"]
+size = Vector3(0.9, 0.5, 0.9)
+
+[sub_resource type="BoxMesh" id="CableMesh"]
+size = Vector3(0.06, 0.06, 1)
+
+[sub_resource type="BoxMesh" id="ArmMesh"]
+size = Vector3(6.5, 0.3, 0.7)
+
+[sub_resource type="BoxShape3D" id="ArmShape"]
+size = Vector3(6.5, 0.3, 0.7)
+
+[sub_resource type="BoxMesh" id="MotorMesh"]
+size = Vector3(1.4, 1.2, 1.4)
+
+[sub_resource type="BoxShape3D" id="EndShape"]
+size = Vector3(2.4, 0.4, 2.4)
+
+[sub_resource type="StandardMaterial3D" id="CarRed"]
+albedo_color = Color(0.55, 0.15, 0.13, 1)
+roughness = 0.4
+metallic = 0.3
+
+[sub_resource type="StandardMaterial3D" id="CarSilver"]
+albedo_color = Color(0.72, 0.73, 0.75, 1)
+roughness = 0.35
+metallic = 0.4
+
+[sub_resource type="StandardMaterial3D" id="CarWhite"]
+albedo_color = Color(0.88, 0.88, 0.9, 1)
+roughness = 0.4
+metallic = 0.2
+
+[sub_resource type="StandardMaterial3D" id="CarBlack"]
+albedo_color = Color(0.12, 0.12, 0.14, 1)
+roughness = 0.35
+metallic = 0.4
+
+[sub_resource type="StandardMaterial3D" id="CarBlue"]
+albedo_color = Color(0.2, 0.3, 0.5, 1)
+roughness = 0.4
+metallic = 0.3
+
+[sub_resource type="StandardMaterial3D" id="CarYellow"]
+albedo_color = Color(0.85, 0.7, 0.15, 1)
+roughness = 0.4
+metallic = 0.2
+
+[sub_resource type="StandardMaterial3D" id="TireMat"]
+albedo_color = Color(0.1, 0.1, 0.11, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="CarBodyMesh"]
+size = Vector3(1.9, 0.6, 4.2)
+
+[sub_resource type="BoxMesh" id="CarCabinMesh"]
+size = Vector3(1.7, 0.5, 2)
+
+[sub_resource type="CylinderMesh" id="CarWheelMesh"]
+top_radius = 0.35
+bottom_radius = 0.35
+height = 0.25
+
+[sub_resource type="BoxShape3D" id="CarShape"]
+size = Vector3(1.9, 1.55, 4.2)
+
+[sub_resource type="BoxMesh" id="BenchSeatMesh"]
+size = Vector3(1.8, 0.1, 0.5)
+
+[sub_resource type="BoxMesh" id="BenchLegMesh"]
+size = Vector3(0.1, 0.45, 0.4)
+
+[sub_resource type="CylinderMesh" id="CanMesh"]
+top_radius = 0.35
+bottom_radius = 0.35
+height = 0.9
+
+[sub_resource type="BoxMesh" id="PlanterMesh"]
+size = Vector3(1.6, 0.5, 1.6)
+
+[sub_resource type="BoxMesh" id="HedgeMesh"]
+size = Vector3(1.4, 0.6, 1.4)
+
+[sub_resource type="BoxMesh" id="ACMesh"]
+size = Vector3(1.2, 0.8, 1.2)
+
+[sub_resource type="StandardMaterial3D" id="LeafMatB"]
+albedo_color = Color(0.3, 0.45, 0.28, 1)
+roughness = 0.9
+
 [node name="Main" type="Node3D"]
 script = ExtResource("1_main_script")
 
@@ -492,7 +661,7 @@ position = Vector3(10, 0, -30)
 position = Vector3(0, 6, 0)
 scale = Vector3(11, 12, 11)
 mesh = SubResource("UnitBoxMesh")
-surface_material_override/0 = SubResource("BuildingDarkA")
+surface_material_override/0 = SubResource("PalBrick")
 
 [node name="Collision" type="CollisionShape3D" parent="Buildings/G1"]
 position = Vector3(0, 6, 0)
@@ -517,7 +686,7 @@ position = Vector3(30, 0, -30)
 position = Vector3(0, 8, 0)
 scale = Vector3(12, 16, 12)
 mesh = SubResource("UnitBoxMesh")
-surface_material_override/0 = SubResource("BuildingDarkB")
+surface_material_override/0 = SubResource("PalSlate")
 
 [node name="Collision" type="CollisionShape3D" parent="Buildings/G2"]
 position = Vector3(0, 8, 0)
@@ -548,7 +717,7 @@ position = Vector3(-10, 0, -10)
 position = Vector3(0, 5, 0)
 scale = Vector3(10, 10, 10)
 mesh = SubResource("UnitBoxMesh")
-surface_material_override/0 = SubResource("BuildingDarkA")
+surface_material_override/0 = SubResource("PalBeige")
 
 [node name="Collision" type="CollisionShape3D" parent="Buildings/G3"]
 position = Vector3(0, 5, 0)
@@ -573,7 +742,7 @@ position = Vector3(10, 0, -10)
 position = Vector3(0, 6.5, 0)
 scale = Vector3(11, 13, 11)
 mesh = SubResource("UnitBoxMesh")
-surface_material_override/0 = SubResource("BuildingDarkB")
+surface_material_override/0 = SubResource("PalTerra")
 
 [node name="Collision" type="CollisionShape3D" parent="Buildings/G4"]
 position = Vector3(0, 6.5, 0)
@@ -598,7 +767,7 @@ position = Vector3(30, 0, -10)
 position = Vector3(0, 10, 0)
 scale = Vector3(12, 20, 12)
 mesh = SubResource("UnitBoxMesh")
-surface_material_override/0 = SubResource("BuildingDarkA")
+surface_material_override/0 = SubResource("PalCream")
 
 [node name="Collision" type="CollisionShape3D" parent="Buildings/G5"]
 position = Vector3(0, 10, 0)
@@ -629,7 +798,7 @@ position = Vector3(-10, 0, 10)
 position = Vector3(0, 4.5, 0)
 scale = Vector3(10, 9, 10)
 mesh = SubResource("UnitBoxMesh")
-surface_material_override/0 = SubResource("BuildingDarkB")
+surface_material_override/0 = SubResource("PalSage")
 
 [node name="Collision" type="CollisionShape3D" parent="Buildings/G6"]
 position = Vector3(0, 4.5, 0)
@@ -654,7 +823,7 @@ position = Vector3(10, 0, 10)
 position = Vector3(0, 6, 0)
 scale = Vector3(11, 12, 11)
 mesh = SubResource("UnitBoxMesh")
-surface_material_override/0 = SubResource("BuildingDarkA")
+surface_material_override/0 = SubResource("PalBrown")
 
 [node name="Collision" type="CollisionShape3D" parent="Buildings/G7"]
 position = Vector3(0, 6, 0)
@@ -679,7 +848,7 @@ position = Vector3(30, 0, 10)
 position = Vector3(0, 7.5, 0)
 scale = Vector3(12, 15, 12)
 mesh = SubResource("UnitBoxMesh")
-surface_material_override/0 = SubResource("BuildingDarkB")
+surface_material_override/0 = SubResource("PalOffWhite")
 
 [node name="Collision" type="CollisionShape3D" parent="Buildings/G8"]
 position = Vector3(0, 7.5, 0)
@@ -710,7 +879,7 @@ position = Vector3(-32, 0, 10)
 position = Vector3(0, 5, 0)
 scale = Vector3(10, 10, 10)
 mesh = SubResource("UnitBoxMesh")
-surface_material_override/0 = SubResource("BuildingDarkA")
+surface_material_override/0 = SubResource("PalSlate")
 
 [node name="Collision" type="CollisionShape3D" parent="Buildings/G9"]
 position = Vector3(0, 5, 0)
@@ -735,7 +904,7 @@ position = Vector3(28, 0, 32)
 position = Vector3(0, 4.5, 0)
 scale = Vector3(10, 9, 10)
 mesh = SubResource("UnitBoxMesh")
-surface_material_override/0 = SubResource("BuildingDarkB")
+surface_material_override/0 = SubResource("PalBrick")
 
 [node name="Collision" type="CollisionShape3D" parent="Buildings/G10"]
 position = Vector3(0, 4.5, 0)
@@ -750,6 +919,75 @@ surface_material_override/0 = SubResource("TrimOrange")
 [node name="Band" type="MeshInstance3D" parent="Buildings/G10"]
 position = Vector3(0, 4.05, 0)
 scale = Vector3(10.25, 0.5, 10.25)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("TrimCyan")
+
+[node name="I1" type="StaticBody3D" parent="Buildings"]
+position = Vector3(-32, 0, -10)
+
+[node name="Mesh" type="MeshInstance3D" parent="Buildings/I1"]
+position = Vector3(0, 5.5, 0)
+scale = Vector3(10, 11, 10)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("PalCream")
+
+[node name="Collision" type="CollisionShape3D" parent="Buildings/I1"]
+position = Vector3(0, 5.5, 0)
+shape = SubResource("I1Shape")
+
+[node name="Trim" type="MeshInstance3D" parent="Buildings/I1"]
+position = Vector3(0, 10.85, 0)
+scale = Vector3(10.3, 0.3, 10.3)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("TrimCyan")
+
+[node name="Band" type="MeshInstance3D" parent="Buildings/I1"]
+position = Vector3(0, 4.95, 0)
+scale = Vector3(10.25, 0.5, 10.25)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("TrimOrange")
+
+[node name="I2" type="StaticBody3D" parent="Buildings"]
+position = Vector3(10, 0, 30)
+
+[node name="Mesh" type="MeshInstance3D" parent="Buildings/I2"]
+position = Vector3(0, 3.5, 0)
+scale = Vector3(10, 7, 10)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("PalBeige")
+
+[node name="Collision" type="CollisionShape3D" parent="Buildings/I2"]
+position = Vector3(0, 3.5, 0)
+shape = SubResource("I2Shape")
+
+[node name="Trim" type="MeshInstance3D" parent="Buildings/I2"]
+position = Vector3(0, 6.85, 0)
+scale = Vector3(10.3, 0.3, 10.3)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("TrimCyan")
+
+[node name="Band" type="MeshInstance3D" parent="Buildings/I2"]
+position = Vector3(0, 3.15, 0)
+scale = Vector3(10.25, 0.5, 10.25)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("TrimOrange")
+
+[node name="I4" type="StaticBody3D" parent="Buildings"]
+position = Vector3(35, 0, 25)
+
+[node name="Mesh" type="MeshInstance3D" parent="Buildings/I4"]
+position = Vector3(0, 3, 0)
+scale = Vector3(5, 6, 5)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("PalSlate")
+
+[node name="Collision" type="CollisionShape3D" parent="Buildings/I4"]
+position = Vector3(0, 3, 0)
+shape = SubResource("I4Shape")
+
+[node name="Trim" type="MeshInstance3D" parent="Buildings/I4"]
+position = Vector3(0, 5.85, 0)
+scale = Vector3(5.3, 0.3, 5.3)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimCyan")
 
@@ -797,199 +1035,252 @@ surface_material_override/0 = SubResource("WoodMat")
 [node name="Collision" type="CollisionShape3D" parent="Parkour/Crate"]
 shape = SubResource("CrateShape")
 
-[node name="R1" type="StaticBody3D" parent="Parkour" groups=["climbable"]]
-position = Vector3(15.95, 1.55, -26.5)
+[node name="Truck" type="StaticBody3D" parent="Parkour"]
+position = Vector3(-31, 0, 20)
 
-[node name="Mesh" type="MeshInstance3D" parent="Parkour/R1"]
-mesh = SubResource("LedgeMesh")
-surface_material_override/0 = SubResource("BuildingDarkA")
+[node name="Chassis" type="MeshInstance3D" parent="Parkour/Truck"]
+position = Vector3(0, 0.45, 0)
+scale = Vector3(2, 0.9, 6)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("TruckMat")
 
-[node name="Collision" type="CollisionShape3D" parent="Parkour/R1"]
-shape = SubResource("LedgeShape")
+[node name="ChassisCollision" type="CollisionShape3D" parent="Parkour/Truck"]
+position = Vector3(0, 0.45, 0)
+shape = SubResource("ChassisShape")
 
-[node name="R2" type="StaticBody3D" parent="Parkour" groups=["climbable"]]
-position = Vector3(15.95, 3.25, -27.8)
+[node name="Container" type="MeshInstance3D" parent="Parkour/Truck"]
+position = Vector3(0, 1.8, 1.2)
+scale = Vector3(2, 1.6, 3.4)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("TruckMat")
 
-[node name="Mesh" type="MeshInstance3D" parent="Parkour/R2"]
-mesh = SubResource("LedgeMesh")
-surface_material_override/0 = SubResource("BuildingDarkA")
+[node name="ContainerCollision" type="CollisionShape3D" parent="Parkour/Truck"]
+position = Vector3(0, 1.8, 1.2)
+shape = SubResource("ContainerShape")
 
-[node name="Collision" type="CollisionShape3D" parent="Parkour/R2"]
-shape = SubResource("LedgeShape")
+[node name="Cab" type="MeshInstance3D" parent="Parkour/Truck"]
+position = Vector3(0, 1.65, -2.2)
+scale = Vector3(2, 1.4, 1.6)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("TruckMat")
 
-[node name="R3" type="StaticBody3D" parent="Parkour" groups=["climbable"]]
-position = Vector3(15.95, 4.95, -26.5)
+[node name="CabCollision" type="CollisionShape3D" parent="Parkour/Truck"]
+position = Vector3(0, 1.65, -2.2)
+shape = SubResource("CabShape")
 
-[node name="Mesh" type="MeshInstance3D" parent="Parkour/R3"]
-mesh = SubResource("LedgeMesh")
-surface_material_override/0 = SubResource("BuildingDarkA")
-
-[node name="Collision" type="CollisionShape3D" parent="Parkour/R3"]
-shape = SubResource("LedgeShape")
-
-[node name="R4" type="StaticBody3D" parent="Parkour" groups=["climbable"]]
-position = Vector3(15.95, 6.65, -27.8)
-
-[node name="Mesh" type="MeshInstance3D" parent="Parkour/R4"]
-mesh = SubResource("LedgeMesh")
-surface_material_override/0 = SubResource("BuildingDarkA")
-
-[node name="Collision" type="CollisionShape3D" parent="Parkour/R4"]
-shape = SubResource("LedgeShape")
-
-[node name="R5" type="StaticBody3D" parent="Parkour" groups=["climbable"]]
-position = Vector3(15.95, 8.35, -26.5)
-
-[node name="Mesh" type="MeshInstance3D" parent="Parkour/R5"]
-mesh = SubResource("LedgeMesh")
-surface_material_override/0 = SubResource("BuildingDarkA")
-
-[node name="Collision" type="CollisionShape3D" parent="Parkour/R5"]
-shape = SubResource("LedgeShape")
-
-[node name="R6" type="StaticBody3D" parent="Parkour" groups=["climbable"]]
-position = Vector3(15.95, 10.05, -27.8)
-
-[node name="Mesh" type="MeshInstance3D" parent="Parkour/R6"]
-mesh = SubResource("LedgeMesh")
-surface_material_override/0 = SubResource("BuildingDarkA")
-
-[node name="Collision" type="CollisionShape3D" parent="Parkour/R6"]
-shape = SubResource("LedgeShape")
-
-[node name="R7" type="StaticBody3D" parent="Parkour" groups=["climbable"]]
-position = Vector3(15.95, 11.75, -26.5)
-
-[node name="Mesh" type="MeshInstance3D" parent="Parkour/R7"]
-mesh = SubResource("LedgeMesh")
-surface_material_override/0 = SubResource("BuildingDarkA")
-
-[node name="Collision" type="CollisionShape3D" parent="Parkour/R7"]
-shape = SubResource("LedgeShape")
-
-[node name="Pipe" type="StaticBody3D" parent="Parkour"]
-position = Vector3(10, 12.6, -20)
-rotation = Vector3(1.5708, 0, 0)
-
-[node name="Mesh" type="MeshInstance3D" parent="Parkour/Pipe"]
-mesh = SubResource("PipeMesh")
+[node name="Wheel1" type="MeshInstance3D" parent="Parkour/Truck"]
+position = Vector3(1.05, 0.45, -2.2)
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("WheelMesh")
 surface_material_override/0 = SubResource("WornGrey")
 
-[node name="Collision" type="CollisionShape3D" parent="Parkour/Pipe"]
-shape = SubResource("PipeShape")
+[node name="Wheel2" type="MeshInstance3D" parent="Parkour/Truck"]
+position = Vector3(-1.05, 0.45, -2.2)
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("WheelMesh")
+surface_material_override/0 = SubResource("WornGrey")
 
-[node name="ScaffoldPost1" type="MeshInstance3D" parent="Parkour"]
-position = Vector3(17.8, 7.05, -11.2)
-scale = Vector3(0.15, 14.1, 0.15)
+[node name="Wheel3" type="MeshInstance3D" parent="Parkour/Truck"]
+position = Vector3(1.05, 0.45, 0.4)
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("WheelMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Wheel4" type="MeshInstance3D" parent="Parkour/Truck"]
+position = Vector3(-1.05, 0.45, 0.4)
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("WheelMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Wheel5" type="MeshInstance3D" parent="Parkour/Truck"]
+position = Vector3(1.05, 0.45, 2.2)
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("WheelMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Wheel6" type="MeshInstance3D" parent="Parkour/Truck"]
+position = Vector3(-1.05, 0.45, 2.2)
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("WheelMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Billboard" type="Node3D" parent="Parkour"]
+position = Vector3(-32, 0, 15.35)
+
+[node name="Panel" type="MeshInstance3D" parent="Parkour/Billboard"]
+position = Vector3(0, 6.5, 0)
+mesh = SubResource("BillboardMesh")
+surface_material_override/0 = SubResource("BillboardMat")
+
+[node name="Post1" type="MeshInstance3D" parent="Parkour/Billboard"]
+position = Vector3(-2.6, 3.85, 0)
+scale = Vector3(0.12, 7.7, 0.12)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("WornGrey")
 
-[node name="ScaffoldPost2" type="MeshInstance3D" parent="Parkour"]
-position = Vector3(20.2, 7.05, -11.2)
-scale = Vector3(0.15, 14.1, 0.15)
+[node name="Post2" type="MeshInstance3D" parent="Parkour/Billboard"]
+position = Vector3(2.6, 3.85, 0)
+scale = Vector3(0.12, 7.7, 0.12)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("WornGrey")
 
-[node name="ScaffoldPost3" type="MeshInstance3D" parent="Parkour"]
-position = Vector3(17.8, 7.05, -8.8)
-scale = Vector3(0.15, 14.1, 0.15)
-mesh = SubResource("UnitBoxMesh")
-surface_material_override/0 = SubResource("WornGrey")
+[node name="Cb1" type="StaticBody3D" parent="Parkour" groups=["climbable"]]
+position = Vector3(-33.5, 4.05, 15.45)
 
-[node name="ScaffoldPost4" type="MeshInstance3D" parent="Parkour"]
-position = Vector3(20.2, 7.05, -8.8)
-scale = Vector3(0.15, 14.1, 0.15)
-mesh = SubResource("UnitBoxMesh")
-surface_material_override/0 = SubResource("WornGrey")
+[node name="Mesh" type="MeshInstance3D" parent="Parkour/Cb1"]
+mesh = SubResource("LedgeMesh")
+surface_material_override/0 = SubResource("PalSlate")
 
-[node name="ScaffoldPlatform" type="StaticBody3D" parent="Parkour"]
-position = Vector3(19, 13.8, -10)
+[node name="Collision" type="CollisionShape3D" parent="Parkour/Cb1"]
+shape = SubResource("LedgeShape")
 
-[node name="Mesh" type="MeshInstance3D" parent="Parkour/ScaffoldPlatform"]
-scale = Vector3(2.8, 0.3, 2.8)
-mesh = SubResource("UnitBoxMesh")
+[node name="Cb2" type="StaticBody3D" parent="Parkour" groups=["climbable"]]
+position = Vector3(-30.5, 5.65, 15.45)
+
+[node name="Mesh" type="MeshInstance3D" parent="Parkour/Cb2"]
+mesh = SubResource("LedgeMesh")
+surface_material_override/0 = SubResource("PalSlate")
+
+[node name="Collision" type="CollisionShape3D" parent="Parkour/Cb2"]
+shape = SubResource("LedgeShape")
+
+[node name="Cb3" type="StaticBody3D" parent="Parkour" groups=["climbable"]]
+position = Vector3(-33.5, 7.25, 15.45)
+
+[node name="Mesh" type="MeshInstance3D" parent="Parkour/Cb3"]
+mesh = SubResource("LedgeMesh")
+surface_material_override/0 = SubResource("PalSlate")
+
+[node name="Collision" type="CollisionShape3D" parent="Parkour/Cb3"]
+shape = SubResource("LedgeShape")
+
+[node name="Cb4" type="StaticBody3D" parent="Parkour" groups=["climbable"]]
+position = Vector3(-30.5, 8.85, 15.45)
+
+[node name="Mesh" type="MeshInstance3D" parent="Parkour/Cb4"]
+mesh = SubResource("LedgeMesh")
+surface_material_override/0 = SubResource("PalSlate")
+
+[node name="Collision" type="CollisionShape3D" parent="Parkour/Cb4"]
+shape = SubResource("LedgeShape")
+
+[node name="Plank1" type="AnimatableBody3D" parent="Parkour"]
+position = Vector3(-32, 10.3, 2.2)
+
+[node name="Mesh" type="MeshInstance3D" parent="Parkour/Plank1"]
+mesh = SubResource("PlankMesh")
 surface_material_override/0 = SubResource("WoodMat")
 
-[node name="Collision" type="CollisionShape3D" parent="Parkour/ScaffoldPlatform"]
-shape = SubResource("ScaffoldShape")
+[node name="Collision" type="CollisionShape3D" parent="Parkour/Plank1"]
+shape = SubResource("PlankShape")
 
-[node name="R8" type="StaticBody3D" parent="Parkour" groups=["climbable"]]
-position = Vector3(23.55, 15.15, -9.4)
+[node name="Plank2" type="AnimatableBody3D" parent="Parkour"]
+position = Vector3(-32, 10.3, 0)
 
-[node name="Mesh" type="MeshInstance3D" parent="Parkour/R8"]
-mesh = SubResource("LedgeMesh")
-surface_material_override/0 = SubResource("BuildingDarkA")
+[node name="Mesh" type="MeshInstance3D" parent="Parkour/Plank2"]
+mesh = SubResource("PlankMesh")
+surface_material_override/0 = SubResource("WoodMat")
 
-[node name="Collision" type="CollisionShape3D" parent="Parkour/R8"]
-shape = SubResource("LedgeShape")
+[node name="Collision" type="CollisionShape3D" parent="Parkour/Plank2"]
+shape = SubResource("PlankShape")
 
-[node name="R9" type="StaticBody3D" parent="Parkour" groups=["climbable"]]
-position = Vector3(23.55, 16.85, -10.6)
+[node name="Plank3" type="AnimatableBody3D" parent="Parkour"]
+position = Vector3(-32, 10.3, -2.2)
 
-[node name="Mesh" type="MeshInstance3D" parent="Parkour/R9"]
-mesh = SubResource("LedgeMesh")
-surface_material_override/0 = SubResource("BuildingDarkA")
+[node name="Mesh" type="MeshInstance3D" parent="Parkour/Plank3"]
+mesh = SubResource("PlankMesh")
+surface_material_override/0 = SubResource("WoodMat")
 
-[node name="Collision" type="CollisionShape3D" parent="Parkour/R9"]
-shape = SubResource("LedgeShape")
+[node name="Collision" type="CollisionShape3D" parent="Parkour/Plank3"]
+shape = SubResource("PlankShape")
 
-[node name="R10" type="StaticBody3D" parent="Parkour" groups=["climbable"]]
-position = Vector3(23.55, 18.55, -9.4)
+[node name="Hook" type="AnimatableBody3D" parent="Parkour"]
+position = Vector3(-32, 12.5, -14.5)
 
-[node name="Mesh" type="MeshInstance3D" parent="Parkour/R10"]
-mesh = SubResource("LedgeMesh")
-surface_material_override/0 = SubResource("BuildingDarkA")
+[node name="Mesh" type="MeshInstance3D" parent="Parkour/Hook"]
+mesh = SubResource("HookMesh")
+surface_material_override/0 = SubResource("WornGrey")
 
-[node name="Collision" type="CollisionShape3D" parent="Parkour/R10"]
-shape = SubResource("LedgeShape")
+[node name="Collision" type="CollisionShape3D" parent="Parkour/Hook"]
+shape = SubResource("HookShape")
 
-[node name="R11" type="StaticBody3D" parent="Parkour" groups=["climbable"]]
-position = Vector3(23.55, 19.75, -10.6)
+[node name="Cable" type="MeshInstance3D" parent="Parkour"]
+position = Vector3(-32, 20, -19)
+mesh = SubResource("CableMesh")
+surface_material_override/0 = SubResource("WornGrey")
 
-[node name="Mesh" type="MeshInstance3D" parent="Parkour/R11"]
-mesh = SubResource("LedgeMesh")
-surface_material_override/0 = SubResource("BuildingDarkA")
+[node name="ArmPivot" type="Node3D" parent="Parkour"]
+position = Vector3(-30, 19.9, -30)
 
-[node name="Collision" type="CollisionShape3D" parent="Parkour/R11"]
-shape = SubResource("LedgeShape")
-
-[node name="CraneMast" type="StaticBody3D" parent="Parkour"]
-position = Vector3(31.6, 12, -27)
-
-[node name="Mesh" type="MeshInstance3D" parent="Parkour/CraneMast"]
-scale = Vector3(1.2, 24, 1.2)
-mesh = SubResource("UnitBoxMesh")
+[node name="Motor" type="MeshInstance3D" parent="Parkour/ArmPivot"]
+position = Vector3(0, 0.6, 0)
+mesh = SubResource("MotorMesh")
 surface_material_override/0 = SubResource("ConstructionYellow")
 
-[node name="Collision" type="CollisionShape3D" parent="Parkour/CraneMast"]
-shape = SubResource("CraneMastShape")
+[node name="Arm" type="AnimatableBody3D" parent="Parkour/ArmPivot"]
 
-[node name="CraneArm" type="StaticBody3D" parent="Parkour"]
-position = Vector3(30, 20.6, -27.5)
-
-[node name="Mesh" type="MeshInstance3D" parent="Parkour/CraneArm"]
-scale = Vector3(1, 0.4, 23)
-mesh = SubResource("UnitBoxMesh")
+[node name="Mesh" type="MeshInstance3D" parent="Parkour/ArmPivot/Arm"]
+position = Vector3(13.75, 0, 0)
+mesh = SubResource("ArmMesh")
 surface_material_override/0 = SubResource("ConstructionYellow")
 
-[node name="Collision" type="CollisionShape3D" parent="Parkour/CraneArm"]
-shape = SubResource("CraneArmShape")
+[node name="Collision" type="CollisionShape3D" parent="Parkour/ArmPivot/Arm"]
+position = Vector3(13.75, 0, 0)
+shape = SubResource("ArmShape")
 
-[node name="CraneCounterweight" type="MeshInstance3D" parent="Parkour"]
-position = Vector3(30, 20.9, -14.8)
-scale = Vector3(1.8, 1.2, 1.6)
+[node name="Counterweight" type="MeshInstance3D" parent="Parkour/ArmPivot/Arm"]
+position = Vector3(9, 0, 0)
+scale = Vector3(1.8, 0.8, 1.2)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("WornGrey")
 
-[node name="CraneCable" type="MeshInstance3D" parent="Parkour"]
-position = Vector3(30, 17.5, -38.5)
-scale = Vector3(0.08, 6, 0.08)
+[node name="EndPlatform" type="StaticBody3D" parent="Parkour"]
+position = Vector3(-42, 19.35, -30)
+
+[node name="Mesh" type="MeshInstance3D" parent="Parkour/EndPlatform"]
+mesh = SubResource("EndShape")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Collision" type="CollisionShape3D" parent="Parkour/EndPlatform"]
+shape = SubResource("EndShape")
+
+[node name="Billboard2" type="Node3D" parent="Parkour"]
+position = Vector3(-10, 0, 4.9)
+
+[node name="Panel" type="MeshInstance3D" parent="Parkour/Billboard2"]
+position = Vector3(0, 6.5, 0)
+mesh = SubResource("BillboardMesh")
+surface_material_override/0 = SubResource("BillboardMat")
+
+[node name="Post1" type="MeshInstance3D" parent="Parkour/Billboard2"]
+position = Vector3(-2.6, 3.85, 0)
+scale = Vector3(0.12, 7.7, 0.12)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("WornGrey")
 
-[node name="CraneHook" type="MeshInstance3D" parent="Parkour"]
-position = Vector3(30, 14.3, -38.5)
-scale = Vector3(0.4, 0.4, 0.4)
+[node name="Post2" type="MeshInstance3D" parent="Parkour/Billboard2"]
+position = Vector3(2.6, 3.85, 0)
+scale = Vector3(0.12, 7.7, 0.12)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Billboard3" type="Node3D" parent="Parkour"]
+position = Vector3(10, 0, -15.6)
+
+[node name="Panel" type="MeshInstance3D" parent="Parkour/Billboard3"]
+position = Vector3(0, 6.5, 0)
+mesh = SubResource("BillboardMesh")
+surface_material_override/0 = SubResource("BillboardMat")
+
+[node name="Post1" type="MeshInstance3D" parent="Parkour/Billboard3"]
+position = Vector3(-2.6, 3.85, 0)
+scale = Vector3(0.12, 7.7, 0.12)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Post2" type="MeshInstance3D" parent="Parkour/Billboard3"]
+position = Vector3(2.6, 3.85, 0)
+scale = Vector3(0.12, 7.7, 0.12)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("WornGrey")
 
@@ -1028,7 +1319,7 @@ position = Vector3(-30, 0, -30)
 position = Vector3(0, 9.3, 0)
 scale = Vector3(14, 18.6, 14)
 mesh = SubResource("UnitBoxMesh")
-surface_material_override/0 = SubResource("BuildingDarkA")
+surface_material_override/0 = SubResource("PalBeige")
 
 [node name="Collision" type="CollisionShape3D" parent="Tower/Base"]
 position = Vector3(0, 9.3, 0)
@@ -1067,65 +1358,6 @@ position = Vector3(0, 2.25, 0)
 mesh = SubResource("BeaconMesh")
 surface_material_override/0 = SubResource("BeaconMaterial")
 
-[node name="Skyline" type="Node3D" parent="."]
-
-[node name="T1" type="MeshInstance3D" parent="Skyline"]
-position = Vector3(-58, 8, -30)
-rotation = Vector3(0, 0.4, 0)
-scale = Vector3(5, 16, 5)
-mesh = SubResource("UnitBoxMesh")
-surface_material_override/0 = SubResource("TrimOrange")
-
-[node name="T2" type="MeshInstance3D" parent="Skyline"]
-position = Vector3(62, 12, -25)
-rotation = Vector3(0, -0.2, 0)
-scale = Vector3(4, 22, 4)
-mesh = SubResource("UnitBoxMesh")
-surface_material_override/0 = SubResource("TrimCyan")
-
-[node name="T3" type="MeshInstance3D" parent="Skyline"]
-position = Vector3(-66, 0, 18)
-rotation = Vector3(0, 0.9, 0)
-scale = Vector3(6, 10, 6)
-mesh = SubResource("UnitBoxMesh")
-surface_material_override/0 = SubResource("TrimCyan")
-
-[node name="T4" type="MeshInstance3D" parent="Skyline"]
-position = Vector3(52, 2, 30)
-rotation = Vector3(0, -0.5, 0)
-scale = Vector3(3.5, 12, 3.5)
-mesh = SubResource("UnitBoxMesh")
-surface_material_override/0 = SubResource("TrimOrange")
-
-[node name="T5" type="MeshInstance3D" parent="Skyline"]
-position = Vector3(10, 16, -75)
-scale = Vector3(5, 26, 5)
-mesh = SubResource("UnitBoxMesh")
-surface_material_override/0 = SubResource("TrimCyan")
-
-[node name="T6" type="MeshInstance3D" parent="Skyline"]
-position = Vector3(-40, 20, -65)
-rotation = Vector3(0, 0.7, 0)
-scale = Vector3(3, 20, 3)
-mesh = SubResource("UnitBoxMesh")
-surface_material_override/0 = SubResource("TrimOrange")
-
-[node name="FallenSlabs" type="Node3D" parent="."]
-
-[node name="Slab1" type="MeshInstance3D" parent="FallenSlabs"]
-position = Vector3(35, -6, -15)
-rotation = Vector3(0.25, 0.7, 0.15)
-scale = Vector3(8, 0.6, 5)
-mesh = SubResource("UnitBoxMesh")
-surface_material_override/0 = SubResource("SurfaceMaterial")
-
-[node name="Slab2" type="MeshInstance3D" parent="FallenSlabs"]
-position = Vector3(-15, -10, 28)
-rotation = Vector3(-0.2, -0.4, -0.3)
-scale = Vector3(6, 0.6, 8)
-mesh = SubResource("UnitBoxMesh")
-surface_material_override/0 = SubResource("SurfaceMaterial")
-
 [node name="Stars" type="CPUParticles3D" parent="."]
 position = Vector3(0, 70, 0)
 amount = 160
@@ -1163,41 +1395,497 @@ light_color = Color(1, 0.85, 0.7, 1)
 light_energy = 1.2
 omni_range = 18.0
 
-[node name="T7" type="MeshInstance3D" parent="Skyline"]
-position = Vector3(80, 10, 10)
-scale = Vector3(5, 18, 5)
-mesh = SubResource("UnitBoxMesh")
-surface_material_override/0 = SubResource("TrimOrange")
+[node name="Cars" type="Node3D" parent="."]
 
-[node name="T8" type="MeshInstance3D" parent="Skyline"]
-position = Vector3(-85, 4, -45)
-scale = Vector3(4, 12, 4)
-mesh = SubResource("UnitBoxMesh")
-surface_material_override/0 = SubResource("TrimCyan")
+[node name="Car1" parent="Cars" instance=ExtResource("2_car")]
+position = Vector3(-36, 0, 1.7)
+rotation = Vector3(0, 1.5708, 0)
+paint = Color(0.55, 0.15, 0.13, 1)
 
-[node name="T9" type="MeshInstance3D" parent="Skyline"]
-position = Vector3(70, 18, -60)
-scale = Vector3(6, 22, 6)
-mesh = SubResource("UnitBoxMesh")
-surface_material_override/0 = SubResource("TrimCyan")
+[node name="Car2" parent="Cars" instance=ExtResource("2_car")]
+position = Vector3(-26, 0, -1.7)
+rotation = Vector3(0, 1.5708, 0)
+paint = Color(0.72, 0.73, 0.75, 1)
 
-[node name="T10" type="MeshInstance3D" parent="Skyline"]
-position = Vector3(-70, 16, 55)
-scale = Vector3(5, 20, 5)
-mesh = SubResource("UnitBoxMesh")
-surface_material_override/0 = SubResource("TrimOrange")
+[node name="Car3" parent="Cars" instance=ExtResource("2_car")]
+position = Vector3(-14, 0, 1.7)
+rotation = Vector3(0, 1.5708, 0)
+paint = Color(0.88, 0.88, 0.9, 1)
 
-[node name="T11" type="MeshInstance3D" parent="Skyline"]
-position = Vector3(100, 6, -20)
-scale = Vector3(7, 14, 7)
-mesh = SubResource("UnitBoxMesh")
-surface_material_override/0 = SubResource("TrimOrange")
+[node name="Car4" parent="Cars" instance=ExtResource("2_car")]
+position = Vector3(-6, 0, -1.7)
+rotation = Vector3(0, 1.5708, 0)
+paint = Color(0.12, 0.12, 0.14, 1)
 
-[node name="T12" type="MeshInstance3D" parent="Skyline"]
-position = Vector3(-100, 2, 40)
-scale = Vector3(5, 10, 5)
-mesh = SubResource("UnitBoxMesh")
-surface_material_override/0 = SubResource("TrimCyan")
+[node name="Car5" parent="Cars" instance=ExtResource("2_car")]
+position = Vector3(6, 0, 1.7)
+rotation = Vector3(0, 1.5708, 0)
+paint = Color(0.2, 0.3, 0.5, 1)
+
+[node name="Car6" parent="Cars" instance=ExtResource("2_car")]
+position = Vector3(16, 0, -1.7)
+rotation = Vector3(0, 1.5708, 0)
+paint = Color(0.85, 0.7, 0.15, 1)
+
+[node name="Car7" parent="Cars" instance=ExtResource("2_car")]
+position = Vector3(26, 0, 1.7)
+rotation = Vector3(0, 1.5708, 0)
+paint = Color(0.72, 0.73, 0.75, 1)
+
+[node name="Car8" parent="Cars" instance=ExtResource("2_car")]
+position = Vector3(36, 0, -1.7)
+rotation = Vector3(0, 1.5708, 0)
+paint = Color(0.55, 0.15, 0.13, 1)
+
+[node name="Car9" parent="Cars" instance=ExtResource("2_car")]
+position = Vector3(1.7, 0, -36)
+paint = Color(0.88, 0.88, 0.9, 1)
+
+[node name="Car10" parent="Cars" instance=ExtResource("2_car")]
+position = Vector3(-1.7, 0, -26)
+paint = Color(0.2, 0.3, 0.5, 1)
+
+[node name="Car11" parent="Cars" instance=ExtResource("2_car")]
+position = Vector3(1.7, 0, -16)
+paint = Color(0.85, 0.7, 0.15, 1)
+
+[node name="Car12" parent="Cars" instance=ExtResource("2_car")]
+position = Vector3(-1.7, 0, -10)
+paint = Color(0.55, 0.15, 0.13, 1)
+
+[node name="Car13" parent="Cars" instance=ExtResource("2_car")]
+position = Vector3(1.7, 0, 10)
+paint = Color(0.72, 0.73, 0.75, 1)
+
+[node name="Car14" parent="Cars" instance=ExtResource("2_car")]
+position = Vector3(-1.7, 0, 26)
+paint = Color(0.12, 0.12, 0.14, 1)
+
+[node name="Car15" parent="Cars" instance=ExtResource("2_car")]
+position = Vector3(1.7, 0, 36)
+paint = Color(0.88, 0.88, 0.9, 1)
+
+[node name="Car16" parent="Cars" instance=ExtResource("2_car")]
+position = Vector3(-21.7, 0, -32)
+paint = Color(0.2, 0.3, 0.5, 1)
+
+[node name="Car17" parent="Cars" instance=ExtResource("2_car")]
+position = Vector3(-18.3, 0, -6)
+paint = Color(0.12, 0.12, 0.14, 1)
+
+[node name="Car18" parent="Cars" instance=ExtResource("2_car")]
+position = Vector3(-21.7, 0, 14)
+paint = Color(0.55, 0.15, 0.13, 1)
+
+[node name="Car19" parent="Cars" instance=ExtResource("2_car")]
+position = Vector3(-18.3, 0, 34)
+paint = Color(0.85, 0.7, 0.15, 1)
+
+[node name="Car20" parent="Cars" instance=ExtResource("2_car")]
+position = Vector3(18.3, 0, -32)
+paint = Color(0.88, 0.88, 0.9, 1)
+
+[node name="Car21" parent="Cars" instance=ExtResource("2_car")]
+position = Vector3(21.7, 0, -4)
+paint = Color(0.55, 0.15, 0.13, 1)
+
+[node name="Car22" parent="Cars" instance=ExtResource("2_car")]
+position = Vector3(18.3, 0, 16)
+paint = Color(0.72, 0.73, 0.75, 1)
+
+[node name="Car23" parent="Cars" instance=ExtResource("2_car")]
+position = Vector3(-36, 0, -21.7)
+rotation = Vector3(0, 1.5708, 0)
+paint = Color(0.72, 0.73, 0.75, 1)
+
+[node name="Car24" parent="Cars" instance=ExtResource("2_car")]
+position = Vector3(-6, 0, -18.3)
+rotation = Vector3(0, 1.5708, 0)
+paint = Color(0.2, 0.3, 0.5, 1)
+
+[node name="Car25" parent="Cars" instance=ExtResource("2_car")]
+position = Vector3(34, 0, -21.7)
+rotation = Vector3(0, 1.5708, 0)
+paint = Color(0.12, 0.12, 0.14, 1)
+
+[node name="Car26" parent="Cars" instance=ExtResource("2_car")]
+position = Vector3(-36, 0, 21.7)
+rotation = Vector3(0, 1.5708, 0)
+paint = Color(0.2, 0.3, 0.5, 1)
+
+[node name="Trees" type="Node3D" parent="."]
+
+[node name="Tree1" parent="Trees" instance=ExtResource("3_tree")]
+position = Vector3(-23.5, 0, -34)
+scale = Vector3(1.1, 1.1, 1.1)
+
+[node name="Tree2" parent="Trees" instance=ExtResource("3_tree")]
+position = Vector3(-16.5, 0, -34)
+scale = Vector3(0.9, 0.9, 0.9)
+
+[node name="Tree3" parent="Trees" instance=ExtResource("3_tree")]
+position = Vector3(23.5, 0, -34)
+scale = Vector3(1.2, 1.2, 1.2)
+
+[node name="Tree4" parent="Trees" instance=ExtResource("3_tree")]
+position = Vector3(16.5, 0, -34)
+
+[node name="Tree5" parent="Trees" instance=ExtResource("3_tree")]
+position = Vector3(-23.5, 0, -2)
+
+[node name="Tree6" parent="Trees" instance=ExtResource("3_tree")]
+position = Vector3(-16.5, 0, 14)
+scale = Vector3(1.2, 1.2, 1.2)
+
+[node name="Tree7" parent="Trees" instance=ExtResource("3_tree")]
+position = Vector3(-23.5, 0, 26)
+scale = Vector3(0.9, 0.9, 0.9)
+
+[node name="Tree8" parent="Trees" instance=ExtResource("3_tree")]
+position = Vector3(-16.5, 0, 26)
+scale = Vector3(1.1, 1.1, 1.1)
+
+[node name="Tree9" parent="Trees" instance=ExtResource("3_tree")]
+position = Vector3(23.5, 0, -2)
+
+[node name="Tree10" parent="Trees" instance=ExtResource("3_tree")]
+position = Vector3(16.5, 0, 26)
+scale = Vector3(1.3, 1.3, 1.3)
+
+[node name="Tree11" parent="Trees" instance=ExtResource("3_tree")]
+position = Vector3(23.5, 0, 26)
+scale = Vector3(0.9, 0.9, 0.9)
+
+[node name="Tree12" parent="Trees" instance=ExtResource("3_tree")]
+position = Vector3(-3.5, 0, -34)
+
+[node name="Tree13" parent="Trees" instance=ExtResource("3_tree")]
+position = Vector3(3.5, 0, -26)
+scale = Vector3(1.2, 1.2, 1.2)
+
+[node name="Tree14" parent="Trees" instance=ExtResource("3_tree")]
+position = Vector3(-3.5, 0, -14)
+scale = Vector3(0.9, 0.9, 0.9)
+
+[node name="Tree15" parent="Trees" instance=ExtResource("3_tree")]
+position = Vector3(3.5, 0, 14)
+scale = Vector3(1.1, 1.1, 1.1)
+
+[node name="Tree16" parent="Trees" instance=ExtResource("3_tree")]
+position = Vector3(-3.5, 0, 26)
+
+[node name="Tree17" parent="Trees" instance=ExtResource("3_tree")]
+position = Vector3(-34, 0, -3.5)
+scale = Vector3(1.2, 1.2, 1.2)
+
+[node name="Tree18" parent="Trees" instance=ExtResource("3_tree")]
+position = Vector3(-12, 0, 3.5)
+
+[node name="Tree19" parent="Trees" instance=ExtResource("3_tree")]
+position = Vector3(12, 0, -3.5)
+scale = Vector3(0.9, 0.9, 0.9)
+
+[node name="Tree20" parent="Trees" instance=ExtResource("3_tree")]
+position = Vector3(36, 0, 3.5)
+scale = Vector3(1.1, 1.1, 1.1)
+
+[node name="Details" type="Node3D" parent="."]
+
+[node name="Bench1" type="Node3D" parent="Details"]
+position = Vector3(-3.5, 0, -8)
+
+[node name="Seat" type="MeshInstance3D" parent="Details/Bench1"]
+position = Vector3(0, 0.55, 0)
+mesh = SubResource("BenchSeatMesh")
+surface_material_override/0 = SubResource("WoodMat")
+
+[node name="Leg1" type="MeshInstance3D" parent="Details/Bench1"]
+position = Vector3(0.75, 0.28, 0)
+mesh = SubResource("BenchLegMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Leg2" type="MeshInstance3D" parent="Details/Bench1"]
+position = Vector3(-0.75, 0.28, 0)
+mesh = SubResource("BenchLegMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Bench2" type="Node3D" parent="Details"]
+position = Vector3(3.5, 0, 18)
+rotation = Vector3(0, 3.1416, 0)
+
+[node name="Seat" type="MeshInstance3D" parent="Details/Bench2"]
+position = Vector3(0, 0.55, 0)
+mesh = SubResource("BenchSeatMesh")
+surface_material_override/0 = SubResource("WoodMat")
+
+[node name="Leg1" type="MeshInstance3D" parent="Details/Bench2"]
+position = Vector3(0.75, 0.28, 0)
+mesh = SubResource("BenchLegMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Leg2" type="MeshInstance3D" parent="Details/Bench2"]
+position = Vector3(-0.75, 0.28, 0)
+mesh = SubResource("BenchLegMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Bench3" type="Node3D" parent="Details"]
+position = Vector3(-16.5, 0, -18)
+rotation = Vector3(0, 1.5708, 0)
+
+[node name="Seat" type="MeshInstance3D" parent="Details/Bench3"]
+position = Vector3(0, 0.55, 0)
+mesh = SubResource("BenchSeatMesh")
+surface_material_override/0 = SubResource("WoodMat")
+
+[node name="Leg1" type="MeshInstance3D" parent="Details/Bench3"]
+position = Vector3(0.75, 0.28, 0)
+mesh = SubResource("BenchLegMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Leg2" type="MeshInstance3D" parent="Details/Bench3"]
+position = Vector3(-0.75, 0.28, 0)
+mesh = SubResource("BenchLegMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Bench4" type="Node3D" parent="Details"]
+position = Vector3(16.5, 0, 6)
+rotation = Vector3(0, 1.5708, 0)
+
+[node name="Seat" type="MeshInstance3D" parent="Details/Bench4"]
+position = Vector3(0, 0.55, 0)
+mesh = SubResource("BenchSeatMesh")
+surface_material_override/0 = SubResource("WoodMat")
+
+[node name="Leg1" type="MeshInstance3D" parent="Details/Bench4"]
+position = Vector3(0.75, 0.28, 0)
+mesh = SubResource("BenchLegMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Leg2" type="MeshInstance3D" parent="Details/Bench4"]
+position = Vector3(-0.75, 0.28, 0)
+mesh = SubResource("BenchLegMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Bench5" type="Node3D" parent="Details"]
+position = Vector3(-3.5, 0, 34)
+
+[node name="Seat" type="MeshInstance3D" parent="Details/Bench5"]
+position = Vector3(0, 0.55, 0)
+mesh = SubResource("BenchSeatMesh")
+surface_material_override/0 = SubResource("WoodMat")
+
+[node name="Leg1" type="MeshInstance3D" parent="Details/Bench5"]
+position = Vector3(0.75, 0.28, 0)
+mesh = SubResource("BenchLegMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Leg2" type="MeshInstance3D" parent="Details/Bench5"]
+position = Vector3(-0.75, 0.28, 0)
+mesh = SubResource("BenchLegMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Bench6" type="Node3D" parent="Details"]
+position = Vector3(23.5, 0, 18)
+rotation = Vector3(0, 3.1416, 0)
+
+[node name="Seat" type="MeshInstance3D" parent="Details/Bench6"]
+position = Vector3(0, 0.55, 0)
+mesh = SubResource("BenchSeatMesh")
+surface_material_override/0 = SubResource("WoodMat")
+
+[node name="Leg1" type="MeshInstance3D" parent="Details/Bench6"]
+position = Vector3(0.75, 0.28, 0)
+mesh = SubResource("BenchLegMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Leg2" type="MeshInstance3D" parent="Details/Bench6"]
+position = Vector3(-0.75, 0.28, 0)
+mesh = SubResource("BenchLegMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Can1" type="MeshInstance3D" parent="Details"]
+position = Vector3(-4.5, 0.45, -8)
+mesh = SubResource("CanMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Can2" type="MeshInstance3D" parent="Details"]
+position = Vector3(4.5, 0.45, 18)
+mesh = SubResource("CanMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Can3" type="MeshInstance3D" parent="Details"]
+position = Vector3(-16.5, 0.45, -16)
+mesh = SubResource("CanMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Can4" type="MeshInstance3D" parent="Details"]
+position = Vector3(17.5, 0.45, 6)
+mesh = SubResource("CanMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Can5" type="MeshInstance3D" parent="Details"]
+position = Vector3(-2.5, 0.45, 34)
+mesh = SubResource("CanMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Can6" type="MeshInstance3D" parent="Details"]
+position = Vector3(24.5, 0.45, 18)
+mesh = SubResource("CanMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Can7" type="MeshInstance3D" parent="Details"]
+position = Vector3(2.5, 0.45, -34)
+mesh = SubResource("CanMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Can8" type="MeshInstance3D" parent="Details"]
+position = Vector3(-24.5, 0.45, 26)
+mesh = SubResource("CanMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Planter1" type="Node3D" parent="Details"]
+position = Vector3(-16.5, 0, -26)
+
+[node name="Base" type="MeshInstance3D" parent="Details/Planter1"]
+position = Vector3(0, 0.25, 0)
+mesh = SubResource("PlanterMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Hedge" type="MeshInstance3D" parent="Details/Planter1"]
+position = Vector3(0, 0.75, 0)
+mesh = SubResource("HedgeMesh")
+surface_material_override/0 = SubResource("LeafMatB")
+
+[node name="Planter2" type="Node3D" parent="Details"]
+position = Vector3(16.5, 0, -26)
+
+[node name="Base" type="MeshInstance3D" parent="Details/Planter2"]
+position = Vector3(0, 0.25, 0)
+mesh = SubResource("PlanterMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Hedge" type="MeshInstance3D" parent="Details/Planter2"]
+position = Vector3(0, 0.75, 0)
+mesh = SubResource("HedgeMesh")
+surface_material_override/0 = SubResource("LeafMatB")
+
+[node name="Planter3" type="Node3D" parent="Details"]
+position = Vector3(-16.5, 0, 6)
+
+[node name="Base" type="MeshInstance3D" parent="Details/Planter3"]
+position = Vector3(0, 0.25, 0)
+mesh = SubResource("PlanterMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Hedge" type="MeshInstance3D" parent="Details/Planter3"]
+position = Vector3(0, 0.75, 0)
+mesh = SubResource("HedgeMesh")
+surface_material_override/0 = SubResource("LeafMatB")
+
+[node name="Planter4" type="Node3D" parent="Details"]
+position = Vector3(16.5, 0, -6)
+
+[node name="Base" type="MeshInstance3D" parent="Details/Planter4"]
+position = Vector3(0, 0.25, 0)
+mesh = SubResource("PlanterMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Hedge" type="MeshInstance3D" parent="Details/Planter4"]
+position = Vector3(0, 0.75, 0)
+mesh = SubResource("HedgeMesh")
+surface_material_override/0 = SubResource("LeafMatB")
+
+[node name="Planter5" type="Node3D" parent="Details"]
+position = Vector3(-3.5, 0, 18)
+
+[node name="Base" type="MeshInstance3D" parent="Details/Planter5"]
+position = Vector3(0, 0.25, 0)
+mesh = SubResource("PlanterMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Hedge" type="MeshInstance3D" parent="Details/Planter5"]
+position = Vector3(0, 0.75, 0)
+mesh = SubResource("HedgeMesh")
+surface_material_override/0 = SubResource("LeafMatB")
+
+[node name="Planter6" type="Node3D" parent="Details"]
+position = Vector3(3.5, 0, -18)
+
+[node name="Base" type="MeshInstance3D" parent="Details/Planter6"]
+position = Vector3(0, 0.25, 0)
+mesh = SubResource("PlanterMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Hedge" type="MeshInstance3D" parent="Details/Planter6"]
+position = Vector3(0, 0.75, 0)
+mesh = SubResource("HedgeMesh")
+surface_material_override/0 = SubResource("LeafMatB")
+
+[node name="Planter7" type="Node3D" parent="Details"]
+position = Vector3(-23.5, 0, 6)
+
+[node name="Base" type="MeshInstance3D" parent="Details/Planter7"]
+position = Vector3(0, 0.25, 0)
+mesh = SubResource("PlanterMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Hedge" type="MeshInstance3D" parent="Details/Planter7"]
+position = Vector3(0, 0.75, 0)
+mesh = SubResource("HedgeMesh")
+surface_material_override/0 = SubResource("LeafMatB")
+
+[node name="Planter8" type="Node3D" parent="Details"]
+position = Vector3(23.5, 0, 6)
+
+[node name="Base" type="MeshInstance3D" parent="Details/Planter8"]
+position = Vector3(0, 0.25, 0)
+mesh = SubResource("PlanterMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Hedge" type="MeshInstance3D" parent="Details/Planter8"]
+position = Vector3(0, 0.75, 0)
+mesh = SubResource("HedgeMesh")
+surface_material_override/0 = SubResource("LeafMatB")
+
+[node name="AC1" type="MeshInstance3D" parent="Details"]
+position = Vector3(8, 12.4, -28)
+mesh = SubResource("ACMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="AC2" type="MeshInstance3D" parent="Details"]
+position = Vector3(28, 16.4, -28)
+mesh = SubResource("ACMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="AC3" type="MeshInstance3D" parent="Details"]
+position = Vector3(-12, 10.4, -12)
+mesh = SubResource("ACMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="AC4" type="MeshInstance3D" parent="Details"]
+position = Vector3(-8, 9.4, 12)
+mesh = SubResource("ACMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="AC5" type="MeshInstance3D" parent="Details"]
+position = Vector3(12, 12.4, 12)
+mesh = SubResource("ACMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="AC6" type="MeshInstance3D" parent="Details"]
+position = Vector3(28, 15.4, 12)
+mesh = SubResource("ACMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="AC7" type="MeshInstance3D" parent="Details"]
+position = Vector3(26, 9.4, 30)
+mesh = SubResource("ACMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="AC8" type="MeshInstance3D" parent="Details"]
+position = Vector3(-30, 11.4, -7)
+mesh = SubResource("ACMesh")
+surface_material_override/0 = SubResource("WornGrey")
 
 [node name="Player" parent="." instance=ExtResource("1_player")]
 position = Vector3(-2, 0.6, 33)

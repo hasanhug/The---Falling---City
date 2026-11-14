@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3]
+
+[sub_resource type="StandardMaterial3D" id="TrunkMat"]
+albedo_color = Color(0.35, 0.26, 0.18, 1)
+roughness = 0.95
+
+[sub_resource type="CylinderShape3D" id="TrunkShape"]
+radius = 0.25
+height = 2.2
+
+[sub_resource type="StandardMaterial3D" id="LeafMatA"]
+albedo_color = Color(0.25, 0.42, 0.22, 1)
+roughness = 0.9
+
+[sub_resource type="CylinderMesh" id="TrunkMesh"]
+top_radius = 0.22
+bottom_radius = 0.28
+height = 2.2
+
+[sub_resource type="SphereMesh" id="FoliageMesh1"]
+radius = 1.4
+
+[sub_resource type="SphereMesh" id="FoliageMesh2"]
+radius = 1.0
+
+[node name="Tree" type="StaticBody3D"]
+
+[node name="Trunk" type="MeshInstance3D" parent="."]
+position = Vector3(0, 1.1, 0)
+mesh = SubResource("TrunkMesh")
+surface_material_override/0 = SubResource("TrunkMat")
+
+[node name="TrunkCollision" type="CollisionShape3D" parent="."]
+position = Vector3(0, 1.1, 0)
+shape = SubResource("TrunkShape")
+
+[node name="Foliage1" type="MeshInstance3D" parent="."]
+position = Vector3(0, 3.1, 0)
+mesh = SubResource("FoliageMesh1")
+surface_material_override/0 = SubResource("LeafMatA")
+
+[node name="Foliage2" type="MeshInstance3D" parent="."]
+position = Vector3(0.3, 4.2, 0.2)
+mesh = SubResource("FoliageMesh2")
+surface_material_override/0 = SubResource("LeafMatA")
