@@ -1,123 +1,116 @@
 extends Node3D
 
-## A small prop plane parked on the tower roof landing pad.
-## Press E nearby to board. Once aboard, it cruises forward constantly —
-## just hover the mouse to steer: left/right of screen centre banks and
-## turns, above/below centre pitches, dead centre flies straight and
-## auto-levels. There is no exiting mid-flight.
-## Reach the beacon island to trigger the ending hook.
+## The ending sequence. When the player steps onto the landing pad:
+## the camera locks exactly where it is, the character walks over and
+## boards the plane, the propeller revs, and the plane takes off toward
+## the beacon island on the horizon. When it has disappeared into the
+## distance, the win text fades in and stays on screen.
 
-## Cruising speed once aboard.
-const CRUISE_SPEED := 18.0
-## Steering: turn rate at full deflection, max pitch, max bank angle.
-const TURN_RATE := 1.6
-const MAX_PITCH := 0.85
-const MAX_BANK := 0.9
-## How quickly pitch and bank ease toward their targets.
-const LEVEL_SPEED := 3.0
-## Dead zone in the middle of the screen (fraction of the radius).
-const DEAD_ZONE := 0.12
-## How close the player must be to board, and to the beacon to escape.
-const BOARD_RANGE := 4.5
-const DESTINATION_RANGE := 35.0
+## How close to the plane triggers the ending.
+const PAD_RANGE := 3.5
+## How long the character takes to walk in, and the propeller to rev.
+const ENTER_TIME := 1.2
+const REV_TIME := 1.0
+## Takeoff: acceleration, cruising speed, and the flight direction
+## (toward the beacon island, climbing gently into the horizon).
+const TAKEOFF_ACCEL := 7.0
+const TAKEOFF_SPEED := 45.0
+const FLIGHT_DIRECTION := Vector3(-0.85, 0.18, -0.45)
+## How far away the plane must get before the win text appears.
+const WIN_DISTANCE := 260.0
+## How long the win text takes to fade in.
+const WIN_FADE := 1.5
 
 @onready var player: Node3D = get_node("../Player") as Node3D
+@onready var player_camera: Camera3D = get_node("../Player/CameraPivot/Camera3D") as Camera3D
 @onready var rumble: Node = get_node("../Rumble")
-@onready var beacon: Node3D = get_node("../BeaconIsland")
 @onready var body: Node3D = $Body
 @onready var propeller: Node3D = $Body/Propeller
-@onready var camera: Camera3D = $Body/CameraPivot/Camera3D
-@onready var hint_label: Label3D = $HintLabel
-@onready var fade_rect: ColorRect = $UI/FadeRect
 @onready var end_label: Label = $UI/EndLabel
 
-var _aboard := false
-var _escaped := false
+var _started := false
+var _phase := 0  # 1 = walking in, 2 = revving, 3 = flying away, 4 = won
+var _phase_time := 0.0
 var _time := 0.0
-var _end_time := 0.0
+var _speed := 0.0
+var _enter_from := Vector3.ZERO
+var _enter_to := Vector3.ZERO
+var _takeoff_from := Vector3.ZERO
+var _win_time := 0.0
+var _static_camera: Camera3D
 
 
 func _ready() -> void:
-	hint_label.visible = false
 	end_label.visible = false
-	fade_rect.color.a = 0.0
+	end_label.modulate.a = 0.0
 
 
 func _process(delta: float) -> void:
 	_time += delta
 
-	# The propeller idles while parked and spins fast while cruising.
-	propeller.rotation.z += delta * (8.0 if not _aboard else 40.0)
-
-	if _escaped:
-		_ending(delta)
+	if not _started:
+		# Parked: the propeller idles until the player reaches the pad.
+		propeller.rotation.z += delta * 8.0
+		if player.global_position.distance_to(global_position) < PAD_RANGE:
+			_begin()
 		return
 
-	if not _aboard:
-		# Parked: gentle bob and a boarding hint when the player is close.
-		var near := player.global_position.distance_to(global_position) < BOARD_RANGE
-		hint_label.visible = near
-		position.y += sin(_time * 1.2) * 0.004
-		if near and Input.is_action_just_pressed("interact"):
-			_board()
-		return
+	_phase_time += delta
 
-	_fly(delta)
-
-
-## Cruise forward and steer by hovering the mouse around screen centre.
-func _fly(delta: float) -> void:
-	# Mouse offset from the window centre in WINDOW space (both values from
-	# the same coordinate system, so stretch mode cannot skew the result).
-	var window := get_window()
-	var offset := (window.get_mouse_position() - window.size * 0.5) / (window.size * 0.5)
-
-	# Dead zone: hovering the exact centre means fly straight.
-	if offset.length() < DEAD_ZONE:
-		offset = Vector2.ZERO
-	else:
-		# Rescale so the edge of the dead zone is zero deflection.
-		offset = offset.normalized() * ((offset.length() - DEAD_ZONE) / (1.0 - DEAD_ZONE))
-
-	# Heading: turn rate from horizontal hover, banking into the turn.
-	body.rotation.y -= offset.x * TURN_RATE * delta
-	body.rotation.z = lerpf(body.rotation.z, -offset.x * MAX_BANK, LEVEL_SPEED * delta)
-
-	# Pitch: hover above centre climbs, below centre dives, centre levels out.
-	body.rotation.x = lerpf(body.rotation.x, -offset.y * MAX_PITCH, LEVEL_SPEED * delta)
-
-	# Cruise forward along the body's forward direction.
-	var forward := -body.global_transform.basis.z
-	global_position += forward * CRUISE_SPEED * delta
-
-	# Reached the beacon island: the ending hook.
-	if global_position.distance_to(beacon.global_position) < DESTINATION_RANGE:
-		_start_ending()
+	if _phase == 1:
+		# The character walks to the fuselage and disappears inside.
+		var blend := clampf(_phase_time / ENTER_TIME, 0.0, 1.0)
+		player.global_position = _enter_from.lerp(_enter_to, blend)
+		if blend >= 1.0:
+			player.visible = false
+			_next_phase()
+	elif _phase == 2:
+		# A short beat while the propeller revs up.
+		propeller.rotation.z += delta * 45.0
+		if _phase_time >= REV_TIME:
+			_next_phase()
+	elif _phase == 3:
+		# Accelerate away toward the horizon.
+		propeller.rotation.z += delta * 45.0
+		_speed = move_toward(_speed, TAKEOFF_SPEED, TAKEOFF_ACCEL * delta)
+		global_position += FLIGHT_DIRECTION * _speed * delta
+		if global_position.distance_to(_takeoff_from) > WIN_DISTANCE:
+			_next_phase()
+	elif _phase == 4:
+		# The plane is gone: fade the win text in and leave it there.
+		_win_time += delta
+		end_label.modulate.a = clampf(_win_time / WIN_FADE, 0.0, 1.0)
 
 
-## Board: hide the player, take the controls, stop the doomsday countdown.
-func _board() -> void:
-	_aboard = true
-	hint_label.visible = false
-	player.visible = false
-	player.process_mode = Node.PROCESS_MODE_DISABLED
-	camera.make_current()
+## Start the ending: lock the camera, freeze the character, halt the doomsday.
+func _begin() -> void:
+	_started = true
 	if rumble.has_method("halt_timer"):
 		rumble.halt_timer()
 
+	# Spawn a camera exactly where the player's camera is, then take over.
+	# This shot never moves for the rest of the game.
+	_static_camera = Camera3D.new()
+	_static_camera.global_transform = player_camera.global_transform
+	get_parent().add_child(_static_camera)
+	_static_camera.make_current()
 
-## ENDING HOOK — replace the body of this function with the real ending
-## cutscene in the next version. For now: drift, fade, victory text.
-func _start_ending() -> void:
-	_escaped = true
+	# Freeze the character and set up the walk into the plane.
+	player.process_mode = Node.PROCESS_MODE_DISABLED
+	_enter_from = player.global_position
+	_enter_to = global_position + Vector3(1.1, -0.4, 0.4)
+
+	# Point the plane body toward its escape direction, ready for takeoff.
+	body.rotation.y = atan2(-FLIGHT_DIRECTION.x, -FLIGHT_DIRECTION.z)
+
+	_phase = 1
+	_phase_time = 0.0
 
 
-func _ending(delta: float) -> void:
-	_end_time += delta
-	# Keep cruising gently while the screen fades out.
-	var forward := -body.global_transform.basis.z
-	global_position += forward * CRUISE_SPEED * 0.5 * delta
-	propeller.rotation.z += delta * 30.0
-	fade_rect.color.a = clampf(_end_time / 1.5, 0.0, 1.0)
-	if _end_time > 1.8 and not end_label.visible:
+func _next_phase() -> void:
+	if _phase == 2:
+		_takeoff_from = global_position
+	_phase += 1
+	_phase_time = 0.0
+	if _phase == 4:
 		end_label.visible = true
