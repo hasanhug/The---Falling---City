@@ -44,7 +44,7 @@ size = Vector3(0.32, 0.22, 0.21)
 size = Vector3(0.36, 0.26, 0.24)
 
 [sub_resource type="BoxMesh" id="HoodMesh"]
-size = Vector3(0.38, 0.1, 0.26)
+size = Vector3(0.36, 0.08, 0.24)
 
 [sub_resource type="CylinderMesh" id="NeckMesh"]
 top_radius = 0.05
@@ -139,12 +139,12 @@ mesh = SubResource("ChestMesh")
 surface_material_override/0 = SubResource("HoodieMaterial")
 
 [node name="HoodMesh" type="MeshInstance3D" parent="Visual/Pelvis/Torso/Chest"]
-position = Vector3(0, 0.28, -0.02)
+position = Vector3(0, 0.26, -0.03)
 mesh = SubResource("HoodMesh")
 surface_material_override/0 = SubResource("HoodieMaterial")
 
 [node name="Neck" type="Node3D" parent="Visual/Pelvis/Torso/Chest"]
-position = Vector3(0, 0.3, 0)
+position = Vector3(0, 0.28, 0)
 
 [node name="NeckMesh" type="MeshInstance3D" parent="Visual/Pelvis/Torso/Chest/Neck"]
 position = Vector3(0, 0.03, 0)
@@ -152,7 +152,7 @@ mesh = SubResource("NeckMesh")
 surface_material_override/0 = SubResource("SkinMaterial")
 
 [node name="Head" type="Node3D" parent="Visual/Pelvis/Torso/Chest/Neck"]
-position = Vector3(0, 0.1, 0)
+position = Vector3(0, 0.12, 0)
 
 [node name="HeadMesh" type="MeshInstance3D" parent="Visual/Pelvis/Torso/Chest/Neck/Head"]
 position = Vector3(0, 0.1, 0)
@@ -191,7 +191,7 @@ mesh = SubResource("MouthMesh")
 surface_material_override/0 = SubResource("FaceMaterial")
 
 [node name="ShoulderL" type="Node3D" parent="Visual/Pelvis/Torso/Chest"]
-position = Vector3(0.225, 0.2, 0)
+position = Vector3(0.225, 0.12, 0)
 
 [node name="DeltoidL" type="MeshInstance3D" parent="Visual/Pelvis/Torso/Chest/ShoulderL"]
 mesh = SubResource("DeltoidMesh")
@@ -222,7 +222,7 @@ mesh = SubResource("HandMesh")
 surface_material_override/0 = SubResource("SkinMaterial")
 
 [node name="ShoulderR" type="Node3D" parent="Visual/Pelvis/Torso/Chest"]
-position = Vector3(-0.225, 0.2, 0)
+position = Vector3(-0.225, 0.12, 0)
 
 [node name="DeltoidR" type="MeshInstance3D" parent="Visual/Pelvis/Torso/Chest/ShoulderR"]
 mesh = SubResource("DeltoidMesh")
