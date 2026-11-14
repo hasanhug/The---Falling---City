@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3]
+[gd_scene load_steps=71 format=3]
 
 [ext_resource type="Script" path="res://main.gd" id="1_main_script"]
 
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" path="res://car.tscn" id="2_car"]
 
 [ext_resource type="PackedScene" path="res://tree.tscn" id="3_tree"]
+
+[ext_resource type="Script" path="res://island.gd" id="4_island"]
 
 [sub_resource type="ProceduralSkyMaterial" id="SkyMat"]
 sky_top_color = Color(0.05, 0.04, 0.18, 1)
@@ -458,60 +460,46 @@ light_energy = 1.2
 shadow_enabled = true
 
 [node name="CityPlatform" type="StaticBody3D" parent="."]
-
-[node name="PlatformMesh" type="MeshInstance3D" parent="CityPlatform"]
-position = Vector3(0, -1, 0)
-mesh = SubResource("PlatformMesh")
-surface_material_override/0 = SubResource("SurfaceMaterial")
-
-[node name="PlatformCollision" type="CollisionShape3D" parent="CityPlatform"]
-position = Vector3(0, -1, 0)
-shape = SubResource("PlatformShape")
-
-[node name="EdgeTrim" type="MeshInstance3D" parent="CityPlatform"]
-position = Vector3(0, -1, 0)
-scale = Vector3(80.8, 0.3, 80.8)
-mesh = SubResource("UnitBoxMesh")
-surface_material_override/0 = SubResource("TrimCyan")
+script = ExtResource("4_island")
 
 [node name="Streets" type="Node3D" parent="."]
 
 [node name="StreetXP0" type="MeshInstance3D" parent="Streets"]
 position = Vector3(0, 0.02, 0)
-scale = Vector3(5, 0.04, 80)
+scale = Vector3(5, 0.04, 68)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("StreetMaterial")
 
 [node name="StreetXM20" type="MeshInstance3D" parent="Streets"]
 position = Vector3(-20, 0.02, 0)
-scale = Vector3(5, 0.04, 80)
+scale = Vector3(5, 0.04, 76)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("StreetMaterial")
 
 [node name="StreetXP20" type="MeshInstance3D" parent="Streets"]
 position = Vector3(20, 0.02, 0)
-scale = Vector3(5, 0.04, 80)
+scale = Vector3(5, 0.04, 76)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("StreetMaterial")
 
 [node name="StreetZP0" type="MeshInstance3D" parent="Streets"]
 position = Vector3(0, 0.03, 0)
 rotation = Vector3(0, 1.5708, 0)
-scale = Vector3(5, 0.04, 80)
+scale = Vector3(5, 0.04, 68)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("StreetMaterial")
 
 [node name="StreetZM20" type="MeshInstance3D" parent="Streets"]
 position = Vector3(0, 0.03, -20)
 rotation = Vector3(0, 1.5708, 0)
-scale = Vector3(5, 0.04, 80)
+scale = Vector3(5, 0.04, 76)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("StreetMaterial")
 
 [node name="StreetZP20" type="MeshInstance3D" parent="Streets"]
 position = Vector3(0, 0.03, 20)
 rotation = Vector3(0, 1.5708, 0)
-scale = Vector3(5, 0.04, 80)
+scale = Vector3(5, 0.04, 76)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("StreetMaterial")
 
@@ -1433,12 +1421,12 @@ rotation = Vector3(0, 1.5708, 0)
 paint = Color(0.72, 0.73, 0.75, 1)
 
 [node name="Car8" parent="Cars" instance=ExtResource("2_car")]
-position = Vector3(36, 0, -1.7)
+position = Vector3(33, 0, -1.7)
 rotation = Vector3(0, 1.5708, 0)
 paint = Color(0.55, 0.15, 0.13, 1)
 
 [node name="Car9" parent="Cars" instance=ExtResource("2_car")]
-position = Vector3(1.7, 0, -36)
+position = Vector3(1.7, 0, -33)
 paint = Color(0.88, 0.88, 0.9, 1)
 
 [node name="Car10" parent="Cars" instance=ExtResource("2_car")]
@@ -1462,7 +1450,7 @@ position = Vector3(-1.7, 0, 26)
 paint = Color(0.12, 0.12, 0.14, 1)
 
 [node name="Car15" parent="Cars" instance=ExtResource("2_car")]
-position = Vector3(1.7, 0, 36)
+position = Vector3(1.7, 0, 33)
 paint = Color(0.88, 0.88, 0.9, 1)
 
 [node name="Car16" parent="Cars" instance=ExtResource("2_car")]
