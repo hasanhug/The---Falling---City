@@ -21,12 +21,11 @@ const DEAD_ZONE := 0.12
 const BOARD_RANGE := 4.5
 const DESTINATION_RANGE := 35.0
 
-@onready var player: Node = get_node("../Player")
+@onready var player: Node3D = get_node("../Player") as Node3D
 @onready var rumble: Node = get_node("../Rumble")
 @onready var beacon: Node3D = get_node("../BeaconIsland")
 @onready var body: Node3D = $Body
 @onready var propeller: Node3D = $Body/Propeller
-@onready var camera_pivot: Node3D = $Body/CameraPivot
 @onready var camera: Camera3D = $Body/CameraPivot/Camera3D
 @onready var hint_label: Label3D = $HintLabel
 @onready var fade_rect: ColorRect = $UI/FadeRect
