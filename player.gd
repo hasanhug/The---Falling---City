@@ -34,17 +34,7 @@ func _physics_process(delta: float) -> void:
 
 	# 4. Turn that input into a 3D direction, relative to the camera's facing.
 	var direction := Vector3.ZERO
-	# 3. Read the WASD input as a 2D vector (length up to 1).
-	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
-
-	# 4. Turn that input into a 3D direction, relative to the camera's facing.
-	var direction := Vector3.ZERO
-	if input_dir != Vector3.ZERO:
-		direction = (camera.global_transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-
-	# 5. Move horizontally. In the air we keep full control (simple arcade feel).
-	velocity.x = direction.x * SPEED
-	velocity.z = direction.z * SPEED
+	if input_dir != Vector2.ZERO:
 		direction = (camera.global_transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
 	# 5. Move horizontally. In the air we keep full control (simple arcade feel).
@@ -56,7 +46,7 @@ func _physics_process(delta: float) -> void:
 		var target_yaw := atan2(direction.x, direction.z)
 		visual.rotation.y = lerp_angle(visual.rotation.y, target_yaw, TURN_SPEED * delta)
 
-	# 7. Apply the movement (and slide along walls/Platforms).
+	# 7. Apply the movement (and slide along walls and platforms).
 	move_and_slide()
 
 	# 8. Fell off the city? Respawn at the start position.
