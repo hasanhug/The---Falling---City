@@ -81,9 +81,11 @@ func _process(delta: float) -> void:
 		if global_position.distance_to(_takeoff_from) > WIN_DISTANCE:
 			_next_phase()
 	elif _phase == 4:
-		# The plane is gone: fade the win text in and leave it there.
+		# The plane is gone: fade the win text in, then let it pulse gently.
 		_win_time += delta
 		end_label.modulate.a = clampf(_win_time / WIN_FADE, 0.0, 1.0)
+		var pulse := 0.5 + 0.5 * sin(_win_time * 3.0)
+		end_label.scale = Vector2.ONE * (1.0 + pulse * 0.06)
 
 
 ## Start the ending: lock the camera, freeze the character, halt the doomsday.

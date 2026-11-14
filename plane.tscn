@@ -99,10 +99,23 @@ surface_material_override/0 = SubResource("PlaneRed")
 layer = 6
 
 [node name="EndLabel" type="Label" parent="UI"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -600.0
+offset_top = -50.0
+offset_right = 600.0
+offset_bottom = 50.0
+pivot_offset = Vector2(600, 50)
 horizontal_alignment = 1
 vertical_alignment = 1
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 72
+theme_override_colors/font_color = Color(1, 0.85, 0.25, 1)
+theme_override_colors/font_outline_color = Color(0.55, 0.15, 0, 1)
+theme_override_constants/outline_size = 14
+theme_override_colors/font_shadow_color = Color(1, 0.55, 0.1, 0.7)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 6
 text = "Congratulations, you won!"
 modulate = Color(1, 1, 1, 0)
