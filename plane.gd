@@ -67,9 +67,10 @@ func _process(delta: float) -> void:
 
 ## Cruise forward and steer by hovering the mouse around screen centre.
 func _fly(delta: float) -> void:
-	# Mouse offset from screen centre, roughly -1..1 on each axis.
-	var screen := get_viewport().get_visible_rect().size
-	var offset := (get_viewport().get_mouse_position() - screen * 0.5) / (screen * 0.5)
+	# Mouse offset from the window centre in WINDOW space (both values from
+	# the same coordinate system, so stretch mode cannot skew the result).
+	var window := get_window()
+	var offset := (window.get_mouse_position() - window.size * 0.5) / (window.size * 0.5)
 
 	# Dead zone: hovering the exact centre means fly straight.
 	if offset.length() < DEAD_ZONE:
