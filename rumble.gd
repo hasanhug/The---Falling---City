@@ -29,6 +29,7 @@ var _fallen := false
 var _time_left := COUNTDOWN_TIME
 var _fall_time := 0.0
 var _objective_time := 0.0
+var _halted := false
 var _pivot_base := Vector3.ZERO
 var _pillar_bases: Array[Vector3] = []
 var _rng := RandomNumberGenerator.new()
@@ -64,10 +65,21 @@ func _process(delta: float) -> void:
 
 	_update_objective(delta)
 
-	if not _fallen:
-		_countdown(delta)
-	else:
+	if _fallen:
 		_fall(delta)
+	elif not _halted:
+		_countdown(delta)
+
+
+## Pause the doomsday countdown (called by the plane when you board).
+func halt_timer() -> void:
+	_halted = true
+
+
+## Resume the countdown if the island has not fallen yet.
+func resume_timer() -> void:
+	if not _fallen:
+		_halted = false
 
 
 ## The rumbling minute: countdown, escalating camera and pillar shake.

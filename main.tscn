@@ -14,6 +14,8 @@
 
 [ext_resource type="Script" path="res://rumble.gd" id="7_rumble"]
 
+[ext_resource type="PackedScene" path="res://plane.tscn" id="8_plane"]
+
 [sub_resource type="ProceduralSkyMaterial" id="SkyMat"]
 sky_top_color = Color(0.25, 0.5, 0.9, 1)
 sky_horizon_color = Color(0.65, 0.8, 0.95, 1)
@@ -547,6 +549,17 @@ size = Vector3(1.4, 2.2, 0.1)
 
 [sub_resource type="BoxMesh" id="AwningMesh"]
 size = Vector3(1.8, 0.08, 0.9)
+
+[sub_resource type="CylinderMesh" id="BeaconPadMesh"]
+top_radius = 10.0
+bottom_radius = 10.0
+height = 1.2
+
+[sub_resource type="StandardMaterial3D" id="BeaconGlowMat"]
+albedo_color = Color(0.2, 0.5, 0.6, 1)
+emission_enabled = true
+emission = Color(0.3, 0.9, 1, 1)
+emission_energy_multiplier = 3.0
 
 [sub_resource type="PlaneMesh" id="GroundMesh"]
 size = Vector2(600, 600)
@@ -2850,6 +2863,47 @@ surface_material_override/0 = SubResource("PillarMat")
 
 [node name="Collision" type="CollisionShape3D" parent="Pillars/Pillar4"]
 shape = SubResource("PillarShape")
+
+[node name="BeaconIsland" type="Node3D" parent="."]
+position = Vector3(-180, 14, -110)
+
+[node name="Rock" type="MeshInstance3D" parent="BeaconIsland"]
+position = Vector3(0, -8, 0)
+scale = Vector3(0.4, 0.15, 0.4)
+mesh = SubResource("MoundMesh")
+surface_material_override/0 = SubResource("PatchDark")
+
+[node name="Pad" type="MeshInstance3D" parent="BeaconIsland"]
+position = Vector3(0, 0.6, 0)
+mesh = SubResource("BeaconPadMesh")
+surface_material_override/0 = SubResource("TrimCyan")
+
+[node name="BeaconColumn" type="MeshInstance3D" parent="BeaconIsland"]
+position = Vector3(0, 16, 0)
+scale = Vector3(1.2, 30, 1.2)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("BeaconGlowMat")
+
+[node name="Structure1" type="MeshInstance3D" parent="BeaconIsland"]
+position = Vector3(7, 3.1, 4)
+scale = Vector3(6, 5, 6)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("PalCream")
+
+[node name="Structure2" type="MeshInstance3D" parent="BeaconIsland"]
+position = Vector3(-6, 2.6, -5)
+scale = Vector3(5, 4, 5)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="BeaconLight" type="OmniLight3D" parent="BeaconIsland"]
+position = Vector3(0, 20, 0)
+light_color = Color(0.3, 0.9, 1, 1)
+light_energy = 2.0
+omni_range = 60.0
+
+[node name="Plane" parent="." instance=ExtResource("8_plane")]
+position = Vector3(-46, 19.3, -30)
 
 [node name="Cutscene" type="Node3D" parent="."]
 script = ExtResource("5_cutscene")

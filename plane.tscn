@@ -1,0 +1,129 @@
+[gd_scene load_steps=13 format=3]
+
+[ext_resource type="Script" path="res://plane.gd" id="1_plane_script"]
+
+[sub_resource type="StandardMaterial3D" id="PlaneRed"]
+albedo_color = Color(0.75, 0.2, 0.15, 1)
+metallic = 0.3
+roughness = 0.4
+
+[sub_resource type="StandardMaterial3D" id="PlaneGlass"]
+albedo_color = Color(0.08, 0.09, 0.11, 1)
+metallic = 0.6
+roughness = 0.15
+
+[sub_resource type="StandardMaterial3D" id="PlaneGrey"]
+albedo_color = Color(0.4, 0.41, 0.43, 1)
+roughness = 0.5
+
+[sub_resource type="BoxMesh" id="FuselageMesh"]
+size = Vector3(1.2, 1.1, 4.5)
+
+[sub_resource type="BoxMesh" id="NoseMesh"]
+size = Vector3(0.9, 0.9, 0.8)
+
+[sub_resource type="BoxMesh" id="WingMesh"]
+size = Vector3(7, 0.12, 1.2)
+
+[sub_resource type="BoxMesh" id="TailWingMesh"]
+size = Vector3(2.4, 0.1, 0.8)
+
+[sub_resource type="BoxMesh" id="FinMesh"]
+size = Vector3(0.1, 1, 0.8)
+
+[sub_resource type="BoxMesh" id="CockpitMesh"]
+size = Vector3(0.9, 0.5, 1)
+
+[sub_resource type="BoxMesh" id="PropBladeMesh"]
+size = Vector3(0.18, 2.4, 0.08)
+
+[sub_resource type="CylinderMesh" id="SpinnerMesh"]
+top_radius = 0.22
+bottom_radius = 0.3
+height = 0.5
+radial_segments = 8
+
+[node name="Plane" type="Node3D"]
+script = ExtResource("1_plane_script")
+
+[node name="Body" type="Node3D" parent="."]
+
+[node name="Fuselage" type="MeshInstance3D" parent="Body"]
+mesh = SubResource("FuselageMesh")
+surface_material_override/0 = SubResource("PlaneRed")
+
+[node name="Nose" type="MeshInstance3D" parent="Body"]
+position = Vector3(0, 0, -2.55)
+mesh = SubResource("NoseMesh")
+surface_material_override/0 = SubResource("PlaneRed")
+
+[node name="Spinner" type="MeshInstance3D" parent="Body"]
+position = Vector3(0, 0, -3)
+rotation = Vector3(1.5708, 0, 0)
+mesh = SubResource("SpinnerMesh")
+surface_material_override/0 = SubResource("PlaneGrey")
+
+[node name="Propeller" type="Node3D" parent="Body"]
+position = Vector3(0, 0, -3.15)
+
+[node name="Blade1" type="MeshInstance3D" parent="Body/Propeller"]
+mesh = SubResource("PropBladeMesh")
+surface_material_override/0 = SubResource("PlaneGrey")
+
+[node name="Blade2" type="MeshInstance3D" parent="Body/Propeller"]
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("PropBladeMesh")
+surface_material_override/0 = SubResource("PlaneGrey")
+
+[node name="Wing" type="MeshInstance3D" parent="Body"]
+position = Vector3(0, 0.1, -0.3)
+mesh = SubResource("WingMesh")
+surface_material_override/0 = SubResource("PlaneRed")
+
+[node name="Cockpit" type="MeshInstance3D" parent="Body"]
+position = Vector3(0, 0.72, -0.9)
+mesh = SubResource("CockpitMesh")
+surface_material_override/0 = SubResource("PlaneGlass")
+
+[node name="TailWing" type="MeshInstance3D" parent="Body"]
+position = Vector3(0, 0.2, 2.1)
+mesh = SubResource("TailWingMesh")
+surface_material_override/0 = SubResource("PlaneRed")
+
+[node name="Fin" type="MeshInstance3D" parent="Body"]
+position = Vector3(0, 0.7, 2.1)
+mesh = SubResource("FinMesh")
+surface_material_override/0 = SubResource("PlaneRed")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+position = Vector3(0, 1.2, 0)
+rotation = Vector3(-0.2, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+position = Vector3(0, 0, 9)
+
+[node name="HintLabel" type="Label3D" parent="."]
+position = Vector3(0, 2.2, 0)
+billboard = 1
+text = "Press E to board"
+font_size = 40
+outline_size = 10
+modulate = Color(1, 1, 1, 0.8)
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 6
+
+[node name="FadeRect" type="ColorRect" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="EndLabel" type="Label" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 54
+text = "YOU ESCAPED\nThe ending cutscene arrives in the next version"
+modulate = Color(0.5, 1, 0.8, 1)
