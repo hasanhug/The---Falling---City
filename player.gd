@@ -12,8 +12,18 @@ const FALL_LIMIT := -25.0
 const WALK_SWING := 0.7
 ## How fast the step rhythm plays.
 const WALK_SPEED := 9.0
+## Camera zoom limits (metres behind the player) and step per scroll tick.
+const ZOOM_MIN := 3.0
+const ZOOM_MAX := 14.0
+const ZOOM_STEP := 1.0
+## How fast the camera turns while holding right mouse button.
+const MOUSE_SENSITIVITY := 0.003
+## How far the camera may look down (-) or up (+), in radians.
+const PITCH_MIN := -1.1
+const PITCH_MAX := 0.45
 
-@onready var camera: Camera3D = $Camera3D
+@onready var camera_pivot: Node3D = $CameraPivot
+@onready var camera: Camera3D = $CameraPivot/Camera3D
 @onready var visual: Node3D = $Visual
 @onready var left_arm: Node3D = $Visual/LeftArm
 @onready var right_arm: Node3D = $Visual/RightArm
@@ -24,10 +34,29 @@ const WALK_SPEED := 9.0
 var _start_position: Vector3
 ## Timer used for the walk cycle animation.
 var _walk_time := 0.0
+## Current target distance of the camera behind the player.
+var _zoom := 6.5
 
 
 func _ready() -> void:
 	_start_position = global_position
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+
+func _input(event: InputEvent) -> void:
+	# Hold right mouse button: hide the cursor and let the mouse orbit the camera.
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
+		if event.pressed:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		else:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	# While the cursor is captured, mouse movement turns the camera.
+	elif event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		camera_pivot.rotation.y -= event.relative.x * MOUSE_SENSITIVITY
+		camera_pivot.rotation.x = clampf(
+			camera_pivot.rotation.x - event.relative.y * MOUSE_SENSITIVITY,
+			PITCH_MIN, PITCH_MAX
+		)
 
 
 func _physics_process(delta: float) -> void:
@@ -72,10 +101,17 @@ func _physics_process(delta: float) -> void:
 		left_leg.rotation.x = lerpf(left_leg.rotation.x, 0.0, TURN_SPEED * delta)
 		right_leg.rotation.x = lerpf(right_leg.rotation.x, 0.0, TURN_SPEED * delta)
 
-	# 8. Apply the movement (and slide along walls and platforms).
+	# 8. Scroll wheel zoom: wheel up pulls the camera in, wheel out moves it back.
+	if Input.is_action_just_pressed("zoom_in"):
+		_zoom = clampf(_zoom - ZOOM_STEP, ZOOM_MIN, ZOOM_MAX)
+	if Input.is_action_just_pressed("zoom_out"):
+		_zoom = clampf(_zoom + ZOOM_STEP, ZOOM_MIN, ZOOM_MAX)
+	camera.position.z = lerpf(camera.position.z, _zoom, 10.0 * delta)
+
+	# 9. Apply the movement (and slide along walls and platforms).
 	move_and_slide()
 
-	# 9. Fell off the city? Respawn at the start position.
+	# 10. Fell off the city? Respawn at the start position.
 	if global_position.y < FALL_LIMIT:
 		global_position = _start_position
 		velocity = Vector3.ZERO

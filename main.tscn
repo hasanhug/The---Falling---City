@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3]
+[gd_scene load_steps=35 format=3]
 
 [ext_resource type="PackedScene" path="res://player.tscn" id="1_player"]
 
@@ -91,47 +91,44 @@ size = Vector3(80, 2, 80)
 [sub_resource type="BoxShape3D" id="PlatformShape"]
 size = Vector3(80, 2, 80)
 
-[sub_resource type="BoxShape3D" id="GS_11_7"]
-size = Vector3(11, 7, 11)
+[sub_resource type="BoxShape3D" id="GS_11_12"]
+size = Vector3(11, 12, 11)
 
-[sub_resource type="BoxShape3D" id="GS_12_10"]
-size = Vector3(12, 10, 12)
+[sub_resource type="BoxShape3D" id="GS_12_16"]
+size = Vector3(12, 16, 12)
 
-[sub_resource type="BoxShape3D" id="GS_10_6"]
-size = Vector3(10, 6, 10)
+[sub_resource type="BoxShape3D" id="GS_10_10"]
+size = Vector3(10, 10, 10)
 
-[sub_resource type="BoxShape3D" id="GS_11_8"]
-size = Vector3(11, 8, 11)
+[sub_resource type="BoxShape3D" id="GS_11_13"]
+size = Vector3(11, 13, 11)
 
-[sub_resource type="BoxShape3D" id="GS_12_11"]
-size = Vector3(12, 11, 12)
+[sub_resource type="BoxShape3D" id="GS_12_20"]
+size = Vector3(12, 20, 12)
 
-[sub_resource type="BoxShape3D" id="GS_10_5"]
-size = Vector3(10, 5, 10)
+[sub_resource type="BoxShape3D" id="GS_10_9"]
+size = Vector3(10, 9, 10)
 
-[sub_resource type="BoxShape3D" id="GS_12_9"]
-size = Vector3(12, 9, 12)
-
-[sub_resource type="BoxShape3D" id="GS_10_4"]
-size = Vector3(10, 4, 10)
+[sub_resource type="BoxShape3D" id="GS_12_15"]
+size = Vector3(12, 15, 12)
 
 [sub_resource type="BoxShape3D" id="CS1"]
-size = Vector3(8, 1.6, 8)
+size = Vector3(8, 9, 8)
 
 [sub_resource type="BoxShape3D" id="CS2"]
-size = Vector3(8, 3.2, 8)
+size = Vector3(8, 10.6, 8)
 
 [sub_resource type="BoxShape3D" id="CS3"]
-size = Vector3(8, 4.8, 8)
+size = Vector3(8, 12.2, 8)
 
 [sub_resource type="BoxShape3D" id="CS4"]
-size = Vector3(8, 6.4, 8)
+size = Vector3(8, 13.8, 8)
 
 [sub_resource type="BoxShape3D" id="CS5"]
-size = Vector3(8, 8, 8)
+size = Vector3(8, 15.4, 8)
 
 [sub_resource type="BoxShape3D" id="CS6"]
-size = Vector3(8, 9.6, 8)
+size = Vector3(8, 17, 8)
 
 [sub_resource type="BoxShape3D" id="StepShape"]
 size = Vector3(2.4, 0.4, 2.4)
@@ -140,7 +137,7 @@ size = Vector3(2.4, 0.4, 2.4)
 size = Vector3(5, 0.5, 5)
 
 [sub_resource type="BoxShape3D" id="TowerBaseShape"]
-size = Vector3(14, 11.2, 14)
+size = Vector3(14, 18.6, 14)
 
 [node name="Main" type="Node3D"]
 
@@ -354,23 +351,23 @@ surface_material_override/0 = SubResource("LampGlowMaterial")
 position = Vector3(10, 0, -30)
 
 [node name="Mesh" type="MeshInstance3D" parent="Buildings/G1"]
-position = Vector3(0, 3.5, 0)
-scale = Vector3(11, 7, 11)
+position = Vector3(0, 6, 0)
+scale = Vector3(11, 12, 11)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("BuildingDarkA")
 
 [node name="Collision" type="CollisionShape3D" parent="Buildings/G1"]
-position = Vector3(0, 3.5, 0)
-shape = SubResource("GS_11_7")
+position = Vector3(0, 6, 0)
+shape = SubResource("GS_11_12")
 
 [node name="Trim" type="MeshInstance3D" parent="Buildings/G1"]
-position = Vector3(0, 6.85, 0)
+position = Vector3(0, 11.85, 0)
 scale = Vector3(11.3, 0.3, 11.3)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimCyan")
 
 [node name="Band" type="MeshInstance3D" parent="Buildings/G1"]
-position = Vector3(0, 3.85, 0)
+position = Vector3(0, 5.4, 0)
 scale = Vector3(11.25, 0.5, 11.25)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimOrange")
@@ -379,23 +376,23 @@ surface_material_override/0 = SubResource("TrimOrange")
 position = Vector3(30, 0, -30)
 
 [node name="Mesh" type="MeshInstance3D" parent="Buildings/G2"]
-position = Vector3(0, 5, 0)
-scale = Vector3(12, 10, 12)
+position = Vector3(0, 8, 0)
+scale = Vector3(12, 16, 12)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("BuildingDarkB")
 
 [node name="Collision" type="CollisionShape3D" parent="Buildings/G2"]
-position = Vector3(0, 5, 0)
-shape = SubResource("GS_12_10")
+position = Vector3(0, 8, 0)
+shape = SubResource("GS_12_16")
 
 [node name="Trim" type="MeshInstance3D" parent="Buildings/G2"]
-position = Vector3(0, 9.85, 0)
+position = Vector3(0, 15.85, 0)
 scale = Vector3(12.3, 0.3, 12.3)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimOrange")
 
 [node name="Band" type="MeshInstance3D" parent="Buildings/G2"]
-position = Vector3(0, 5.5, 0)
+position = Vector3(0, 7.2, 0)
 scale = Vector3(12.25, 0.5, 12.25)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimCyan")
@@ -404,23 +401,23 @@ surface_material_override/0 = SubResource("TrimCyan")
 position = Vector3(-10, 0, -10)
 
 [node name="Mesh" type="MeshInstance3D" parent="Buildings/G3"]
-position = Vector3(0, 3, 0)
-scale = Vector3(10, 6, 10)
+position = Vector3(0, 5, 0)
+scale = Vector3(10, 10, 10)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("BuildingDarkA")
 
 [node name="Collision" type="CollisionShape3D" parent="Buildings/G3"]
-position = Vector3(0, 3, 0)
-shape = SubResource("GS_10_6")
+position = Vector3(0, 5, 0)
+shape = SubResource("GS_10_10")
 
 [node name="Trim" type="MeshInstance3D" parent="Buildings/G3"]
-position = Vector3(0, 5.85, 0)
+position = Vector3(0, 9.85, 0)
 scale = Vector3(10.3, 0.3, 10.3)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimCyan")
 
 [node name="Band" type="MeshInstance3D" parent="Buildings/G3"]
-position = Vector3(0, 3.3, 0)
+position = Vector3(0, 4.5, 0)
 scale = Vector3(10.25, 0.5, 10.25)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimOrange")
@@ -429,23 +426,23 @@ surface_material_override/0 = SubResource("TrimOrange")
 position = Vector3(10, 0, -10)
 
 [node name="Mesh" type="MeshInstance3D" parent="Buildings/G4"]
-position = Vector3(0, 4, 0)
-scale = Vector3(11, 8, 11)
+position = Vector3(0, 6.5, 0)
+scale = Vector3(11, 13, 11)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("BuildingDarkB")
 
 [node name="Collision" type="CollisionShape3D" parent="Buildings/G4"]
-position = Vector3(0, 4, 0)
-shape = SubResource("GS_11_8")
+position = Vector3(0, 6.5, 0)
+shape = SubResource("GS_11_13")
 
 [node name="Trim" type="MeshInstance3D" parent="Buildings/G4"]
-position = Vector3(0, 7.85, 0)
+position = Vector3(0, 12.85, 0)
 scale = Vector3(11.3, 0.3, 11.3)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimOrange")
 
 [node name="Band" type="MeshInstance3D" parent="Buildings/G4"]
-position = Vector3(0, 4.4, 0)
+position = Vector3(0, 5.85, 0)
 scale = Vector3(11.25, 0.5, 11.25)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimCyan")
@@ -454,23 +451,23 @@ surface_material_override/0 = SubResource("TrimCyan")
 position = Vector3(30, 0, -10)
 
 [node name="Mesh" type="MeshInstance3D" parent="Buildings/G5"]
-position = Vector3(0, 5.5, 0)
-scale = Vector3(12, 11, 12)
+position = Vector3(0, 10, 0)
+scale = Vector3(12, 20, 12)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("BuildingDarkA")
 
 [node name="Collision" type="CollisionShape3D" parent="Buildings/G5"]
-position = Vector3(0, 5.5, 0)
-shape = SubResource("GS_12_11")
+position = Vector3(0, 10, 0)
+shape = SubResource("GS_12_20")
 
 [node name="Trim" type="MeshInstance3D" parent="Buildings/G5"]
-position = Vector3(0, 10.85, 0)
+position = Vector3(0, 19.85, 0)
 scale = Vector3(12.3, 0.3, 12.3)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimCyan")
 
 [node name="Band" type="MeshInstance3D" parent="Buildings/G5"]
-position = Vector3(0, 6.05, 0)
+position = Vector3(0, 9, 0)
 scale = Vector3(12.25, 0.5, 12.25)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimOrange")
@@ -479,23 +476,23 @@ surface_material_override/0 = SubResource("TrimOrange")
 position = Vector3(-10, 0, 10)
 
 [node name="Mesh" type="MeshInstance3D" parent="Buildings/G6"]
-position = Vector3(0, 2.5, 0)
-scale = Vector3(10, 5, 10)
+position = Vector3(0, 4.5, 0)
+scale = Vector3(10, 9, 10)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("BuildingDarkB")
 
 [node name="Collision" type="CollisionShape3D" parent="Buildings/G6"]
-position = Vector3(0, 2.5, 0)
-shape = SubResource("GS_10_5")
+position = Vector3(0, 4.5, 0)
+shape = SubResource("GS_10_9")
 
 [node name="Trim" type="MeshInstance3D" parent="Buildings/G6"]
-position = Vector3(0, 4.85, 0)
+position = Vector3(0, 8.85, 0)
 scale = Vector3(10.3, 0.3, 10.3)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimOrange")
 
 [node name="Band" type="MeshInstance3D" parent="Buildings/G6"]
-position = Vector3(0, 2.75, 0)
+position = Vector3(0, 4.05, 0)
 scale = Vector3(10.25, 0.5, 10.25)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimCyan")
@@ -504,23 +501,23 @@ surface_material_override/0 = SubResource("TrimCyan")
 position = Vector3(10, 0, 10)
 
 [node name="Mesh" type="MeshInstance3D" parent="Buildings/G7"]
-position = Vector3(0, 3.5, 0)
-scale = Vector3(11, 7, 11)
+position = Vector3(0, 6, 0)
+scale = Vector3(11, 12, 11)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("BuildingDarkA")
 
 [node name="Collision" type="CollisionShape3D" parent="Buildings/G7"]
-position = Vector3(0, 3.5, 0)
-shape = SubResource("GS_11_7")
+position = Vector3(0, 6, 0)
+shape = SubResource("GS_11_12")
 
 [node name="Trim" type="MeshInstance3D" parent="Buildings/G7"]
-position = Vector3(0, 6.85, 0)
+position = Vector3(0, 11.85, 0)
 scale = Vector3(11.3, 0.3, 11.3)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimCyan")
 
 [node name="Band" type="MeshInstance3D" parent="Buildings/G7"]
-position = Vector3(0, 3.85, 0)
+position = Vector3(0, 5.4, 0)
 scale = Vector3(11.25, 0.5, 11.25)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimOrange")
@@ -529,23 +526,23 @@ surface_material_override/0 = SubResource("TrimOrange")
 position = Vector3(30, 0, 10)
 
 [node name="Mesh" type="MeshInstance3D" parent="Buildings/G8"]
-position = Vector3(0, 4.5, 0)
-scale = Vector3(12, 9, 12)
+position = Vector3(0, 7.5, 0)
+scale = Vector3(12, 15, 12)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("BuildingDarkB")
 
 [node name="Collision" type="CollisionShape3D" parent="Buildings/G8"]
-position = Vector3(0, 4.5, 0)
-shape = SubResource("GS_12_9")
+position = Vector3(0, 7.5, 0)
+shape = SubResource("GS_12_15")
 
 [node name="Trim" type="MeshInstance3D" parent="Buildings/G8"]
-position = Vector3(0, 8.85, 0)
+position = Vector3(0, 14.85, 0)
 scale = Vector3(12.3, 0.3, 12.3)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimOrange")
 
 [node name="Band" type="MeshInstance3D" parent="Buildings/G8"]
-position = Vector3(0, 4.95, 0)
+position = Vector3(0, 6.75, 0)
 scale = Vector3(12.25, 0.5, 12.25)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimCyan")
@@ -554,23 +551,23 @@ surface_material_override/0 = SubResource("TrimCyan")
 position = Vector3(-32, 0, 10)
 
 [node name="Mesh" type="MeshInstance3D" parent="Buildings/G9"]
-position = Vector3(0, 3, 0)
-scale = Vector3(10, 6, 10)
+position = Vector3(0, 5, 0)
+scale = Vector3(10, 10, 10)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("BuildingDarkA")
 
 [node name="Collision" type="CollisionShape3D" parent="Buildings/G9"]
-position = Vector3(0, 3, 0)
-shape = SubResource("GS_10_6")
+position = Vector3(0, 5, 0)
+shape = SubResource("GS_10_10")
 
 [node name="Trim" type="MeshInstance3D" parent="Buildings/G9"]
-position = Vector3(0, 5.85, 0)
+position = Vector3(0, 9.85, 0)
 scale = Vector3(10.3, 0.3, 10.3)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimCyan")
 
 [node name="Band" type="MeshInstance3D" parent="Buildings/G9"]
-position = Vector3(0, 3.3, 0)
+position = Vector3(0, 4.5, 0)
 scale = Vector3(10.25, 0.5, 10.25)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimOrange")
@@ -579,23 +576,23 @@ surface_material_override/0 = SubResource("TrimOrange")
 position = Vector3(28, 0, 32)
 
 [node name="Mesh" type="MeshInstance3D" parent="Buildings/G10"]
-position = Vector3(0, 2, 0)
-scale = Vector3(10, 4, 10)
+position = Vector3(0, 4.5, 0)
+scale = Vector3(10, 9, 10)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("BuildingDarkB")
 
 [node name="Collision" type="CollisionShape3D" parent="Buildings/G10"]
-position = Vector3(0, 2, 0)
-shape = SubResource("GS_10_4")
+position = Vector3(0, 4.5, 0)
+shape = SubResource("GS_10_9")
 
 [node name="Trim" type="MeshInstance3D" parent="Buildings/G10"]
-position = Vector3(0, 3.85, 0)
+position = Vector3(0, 8.85, 0)
 scale = Vector3(10.3, 0.3, 10.3)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimOrange")
 
 [node name="Band" type="MeshInstance3D" parent="Buildings/G10"]
-position = Vector3(0, 2.2, 0)
+position = Vector3(0, 4.05, 0)
 scale = Vector3(10.25, 0.5, 10.25)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimCyan")
@@ -606,42 +603,88 @@ surface_material_override/0 = SubResource("TrimCyan")
 position = Vector3(7, 0, 34)
 
 [node name="Mesh" type="MeshInstance3D" parent="Parkour/C1"]
-position = Vector3(0, 0.8, 0)
-scale = Vector3(8, 1.6, 8)
+position = Vector3(0, 4.5, 0)
+scale = Vector3(8, 9, 8)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("BuildingDarkB")
 
 [node name="Collision" type="CollisionShape3D" parent="Parkour/C1"]
-position = Vector3(0, 0.8, 0)
+position = Vector3(0, 4.5, 0)
 shape = SubResource("CS1")
 
 [node name="Trim" type="MeshInstance3D" parent="Parkour/C1"]
-position = Vector3(0, 1.45, 0)
+position = Vector3(0, 8.85, 0)
 scale = Vector3(8.3, 0.3, 8.3)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimCyan")
+
+[node name="Band" type="MeshInstance3D" parent="Parkour/C1"]
+position = Vector3(0, 4.05, 0)
+scale = Vector3(8.25, 0.5, 8.25)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("TrimOrange")
+
+[node name="E1" type="StaticBody3D" parent="Parkour"]
+position = Vector3(1.2, 1.6, 37.5)
+
+[node name="Mesh" type="MeshInstance3D" parent="Parkour/E1"]
+mesh = SubResource("StepMesh")
+surface_material_override/0 = SubResource("TrimCyan")
+
+[node name="Collision" type="CollisionShape3D" parent="Parkour/E1"]
+shape = SubResource("StepShape")
+
+[node name="E2" type="StaticBody3D" parent="Parkour"]
+position = Vector3(1.2, 3.4, 34.7)
+
+[node name="Mesh" type="MeshInstance3D" parent="Parkour/E2"]
+mesh = SubResource("StepMesh")
+surface_material_override/0 = SubResource("TrimCyan")
+
+[node name="Collision" type="CollisionShape3D" parent="Parkour/E2"]
+shape = SubResource("StepShape")
+
+[node name="E3" type="StaticBody3D" parent="Parkour"]
+position = Vector3(1.2, 5.2, 31.9)
+
+[node name="Mesh" type="MeshInstance3D" parent="Parkour/E3"]
+mesh = SubResource("StepMesh")
+surface_material_override/0 = SubResource("TrimCyan")
+
+[node name="Collision" type="CollisionShape3D" parent="Parkour/E3"]
+shape = SubResource("StepShape")
+
+[node name="E4" type="StaticBody3D" parent="Parkour"]
+position = Vector3(1.2, 7, 29.1)
+
+[node name="Mesh" type="MeshInstance3D" parent="Parkour/E4"]
+mesh = SubResource("StepMesh")
+surface_material_override/0 = SubResource("TrimCyan")
+
+[node name="Collision" type="CollisionShape3D" parent="Parkour/E4"]
+shape = SubResource("StepShape")
 
 [node name="C2" type="StaticBody3D" parent="Parkour"]
 position = Vector3(-4, 0, 27)
 
 [node name="Mesh" type="MeshInstance3D" parent="Parkour/C2"]
-position = Vector3(0, 1.6, 0)
-scale = Vector3(8, 3.2, 8)
+position = Vector3(0, 5.3, 0)
+scale = Vector3(8, 10.6, 8)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("BuildingDarkB")
 
 [node name="Collision" type="CollisionShape3D" parent="Parkour/C2"]
-position = Vector3(0, 1.6, 0)
+position = Vector3(0, 5.3, 0)
 shape = SubResource("CS2")
 
 [node name="Trim" type="MeshInstance3D" parent="Parkour/C2"]
-position = Vector3(0, 3.05, 0)
+position = Vector3(0, 10.45, 0)
 scale = Vector3(8.3, 0.3, 8.3)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimCyan")
 
 [node name="Band" type="MeshInstance3D" parent="Parkour/C2"]
-position = Vector3(0, 1.75, 0)
+position = Vector3(0, 4.77, 0)
 scale = Vector3(8.25, 0.5, 8.25)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimOrange")
@@ -650,23 +693,23 @@ surface_material_override/0 = SubResource("TrimOrange")
 position = Vector3(-13, 0, 19)
 
 [node name="Mesh" type="MeshInstance3D" parent="Parkour/C3"]
-position = Vector3(0, 2.4, 0)
-scale = Vector3(8, 4.8, 8)
+position = Vector3(0, 6.1, 0)
+scale = Vector3(8, 12.2, 8)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("BuildingDarkB")
 
 [node name="Collision" type="CollisionShape3D" parent="Parkour/C3"]
-position = Vector3(0, 2.4, 0)
+position = Vector3(0, 6.1, 0)
 shape = SubResource("CS3")
 
 [node name="Trim" type="MeshInstance3D" parent="Parkour/C3"]
-position = Vector3(0, 4.65, 0)
+position = Vector3(0, 12.05, 0)
 scale = Vector3(8.3, 0.3, 8.3)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimCyan")
 
 [node name="Band" type="MeshInstance3D" parent="Parkour/C3"]
-position = Vector3(0, 2.65, 0)
+position = Vector3(0, 5.49, 0)
 scale = Vector3(8.25, 0.5, 8.25)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimOrange")
@@ -675,23 +718,23 @@ surface_material_override/0 = SubResource("TrimOrange")
 position = Vector3(-21, 0, 10)
 
 [node name="Mesh" type="MeshInstance3D" parent="Parkour/C4"]
-position = Vector3(0, 3.2, 0)
-scale = Vector3(8, 6.4, 8)
+position = Vector3(0, 6.9, 0)
+scale = Vector3(8, 13.8, 8)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("BuildingDarkB")
 
 [node name="Collision" type="CollisionShape3D" parent="Parkour/C4"]
-position = Vector3(0, 3.2, 0)
+position = Vector3(0, 6.9, 0)
 shape = SubResource("CS4")
 
 [node name="Trim" type="MeshInstance3D" parent="Parkour/C4"]
-position = Vector3(0, 6.25, 0)
+position = Vector3(0, 13.65, 0)
 scale = Vector3(8.3, 0.3, 8.3)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimCyan")
 
 [node name="Band" type="MeshInstance3D" parent="Parkour/C4"]
-position = Vector3(0, 3.5, 0)
+position = Vector3(0, 6.21, 0)
 scale = Vector3(8.25, 0.5, 8.25)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimOrange")
@@ -700,23 +743,23 @@ surface_material_override/0 = SubResource("TrimOrange")
 position = Vector3(-27, 0, 0)
 
 [node name="Mesh" type="MeshInstance3D" parent="Parkour/C5"]
-position = Vector3(0, 4, 0)
-scale = Vector3(8, 8, 8)
+position = Vector3(0, 7.7, 0)
+scale = Vector3(8, 15.4, 8)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("BuildingDarkB")
 
 [node name="Collision" type="CollisionShape3D" parent="Parkour/C5"]
-position = Vector3(0, 4, 0)
+position = Vector3(0, 7.7, 0)
 shape = SubResource("CS5")
 
 [node name="Trim" type="MeshInstance3D" parent="Parkour/C5"]
-position = Vector3(0, 7.85, 0)
+position = Vector3(0, 15.25, 0)
 scale = Vector3(8.3, 0.3, 8.3)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimCyan")
 
 [node name="Band" type="MeshInstance3D" parent="Parkour/C5"]
-position = Vector3(0, 4.4, 0)
+position = Vector3(0, 6.93, 0)
 scale = Vector3(8.25, 0.5, 8.25)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimOrange")
@@ -725,29 +768,29 @@ surface_material_override/0 = SubResource("TrimOrange")
 position = Vector3(-30, 0, -9)
 
 [node name="Mesh" type="MeshInstance3D" parent="Parkour/C6"]
-position = Vector3(0, 4.8, 0)
-scale = Vector3(8, 9.6, 8)
+position = Vector3(0, 8.5, 0)
+scale = Vector3(8, 17, 8)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("BuildingDarkB")
 
 [node name="Collision" type="CollisionShape3D" parent="Parkour/C6"]
-position = Vector3(0, 4.8, 0)
+position = Vector3(0, 8.5, 0)
 shape = SubResource("CS6")
 
 [node name="Trim" type="MeshInstance3D" parent="Parkour/C6"]
-position = Vector3(0, 9.45, 0)
+position = Vector3(0, 16.85, 0)
 scale = Vector3(8.3, 0.3, 8.3)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimCyan")
 
 [node name="Band" type="MeshInstance3D" parent="Parkour/C6"]
-position = Vector3(0, 5.3, 0)
+position = Vector3(0, 7.65, 0)
 scale = Vector3(8.25, 0.5, 8.25)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimOrange")
 
 [node name="Landing" type="StaticBody3D" parent="Parkour"]
-position = Vector3(-30, 10.4, -18)
+position = Vector3(-30, 17.8, -18)
 
 [node name="Mesh" type="MeshInstance3D" parent="Parkour/Landing"]
 mesh = SubResource("StepMesh")
@@ -762,37 +805,37 @@ position = Vector3(-30, 0, -30)
 [node name="Base" type="StaticBody3D" parent="Tower"]
 
 [node name="Mesh" type="MeshInstance3D" parent="Tower/Base"]
-position = Vector3(0, 5.6, 0)
-scale = Vector3(14, 11.2, 14)
+position = Vector3(0, 9.3, 0)
+scale = Vector3(14, 18.6, 14)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("BuildingDarkA")
 
 [node name="Collision" type="CollisionShape3D" parent="Tower/Base"]
-position = Vector3(0, 5.6, 0)
+position = Vector3(0, 9.3, 0)
 shape = SubResource("TowerBaseShape")
 
 [node name="Trim" type="MeshInstance3D" parent="Tower/Base"]
-position = Vector3(0, 10.9, 0)
+position = Vector3(0, 18.45, 0)
 scale = Vector3(14.3, 0.3, 14.3)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimCyan")
 
 [node name="Band" type="MeshInstance3D" parent="Tower/Base"]
-position = Vector3(0, 6.1, 0)
+position = Vector3(0, 8.37, 0)
 scale = Vector3(14.25, 0.5, 14.25)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimOrange")
 
 [node name="Core" type="MeshInstance3D" parent="Tower"]
-position = Vector3(0, 17.6, 0)
-scale = Vector3(4, 12.75, 4)
+position = Vector3(0, 25.08, 0)
+scale = Vector3(4, 12.95, 4)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("BuildingDarkA")
 
 [node name="Steps" type="Node3D" parent="Tower"]
 
 [node name="S1" type="StaticBody3D" parent="Tower/Steps"]
-position = Vector3(0, 12, 8.5)
+position = Vector3(0, 19.4, 8.5)
 
 [node name="Mesh" type="MeshInstance3D" parent="Tower/Steps/S1"]
 mesh = SubResource("StepMesh")
@@ -802,7 +845,7 @@ surface_material_override/0 = SubResource("TrimCyan")
 shape = SubResource("StepShape")
 
 [node name="S2" type="StaticBody3D" parent="Tower/Steps"]
-position = Vector3(-4.25, 13, 7.36)
+position = Vector3(-4.25, 20.4, 7.36)
 
 [node name="Mesh" type="MeshInstance3D" parent="Tower/Steps/S2"]
 mesh = SubResource("StepMesh")
@@ -812,7 +855,7 @@ surface_material_override/0 = SubResource("TrimCyan")
 shape = SubResource("StepShape")
 
 [node name="S3" type="StaticBody3D" parent="Tower/Steps"]
-position = Vector3(-7.36, 14, 4.25)
+position = Vector3(-7.36, 21.4, 4.25)
 
 [node name="Mesh" type="MeshInstance3D" parent="Tower/Steps/S3"]
 mesh = SubResource("StepMesh")
@@ -822,7 +865,7 @@ surface_material_override/0 = SubResource("TrimCyan")
 shape = SubResource("StepShape")
 
 [node name="S4" type="StaticBody3D" parent="Tower/Steps"]
-position = Vector3(-8.5, 15, 0)
+position = Vector3(-8.5, 22.4, 0)
 
 [node name="Mesh" type="MeshInstance3D" parent="Tower/Steps/S4"]
 mesh = SubResource("StepMesh")
@@ -832,7 +875,7 @@ surface_material_override/0 = SubResource("TrimCyan")
 shape = SubResource("StepShape")
 
 [node name="S5" type="StaticBody3D" parent="Tower/Steps"]
-position = Vector3(-7.36, 16, -4.25)
+position = Vector3(-7.36, 23.4, -4.25)
 
 [node name="Mesh" type="MeshInstance3D" parent="Tower/Steps/S5"]
 mesh = SubResource("StepMesh")
@@ -842,7 +885,7 @@ surface_material_override/0 = SubResource("TrimCyan")
 shape = SubResource("StepShape")
 
 [node name="S6" type="StaticBody3D" parent="Tower/Steps"]
-position = Vector3(-4.25, 17, -7.36)
+position = Vector3(-4.25, 24.4, -7.36)
 
 [node name="Mesh" type="MeshInstance3D" parent="Tower/Steps/S6"]
 mesh = SubResource("StepMesh")
@@ -852,7 +895,7 @@ surface_material_override/0 = SubResource("TrimCyan")
 shape = SubResource("StepShape")
 
 [node name="S7" type="StaticBody3D" parent="Tower/Steps"]
-position = Vector3(0, 18, -8.5)
+position = Vector3(0, 25.4, -8.5)
 
 [node name="Mesh" type="MeshInstance3D" parent="Tower/Steps/S7"]
 mesh = SubResource("StepMesh")
@@ -862,7 +905,7 @@ surface_material_override/0 = SubResource("TrimCyan")
 shape = SubResource("StepShape")
 
 [node name="S8" type="StaticBody3D" parent="Tower/Steps"]
-position = Vector3(4.25, 19, -7.36)
+position = Vector3(4.25, 26.4, -7.36)
 
 [node name="Mesh" type="MeshInstance3D" parent="Tower/Steps/S8"]
 mesh = SubResource("StepMesh")
@@ -872,7 +915,7 @@ surface_material_override/0 = SubResource("TrimCyan")
 shape = SubResource("StepShape")
 
 [node name="S9" type="StaticBody3D" parent="Tower/Steps"]
-position = Vector3(7.36, 20, -4.25)
+position = Vector3(7.36, 27.4, -4.25)
 
 [node name="Mesh" type="MeshInstance3D" parent="Tower/Steps/S9"]
 mesh = SubResource("StepMesh")
@@ -882,7 +925,7 @@ surface_material_override/0 = SubResource("TrimCyan")
 shape = SubResource("StepShape")
 
 [node name="S10" type="StaticBody3D" parent="Tower/Steps"]
-position = Vector3(8.5, 21, 0)
+position = Vector3(8.5, 28.4, 0)
 
 [node name="Mesh" type="MeshInstance3D" parent="Tower/Steps/S10"]
 mesh = SubResource("StepMesh")
@@ -892,7 +935,7 @@ surface_material_override/0 = SubResource("TrimCyan")
 shape = SubResource("StepShape")
 
 [node name="S11" type="StaticBody3D" parent="Tower/Steps"]
-position = Vector3(7.36, 22, 4.25)
+position = Vector3(7.36, 29.4, 4.25)
 
 [node name="Mesh" type="MeshInstance3D" parent="Tower/Steps/S11"]
 mesh = SubResource("StepMesh")
@@ -902,7 +945,7 @@ surface_material_override/0 = SubResource("TrimCyan")
 shape = SubResource("StepShape")
 
 [node name="S12" type="StaticBody3D" parent="Tower/Steps"]
-position = Vector3(4.25, 23, 7.36)
+position = Vector3(4.25, 30.4, 7.36)
 
 [node name="Mesh" type="MeshInstance3D" parent="Tower/Steps/S12"]
 mesh = SubResource("StepMesh")
@@ -912,7 +955,7 @@ surface_material_override/0 = SubResource("TrimCyan")
 shape = SubResource("StepShape")
 
 [node name="TopPlatform" type="StaticBody3D" parent="Tower"]
-position = Vector3(0, 24.2, 0)
+position = Vector3(0, 31.55, 0)
 
 [node name="Mesh" type="MeshInstance3D" parent="Tower/TopPlatform"]
 mesh = SubResource("TopMesh")
