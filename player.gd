@@ -334,6 +334,6 @@ func _rot(joint: Node3D, target: Vector3, delta: float) -> void:
 func _apply_pelvis_y(extra: float, delta: float) -> void:
 	var squash := 0.0
 	if _land_timer > 0.0:
-		squat_factor := _land_timer / LAND_TIME
-		squash = -sin(PI * squat_factor) * LAND_DIP
+		var land_phase: float = _land_timer / LAND_TIME
+		squash = -sin(PI * land_phase) * LAND_DIP
 	pelvis.position.y = lerpf(pelvis.position.y, _pelvis_base_y + extra + squash, minf(1.0, ANIM_BLEND * delta))
