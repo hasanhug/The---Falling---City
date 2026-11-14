@@ -6,7 +6,7 @@
 
 [sub_resource type="ProceduralSkyMaterial" id="SkyMat"]
 sky_top_color = Color(0.05, 0.04, 0.18, 1)
-sky_horizon_color = Color(0.85, 0.42, 0.24, 1)
+sky_horizon_color = Color(0.65, 0.45, 0.35, 1)
 sky_curve = 0.1
 ground_bottom_color = Color(0.04, 0.03, 0.08, 1)
 ground_horizon_color = Color(0.55, 0.3, 0.3, 1)
@@ -21,41 +21,37 @@ ambient_light_source = 3
 ambient_light_energy = 1.0
 tonemap_mode = 2
 glow_enabled = true
-glow_strength = 1.2
-glow_bloom = 0.1
+glow_strength = 0.7
+glow_bloom = 0.03
 fog_enabled = true
 fog_light_color = Color(0.75, 0.5, 0.45, 1)
 fog_density = 0.006
 
 [sub_resource type="StandardMaterial3D" id="SurfaceMaterial"]
-albedo_color = Color(0.13, 0.13, 0.16, 1)
-roughness = 0.9
+albedo_color = Color(0.15, 0.15, 0.17, 1)
+roughness = 0.95
 
 [sub_resource type="StandardMaterial3D" id="StreetMaterial"]
 albedo_color = Color(0.2, 0.2, 0.23, 1)
 roughness = 0.9
 
 [sub_resource type="StandardMaterial3D" id="BuildingDarkA"]
-albedo_color = Color(0.15, 0.17, 0.26, 1)
-metallic = 0.4
-roughness = 0.55
+albedo_color = Color(0.38, 0.38, 0.42, 1)
+metallic = 0.0
+roughness = 0.9
 
 [sub_resource type="StandardMaterial3D" id="BuildingDarkB"]
-albedo_color = Color(0.2, 0.16, 0.14, 1)
-metallic = 0.4
-roughness = 0.55
+albedo_color = Color(0.33, 0.31, 0.29, 1)
+metallic = 0.0
+roughness = 0.9
 
 [sub_resource type="StandardMaterial3D" id="TrimCyan"]
-albedo_color = Color(0.1, 0.2, 0.25, 1)
-emission_enabled = true
-emission = Color(0.2, 0.85, 1, 1)
-emission_energy_multiplier = 1.8
+albedo_color = Color(0.5, 0.5, 0.54, 1)
+roughness = 0.85
 
 [sub_resource type="StandardMaterial3D" id="TrimOrange"]
-albedo_color = Color(0.25, 0.16, 0.1, 1)
-emission_enabled = true
-emission = Color(1, 0.55, 0.2, 1)
-emission_energy_multiplier = 1.8
+albedo_color = Color(0.48, 0.44, 0.4, 1)
+roughness = 0.85
 
 [sub_resource type="StandardMaterial3D" id="PoleMaterial"]
 albedo_color = Color(0.2, 0.2, 0.24, 1)
@@ -166,14 +162,14 @@ metallic = 0.5
 roughness = 0.4
 emission_enabled = true
 emission = Color(0.2, 0.8, 1, 1)
-emission_energy_multiplier = 0.8
+emission_energy_multiplier = 0.25
 
 [sub_resource type="StandardMaterial3D" id="StarMaterial"]
 shading_mode = 0
 albedo_color = Color(1, 1, 1, 1)
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
-emission_energy_multiplier = 1.4
+emission_energy_multiplier = 0.7
 billboard_mode = 1
 
 [sub_resource type="StandardMaterial3D" id="MoteMaterial"]
@@ -221,6 +217,12 @@ size = Vector2(0.4, 0.4)
 
 [sub_resource type="QuadMesh" id="MoteQuad"]
 size = Vector2(0.08, 0.08)
+
+[sub_resource type="BoxMesh" id="LedgeMesh"]
+size = Vector3(0.9, 0.3, 2.2)
+
+[sub_resource type="BoxShape3D" id="LedgeShape"]
+size = Vector3(0.9, 0.3, 2.2)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_main_script")
@@ -708,7 +710,7 @@ position = Vector3(7, 0, 34)
 position = Vector3(0, 4.5, 0)
 scale = Vector3(8, 9, 8)
 mesh = SubResource("UnitBoxMesh")
-surface_material_override/0 = SubResource("BuildingDarkB")
+surface_material_override/0 = SubResource("BuildingDarkA")
 
 [node name="Collision" type="CollisionShape3D" parent="Parkour/C1"]
 position = Vector3(0, 4.5, 0)
@@ -726,45 +728,55 @@ scale = Vector3(8.25, 0.5, 8.25)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimOrange")
 
-[node name="E1" type="StaticBody3D" parent="Parkour"]
-position = Vector3(1.2, 1.6, 37.5)
+[node name="L1" type="StaticBody3D" parent="Parkour"]
+position = Vector3(2.55, 1.65, 37.2)
 
-[node name="Mesh" type="MeshInstance3D" parent="Parkour/E1"]
-mesh = SubResource("StepMesh")
-surface_material_override/0 = SubResource("TrimCyan")
+[node name="Mesh" type="MeshInstance3D" parent="Parkour/L1"]
+mesh = SubResource("LedgeMesh")
+surface_material_override/0 = SubResource("BuildingDarkA")
 
-[node name="Collision" type="CollisionShape3D" parent="Parkour/E1"]
-shape = SubResource("StepShape")
+[node name="Collision" type="CollisionShape3D" parent="Parkour/L1"]
+shape = SubResource("LedgeShape")
 
-[node name="E2" type="StaticBody3D" parent="Parkour"]
-position = Vector3(1.2, 3.4, 34.7)
+[node name="L2" type="StaticBody3D" parent="Parkour"]
+position = Vector3(2.55, 3.35, 35)
 
-[node name="Mesh" type="MeshInstance3D" parent="Parkour/E2"]
-mesh = SubResource("StepMesh")
-surface_material_override/0 = SubResource("TrimCyan")
+[node name="Mesh" type="MeshInstance3D" parent="Parkour/L2"]
+mesh = SubResource("LedgeMesh")
+surface_material_override/0 = SubResource("BuildingDarkA")
 
-[node name="Collision" type="CollisionShape3D" parent="Parkour/E2"]
-shape = SubResource("StepShape")
+[node name="Collision" type="CollisionShape3D" parent="Parkour/L2"]
+shape = SubResource("LedgeShape")
 
-[node name="E3" type="StaticBody3D" parent="Parkour"]
-position = Vector3(1.2, 5.2, 31.9)
+[node name="L3" type="StaticBody3D" parent="Parkour"]
+position = Vector3(2.55, 5.05, 32.8)
 
-[node name="Mesh" type="MeshInstance3D" parent="Parkour/E3"]
-mesh = SubResource("StepMesh")
-surface_material_override/0 = SubResource("TrimCyan")
+[node name="Mesh" type="MeshInstance3D" parent="Parkour/L3"]
+mesh = SubResource("LedgeMesh")
+surface_material_override/0 = SubResource("BuildingDarkA")
 
-[node name="Collision" type="CollisionShape3D" parent="Parkour/E3"]
-shape = SubResource("StepShape")
+[node name="Collision" type="CollisionShape3D" parent="Parkour/L3"]
+shape = SubResource("LedgeShape")
 
-[node name="E4" type="StaticBody3D" parent="Parkour"]
-position = Vector3(1.2, 7, 29.1)
+[node name="L4" type="StaticBody3D" parent="Parkour"]
+position = Vector3(2.55, 6.75, 30.6)
 
-[node name="Mesh" type="MeshInstance3D" parent="Parkour/E4"]
-mesh = SubResource("StepMesh")
-surface_material_override/0 = SubResource("TrimCyan")
+[node name="Mesh" type="MeshInstance3D" parent="Parkour/L4"]
+mesh = SubResource("LedgeMesh")
+surface_material_override/0 = SubResource("BuildingDarkA")
 
-[node name="Collision" type="CollisionShape3D" parent="Parkour/E4"]
-shape = SubResource("StepShape")
+[node name="Collision" type="CollisionShape3D" parent="Parkour/L4"]
+shape = SubResource("LedgeShape")
+
+[node name="L5" type="StaticBody3D" parent="Parkour"]
+position = Vector3(2.55, 8.45, 28.4)
+
+[node name="Mesh" type="MeshInstance3D" parent="Parkour/L5"]
+mesh = SubResource("LedgeMesh")
+surface_material_override/0 = SubResource("BuildingDarkA")
+
+[node name="Collision" type="CollisionShape3D" parent="Parkour/L5"]
+shape = SubResource("LedgeShape")
 
 [node name="C2" type="StaticBody3D" parent="Parkour"]
 position = Vector3(-4, 0, 27)
@@ -798,7 +810,7 @@ position = Vector3(-13, 0, 19)
 position = Vector3(0, 6.1, 0)
 scale = Vector3(8, 12.2, 8)
 mesh = SubResource("UnitBoxMesh")
-surface_material_override/0 = SubResource("BuildingDarkB")
+surface_material_override/0 = SubResource("BuildingDarkA")
 
 [node name="Collision" type="CollisionShape3D" parent="Parkour/C3"]
 position = Vector3(0, 6.1, 0)
@@ -848,7 +860,7 @@ position = Vector3(-27, 0, 0)
 position = Vector3(0, 7.7, 0)
 scale = Vector3(8, 15.4, 8)
 mesh = SubResource("UnitBoxMesh")
-surface_material_override/0 = SubResource("BuildingDarkB")
+surface_material_override/0 = SubResource("BuildingDarkA")
 
 [node name="Collision" type="CollisionShape3D" parent="Parkour/C5"]
 position = Vector3(0, 7.7, 0)
@@ -1130,26 +1142,6 @@ scale = Vector3(6, 0.6, 8)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("SurfaceMaterial")
 
-[node name="Rings" type="Node3D" parent="."]
-
-[node name="Ring1" type="MeshInstance3D" parent="Rings"]
-position = Vector3(-4, 12.1, 27)
-rotation = Vector3(0, 0.5, 0)
-mesh = SubResource("RingMesh")
-surface_material_override/0 = SubResource("RingMaterial")
-
-[node name="Ring2" type="MeshInstance3D" parent="Rings"]
-position = Vector3(-21, 15.4, 10)
-rotation = Vector3(0, 0.8, 0)
-mesh = SubResource("RingMesh")
-surface_material_override/0 = SubResource("RingMaterial")
-
-[node name="Ring3" type="MeshInstance3D" parent="Rings"]
-position = Vector3(-30, 18.6, -9)
-rotation = Vector3(0, 0.6, 0)
-mesh = SubResource("RingMesh")
-surface_material_override/0 = SubResource("RingMaterial")
-
 [node name="Bridge" type="Node3D" parent="."]
 
 [node name="B1" type="StaticBody3D" parent="Bridge"]
@@ -1319,7 +1311,7 @@ omni_range = 12.0
 
 [node name="Stars" type="CPUParticles3D" parent="."]
 position = Vector3(0, 70, 0)
-amount = 300
+amount = 160
 lifetime = 3600.0
 one_shot = true
 preprocess = 1.0

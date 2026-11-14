@@ -7,8 +7,6 @@ extends Node3D
 ## How far bridge platforms bob up and down, and how fast.
 const BOB_HEIGHT := 0.15
 const BOB_SPEED := 1.2
-## How fast the holo-rings spin.
-const RING_SPEED := 0.6
 ## How close to the portal counts as reaching the goal.
 const WIN_DISTANCE := 5.0
 
@@ -17,11 +15,6 @@ const WIN_DISTANCE := 5.0
 @onready var portal_material: StandardMaterial3D = $GoalIsland/Portal/Ring.get_active_material(0) as StandardMaterial3D
 @onready var portal: Node3D = $GoalIsland/Portal
 @onready var win_label: Label3D = $GoalIsland/Portal/WinLabel
-@onready var rings: Array[Node3D] = [
-	$Rings/Ring1,
-	$Rings/Ring2,
-	$Rings/Ring3,
-]
 @onready var bridge_platforms: Array[Node3D] = []
 
 ## Remember each bridge platform's resting height so we can bob around it.
@@ -48,11 +41,7 @@ func _process(delta: float) -> void:
 	beacon_material.emission_energy_multiplier = 2.5 + sin(_time * 2.0) * 0.8
 	portal_material.emission_energy_multiplier = 1.6 + sin(_time * 2.5) * 0.9
 
-	# 3. Spin the holo-rings over the rooftop route.
-	for ring in rings:
-		ring.rotation.z += delta * RING_SPEED
-
-	# 4. Reached the portal? Show the victory label.
+	# 3. Reached the portal? Show the victory label.
 	if not win_label.visible:
 		if player.global_position.distance_to(portal.global_position) < WIN_DISTANCE:
 			win_label.visible = true

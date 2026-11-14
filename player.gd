@@ -1,7 +1,9 @@
 extends CharacterBody3D
 
-## How fast the player moves, in metres per second.
+## How fast the player walks, in metres per second.
 const SPEED := 6.0
+## How much faster the player moves while sprinting.
+const SPRINT_MULTIPLIER := 1.6
 ## Upward speed given to the player when jumping.
 const JUMP_VELOCITY := 6.5
 ## How quickly the player model turns to face the direction it moves in.
@@ -12,6 +14,8 @@ const FALL_LIMIT := -25.0
 const WALK_SWING := 0.7
 ## How fast the step rhythm plays.
 const WALK_SPEED := 9.0
+## How far the player model leans forward while sprinting.
+const SPRINT_LEAN := 0.15
 ## Camera zoom limits (metres behind the player) and step per scroll tick.
 const ZOOM_MIN := 3.0
 const ZOOM_MAX := 14.0
@@ -32,8 +36,9 @@ const PITCH_MAX := 0.45
 
 ## Where the player started, used for respawning after a fall.
 var _start_position: Vector3
-## Timer used for the walk cycle animation.
+## Timers for the walk and climb animation cycles.
 var _walk_time := 0.0
+var _climb_time := 0.0
 ## Current target distance of the camera behind the player.
 var _zoom := 6.5
 
@@ -60,11 +65,11 @@ func _input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	# 1. Apply gravity while the player is in the air.
+	# 1. Apply gravity while the player is in the air (9.8 m/s2, set in project settings).
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# 2. Jump with Space, but only when standing on ground or a platform.
+	# 2. Jump with Space, but only when standing on ground or a ledge.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
@@ -76,30 +81,22 @@ func _physics_process(delta: float) -> void:
 	if input_dir != Vector2.ZERO:
 		direction = (camera.global_transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
-	# 5. Move horizontally. In the air we keep full control (simple arcade feel).
-	velocity.x = direction.x * SPEED
-	velocity.z = direction.z * SPEED
+	# 5. Move horizontally; sprint with Shift for extra speed.
+	var sprinting := Input.is_action_pressed("sprint") and direction != Vector3.ZERO
+	var speed := SPEED * (SPRINT_MULTIPLIER if sprinting else 1.0)
+	velocity.x = direction.x * speed
+	velocity.z = direction.z * speed
 
 	# 6. Smoothly turn the player model so it faces where it is going.
 	if direction != Vector3.ZERO:
 		var target_yaw := atan2(direction.x, direction.z)
 		visual.rotation.y = lerp_angle(visual.rotation.y, target_yaw, TURN_SPEED * delta)
 
-	# 7. Animate the limbs: swing while walking, relax when idle or airborne.
-	var walking := is_on_floor() and direction != Vector3.ZERO
-	if walking:
-		_walk_time += delta * WALK_SPEED
-		var swing := sin(_walk_time) * WALK_SWING
-		left_arm.rotation.x = swing
-		right_arm.rotation.x = -swing
-		left_leg.rotation.x = -swing
-		right_leg.rotation.x = swing
+	# 7. Animate the player based on what it is doing.
+	if is_on_floor():
+		_animate_ground(delta, direction, sprinting)
 	else:
-		_walk_time = 0.0
-		left_arm.rotation.x = lerpf(left_arm.rotation.x, 0.0, TURN_SPEED * delta)
-		right_arm.rotation.x = lerpf(right_arm.rotation.x, 0.0, TURN_SPEED * delta)
-		left_leg.rotation.x = lerpf(left_leg.rotation.x, 0.0, TURN_SPEED * delta)
-		right_leg.rotation.x = lerpf(right_leg.rotation.x, 0.0, TURN_SPEED * delta)
+		_animate_air(delta)
 
 	# 8. Scroll wheel zoom: wheel up pulls the camera in, wheel out moves it back.
 	if Input.is_action_just_pressed("zoom_in"):
@@ -115,3 +112,51 @@ func _physics_process(delta: float) -> void:
 	if global_position.y < FALL_LIMIT:
 		global_position = _start_position
 		velocity = Vector3.ZERO
+
+
+## Limb poses while standing on ground: idle, walking or sprinting.
+func _animate_ground(delta: float, direction: Vector3, sprinting: bool) -> void:
+	# Sprinting leans the body forward; otherwise stand upright.
+	var target_lean := SPRINT_LEAN if sprinting else 0.0
+	visual.rotation.x = lerpf(visual.rotation.x, target_lean, TURN_SPEED * delta)
+
+	if direction != Vector3.ZERO:
+		# Walking (or a faster, wider stride when sprinting).
+		var stride_speed := WALK_SPEED * (1.5 if sprinting else 1.0)
+		_walk_time += delta * stride_speed
+		var swing := sin(_walk_time) * WALK_SWING * (1.15 if sprinting else 1.0)
+		left_arm.rotation.x = swing
+		right_arm.rotation.x = -swing
+		left_leg.rotation.x = -swing
+		right_leg.rotation.x = swing
+	else:
+		# Idle: ease every limb back to neutral.
+		_walk_time = 0.0
+		_pose(delta, 0.0, 0.0, 0.0, 0.0)
+
+
+## Limb poses while airborne: climbing a wall, jumping up, or falling.
+func _animate_air(delta: float) -> void:
+	visual.rotation.x = lerpf(visual.rotation.x, 0.0, TURN_SPEED * delta)
+
+	# Pushing against a wall while rising reads as climbing the ledges.
+	if is_on_wall() and velocity.y > 0.5:
+		_climb_time += delta * 7.0
+		var reach := sin(_climb_time)
+		_pose(delta, -2.0 + reach * 0.6, -2.0 - reach * 0.6, 0.35 - reach * 0.2, 0.35 + reach * 0.2)
+	# Rising freely: arms reach up, legs tuck — the jump pose.
+	elif velocity.y > 0.5:
+		_climb_time = 0.0
+		_pose(delta, -2.4, -2.4, 0.55, 0.55)
+	# Falling: arms out to the sides-front for balance.
+	else:
+		_climb_time = 0.0
+		_pose(delta, -1.2, -1.2, 0.15, -0.15)
+
+
+## Smoothly move all four limbs toward a target pose.
+func _pose(delta: float, left_arm_x: float, right_arm_x: float, left_leg_x: float, right_leg_x: float) -> void:
+	left_arm.rotation.x = lerpf(left_arm.rotation.x, left_arm_x, TURN_SPEED * delta)
+	right_arm.rotation.x = lerpf(right_arm.rotation.x, right_arm_x, TURN_SPEED * delta)
+	left_leg.rotation.x = lerpf(left_leg.rotation.x, left_leg_x, TURN_SPEED * delta)
+	right_leg.rotation.x = lerpf(right_leg.rotation.x, right_leg_x, TURN_SPEED * delta)
