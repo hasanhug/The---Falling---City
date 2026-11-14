@@ -1253,13 +1253,13 @@ surface_material_override/0 = SubResource("TrimCyan")
 position = Vector3(12, 7, -10)
 scale = Vector3(6, 14, 6)
 mesh = SubResource("UnitBoxMesh")
-surface_material_override/0 = SubResource("NeonCyanMaterial")
+surface_material_override/0 = SubResource("TrimCyan")
 
 [node name="TowerB" type="MeshInstance3D" parent="GoalIsland"]
 position = Vector3(-12, 7, -12)
 scale = Vector3(5, 12, 5)
 mesh = SubResource("UnitBoxMesh")
-surface_material_override/0 = SubResource("NeonOrangeMaterial")
+surface_material_override/0 = SubResource("TrimOrange")
 
 [node name="LampA" type="Node3D" parent="GoalIsland"]
 position = Vector3(6, 1, 8)
