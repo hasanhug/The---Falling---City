@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3]
+[gd_scene load_steps=28 format=3]
 
 [ext_resource type="Script" path="res://player.gd" id="1_player_script"]
 
@@ -26,45 +26,85 @@ roughness = 0.9
 albedo_color = Color(0.92, 0.92, 0.95, 1)
 roughness = 0.6
 
+[sub_resource type="StandardMaterial3D" id="SoleMaterial"]
+albedo_color = Color(0.75, 0.75, 0.78, 1)
+roughness = 0.8
+
 [sub_resource type="StandardMaterial3D" id="FaceMaterial"]
 albedo_color = Color(0.06, 0.06, 0.09, 1)
 roughness = 0.9
 
-[sub_resource type="BoxMesh" id="TorsoMesh"]
-size = Vector3(0.5, 0.6, 0.32)
+[sub_resource type="BoxMesh" id="PelvisMesh"]
+size = Vector3(0.34, 0.18, 0.22)
+
+[sub_resource type="BoxMesh" id="LowerTorsoMesh"]
+size = Vector3(0.32, 0.22, 0.21)
+
+[sub_resource type="BoxMesh" id="ChestMesh"]
+size = Vector3(0.36, 0.26, 0.24)
 
 [sub_resource type="BoxMesh" id="HoodMesh"]
-size = Vector3(0.56, 0.2, 0.36)
+size = Vector3(0.38, 0.1, 0.26)
+
+[sub_resource type="CylinderMesh" id="NeckMesh"]
+top_radius = 0.05
+bottom_radius = 0.06
+height = 0.1
+radial_segments = 6
 
 [sub_resource type="BoxMesh" id="HeadMesh"]
-size = Vector3(0.36, 0.34, 0.36)
+size = Vector3(0.2, 0.24, 0.22)
 
 [sub_resource type="BoxMesh" id="HairTopMesh"]
-size = Vector3(0.4, 0.14, 0.4)
+size = Vector3(0.22, 0.08, 0.23)
 
 [sub_resource type="BoxMesh" id="HairFringeMesh"]
-size = Vector3(0.4, 0.12, 0.12)
+size = Vector3(0.22, 0.07, 0.05)
 
 [sub_resource type="BoxMesh" id="HairBackMesh"]
-size = Vector3(0.4, 0.2, 0.08)
+size = Vector3(0.22, 0.1, 0.05)
 
 [sub_resource type="BoxMesh" id="EyeMesh"]
-size = Vector3(0.07, 0.09, 0.02)
+size = Vector3(0.035, 0.045, 0.012)
 
 [sub_resource type="BoxMesh" id="MouthMesh"]
-size = Vector3(0.12, 0.03, 0.02)
+size = Vector3(0.06, 0.012, 0.01)
 
-[sub_resource type="BoxMesh" id="ArmMesh"]
-size = Vector3(0.14, 0.5, 0.16)
+[sub_resource type="SphereMesh" id="DeltoidMesh"]
+radius = 0.06
+
+[sub_resource type="CylinderMesh" id="UpperArmMesh"]
+top_radius = 0.055
+bottom_radius = 0.05
+height = 0.26
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="ForearmMesh"]
+top_radius = 0.045
+bottom_radius = 0.04
+height = 0.24
+radial_segments = 8
 
 [sub_resource type="BoxMesh" id="HandMesh"]
-size = Vector3(0.13, 0.1, 0.15)
+size = Vector3(0.07, 0.1, 0.09)
 
-[sub_resource type="BoxMesh" id="LegMesh"]
-size = Vector3(0.17, 0.6, 0.2)
+[sub_resource type="CylinderMesh" id="ThighMesh"]
+top_radius = 0.075
+bottom_radius = 0.07
+height = 0.36
+radial_segments = 8
 
-[sub_resource type="BoxMesh" id="SneakerMesh"]
-size = Vector3(0.2, 0.12, 0.32)
+[sub_resource type="CylinderMesh" id="ShinMesh"]
+top_radius = 0.06
+bottom_radius = 0.05
+height = 0.34
+radial_segments = 8
+
+[sub_resource type="BoxMesh" id="FootMesh"]
+size = Vector3(0.11, 0.08, 0.24)
+
+[sub_resource type="BoxMesh" id="SoleMesh"]
+size = Vector3(0.12, 0.03, 0.26)
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_player_script")
@@ -75,103 +115,200 @@ shape = SubResource("CapsuleShape3D_1")
 
 [node name="Visual" type="Node3D" parent="."]
 
-[node name="Torso" type="MeshInstance3D" parent="Visual"]
-position = Vector3(0, 1.02, 0)
-mesh = SubResource("TorsoMesh")
+[node name="Pelvis" type="Node3D" parent="Visual"]
+position = Vector3(0, 0.9, 0)
+
+[node name="PelvisMesh" type="MeshInstance3D" parent="Visual/Pelvis"]
+mesh = SubResource("PelvisMesh")
+surface_material_override/0 = SubResource("PantsMaterial")
+
+[node name="Torso" type="Node3D" parent="Visual/Pelvis"]
+position = Vector3(0, 0.1, 0)
+
+[node name="LowerTorsoMesh" type="MeshInstance3D" parent="Visual/Pelvis/Torso"]
+position = Vector3(0, 0.11, 0)
+mesh = SubResource("LowerTorsoMesh")
 surface_material_override/0 = SubResource("HoodieMaterial")
 
-[node name="Hood" type="MeshInstance3D" parent="Visual"]
-position = Vector3(0, 1.3, -0.01)
+[node name="Chest" type="Node3D" parent="Visual/Pelvis/Torso"]
+position = Vector3(0, 0.24, 0)
+
+[node name="ChestMesh" type="MeshInstance3D" parent="Visual/Pelvis/Torso/Chest"]
+position = Vector3(0, 0.12, 0)
+mesh = SubResource("ChestMesh")
+surface_material_override/0 = SubResource("HoodieMaterial")
+
+[node name="HoodMesh" type="MeshInstance3D" parent="Visual/Pelvis/Torso/Chest"]
+position = Vector3(0, 0.28, -0.02)
 mesh = SubResource("HoodMesh")
 surface_material_override/0 = SubResource("HoodieMaterial")
 
-[node name="Head" type="MeshInstance3D" parent="Visual"]
-position = Vector3(0, 1.55, 0)
+[node name="Neck" type="Node3D" parent="Visual/Pelvis/Torso/Chest"]
+position = Vector3(0, 0.3, 0)
+
+[node name="NeckMesh" type="MeshInstance3D" parent="Visual/Pelvis/Torso/Chest/Neck"]
+position = Vector3(0, 0.03, 0)
+mesh = SubResource("NeckMesh")
+surface_material_override/0 = SubResource("SkinMaterial")
+
+[node name="Head" type="Node3D" parent="Visual/Pelvis/Torso/Chest/Neck"]
+position = Vector3(0, 0.1, 0)
+
+[node name="HeadMesh" type="MeshInstance3D" parent="Visual/Pelvis/Torso/Chest/Neck/Head"]
+position = Vector3(0, 0.1, 0)
 mesh = SubResource("HeadMesh")
 surface_material_override/0 = SubResource("SkinMaterial")
 
-[node name="HairTop" type="MeshInstance3D" parent="Visual"]
-position = Vector3(0, 1.79, 0)
+[node name="HairTop" type="MeshInstance3D" parent="Visual/Pelvis/Torso/Chest/Neck/Head"]
+position = Vector3(0, 0.235, 0)
 mesh = SubResource("HairTopMesh")
 surface_material_override/0 = SubResource("HairMaterial")
 
-[node name="HairFringe" type="MeshInstance3D" parent="Visual"]
-position = Vector3(0, 1.73, 0.17)
-rotation = Vector3(-0.15, 0, 0)
+[node name="HairFringe" type="MeshInstance3D" parent="Visual/Pelvis/Torso/Chest/Neck/Head"]
+position = Vector3(0, 0.19, 0.1)
+rotation = Vector3(-0.12, 0, 0)
 mesh = SubResource("HairFringeMesh")
 surface_material_override/0 = SubResource("HairMaterial")
 
-[node name="HairBack" type="MeshInstance3D" parent="Visual"]
-position = Vector3(0, 1.7, -0.17)
+[node name="HairBack" type="MeshInstance3D" parent="Visual/Pelvis/Torso/Chest/Neck/Head"]
+position = Vector3(0, 0.18, -0.1)
 mesh = SubResource("HairBackMesh")
 surface_material_override/0 = SubResource("HairMaterial")
 
-[node name="EyeLeft" type="MeshInstance3D" parent="Visual"]
-position = Vector3(0.08, 1.58, 0.185)
+[node name="EyeLeft" type="MeshInstance3D" parent="Visual/Pelvis/Torso/Chest/Neck/Head"]
+position = Vector3(0.045, 0.11, 0.112)
 mesh = SubResource("EyeMesh")
 surface_material_override/0 = SubResource("FaceMaterial")
 
-[node name="EyeRight" type="MeshInstance3D" parent="Visual"]
-position = Vector3(-0.08, 1.58, 0.185)
+[node name="EyeRight" type="MeshInstance3D" parent="Visual/Pelvis/Torso/Chest/Neck/Head"]
+position = Vector3(-0.045, 0.11, 0.112)
 mesh = SubResource("EyeMesh")
 surface_material_override/0 = SubResource("FaceMaterial")
 
-[node name="Mouth" type="MeshInstance3D" parent="Visual"]
-position = Vector3(0, 1.47, 0.185)
+[node name="Mouth" type="MeshInstance3D" parent="Visual/Pelvis/Torso/Chest/Neck/Head"]
+position = Vector3(0, 0.05, 0.112)
 mesh = SubResource("MouthMesh")
 surface_material_override/0 = SubResource("FaceMaterial")
 
-[node name="LeftArm" type="Node3D" parent="Visual"]
-position = Vector3(0.34, 1.24, 0)
+[node name="ShoulderL" type="Node3D" parent="Visual/Pelvis/Torso/Chest"]
+position = Vector3(0.225, 0.2, 0)
 
-[node name="ArmMesh" type="MeshInstance3D" parent="Visual/LeftArm"]
-position = Vector3(0, -0.27, 0)
-mesh = SubResource("ArmMesh")
+[node name="DeltoidL" type="MeshInstance3D" parent="Visual/Pelvis/Torso/Chest/ShoulderL"]
+mesh = SubResource("DeltoidMesh")
 surface_material_override/0 = SubResource("HoodieMaterial")
 
-[node name="Hand" type="MeshInstance3D" parent="Visual/LeftArm"]
-position = Vector3(0, -0.56, 0)
+[node name="UpperArmL" type="Node3D" parent="Visual/Pelvis/Torso/Chest/ShoulderL"]
+position = Vector3(0, -0.05, 0)
+
+[node name="UpperArmMeshL" type="MeshInstance3D" parent="Visual/Pelvis/Torso/Chest/ShoulderL/UpperArmL"]
+position = Vector3(0, -0.13, 0)
+mesh = SubResource("UpperArmMesh")
+surface_material_override/0 = SubResource("HoodieMaterial")
+
+[node name="ElbowL" type="Node3D" parent="Visual/Pelvis/Torso/Chest/ShoulderL/UpperArmL"]
+position = Vector3(0, -0.26, 0)
+
+[node name="ForearmMeshL" type="MeshInstance3D" parent="Visual/Pelvis/Torso/Chest/ShoulderL/UpperArmL/ElbowL"]
+position = Vector3(0, -0.12, 0)
+mesh = SubResource("ForearmMesh")
+surface_material_override/0 = SubResource("HoodieMaterial")
+
+[node name="HandL" type="Node3D" parent="Visual/Pelvis/Torso/Chest/ShoulderL/UpperArmL/ElbowL"]
+position = Vector3(0, -0.24, 0)
+
+[node name="HandMeshL" type="MeshInstance3D" parent="Visual/Pelvis/Torso/Chest/ShoulderL/UpperArmL/ElbowL/HandL"]
+position = Vector3(0, -0.05, 0)
 mesh = SubResource("HandMesh")
 surface_material_override/0 = SubResource("SkinMaterial")
 
-[node name="RightArm" type="Node3D" parent="Visual"]
-position = Vector3(-0.34, 1.24, 0)
+[node name="ShoulderR" type="Node3D" parent="Visual/Pelvis/Torso/Chest"]
+position = Vector3(-0.225, 0.2, 0)
 
-[node name="ArmMesh" type="MeshInstance3D" parent="Visual/RightArm"]
-position = Vector3(0, -0.27, 0)
-mesh = SubResource("ArmMesh")
+[node name="DeltoidR" type="MeshInstance3D" parent="Visual/Pelvis/Torso/Chest/ShoulderR"]
+mesh = SubResource("DeltoidMesh")
 surface_material_override/0 = SubResource("HoodieMaterial")
 
-[node name="Hand" type="MeshInstance3D" parent="Visual/RightArm"]
-position = Vector3(0, -0.56, 0)
+[node name="UpperArmR" type="Node3D" parent="Visual/Pelvis/Torso/Chest/ShoulderR"]
+position = Vector3(0, -0.05, 0)
+
+[node name="UpperArmMeshR" type="MeshInstance3D" parent="Visual/Pelvis/Torso/Chest/ShoulderR/UpperArmR"]
+position = Vector3(0, -0.13, 0)
+mesh = SubResource("UpperArmMesh")
+surface_material_override/0 = SubResource("HoodieMaterial")
+
+[node name="ElbowR" type="Node3D" parent="Visual/Pelvis/Torso/Chest/ShoulderR/UpperArmR"]
+position = Vector3(0, -0.26, 0)
+
+[node name="ForearmMeshR" type="MeshInstance3D" parent="Visual/Pelvis/Torso/Chest/ShoulderR/UpperArmR/ElbowR"]
+position = Vector3(0, -0.12, 0)
+mesh = SubResource("ForearmMesh")
+surface_material_override/0 = SubResource("HoodieMaterial")
+
+[node name="HandR" type="Node3D" parent="Visual/Pelvis/Torso/Chest/ShoulderR/UpperArmR/ElbowR"]
+position = Vector3(0, -0.24, 0)
+
+[node name="HandMeshR" type="MeshInstance3D" parent="Visual/Pelvis/Torso/Chest/ShoulderR/UpperArmR/ElbowR/HandR"]
+position = Vector3(0, -0.05, 0)
 mesh = SubResource("HandMesh")
 surface_material_override/0 = SubResource("SkinMaterial")
 
-[node name="LeftLeg" type="Node3D" parent="Visual"]
-position = Vector3(0.13, 0.72, 0)
+[node name="HipL" type="Node3D" parent="Visual/Pelvis"]
+position = Vector3(0.1, -0.07, 0)
 
-[node name="LegMesh" type="MeshInstance3D" parent="Visual/LeftLeg"]
-position = Vector3(0, -0.32, 0)
-mesh = SubResource("LegMesh")
+[node name="ThighMeshL" type="MeshInstance3D" parent="Visual/Pelvis/HipL"]
+position = Vector3(0, -0.18, 0)
+mesh = SubResource("ThighMesh")
 surface_material_override/0 = SubResource("PantsMaterial")
 
-[node name="Sneaker" type="MeshInstance3D" parent="Visual/LeftLeg"]
-position = Vector3(0, -0.66, 0.05)
-mesh = SubResource("SneakerMesh")
-surface_material_override/0 = SubResource("SneakerMaterial")
+[node name="KneeL" type="Node3D" parent="Visual/Pelvis/HipL"]
+position = Vector3(0, -0.38, 0)
 
-[node name="RightLeg" type="Node3D" parent="Visual"]
-position = Vector3(-0.13, 0.72, 0)
-
-[node name="LegMesh" type="MeshInstance3D" parent="Visual/RightLeg"]
-position = Vector3(0, -0.32, 0)
-mesh = SubResource("LegMesh")
+[node name="ShinMeshL" type="MeshInstance3D" parent="Visual/Pelvis/HipL/KneeL"]
+position = Vector3(0, -0.17, 0)
+mesh = SubResource("ShinMesh")
 surface_material_override/0 = SubResource("PantsMaterial")
 
-[node name="Sneaker" type="MeshInstance3D" parent="Visual/RightLeg"]
-position = Vector3(0, -0.66, 0.05)
-mesh = SubResource("SneakerMesh")
+[node name="AnkleL" type="Node3D" parent="Visual/Pelvis/HipL/KneeL"]
+position = Vector3(0, -0.35, 0)
+
+[node name="FootMeshL" type="MeshInstance3D" parent="Visual/Pelvis/HipL/KneeL/AnkleL"]
+position = Vector3(0, -0.04, 0.05)
+mesh = SubResource("FootMesh")
 surface_material_override/0 = SubResource("SneakerMaterial")
+
+[node name="SoleMeshL" type="MeshInstance3D" parent="Visual/Pelvis/HipL/KneeL/AnkleL"]
+position = Vector3(0, -0.095, 0.05)
+mesh = SubResource("SoleMesh")
+surface_material_override/0 = SubResource("SoleMaterial")
+
+[node name="HipR" type="Node3D" parent="Visual/Pelvis"]
+position = Vector3(-0.1, -0.07, 0)
+
+[node name="ThighMeshR" type="MeshInstance3D" parent="Visual/Pelvis/HipR"]
+position = Vector3(0, -0.18, 0)
+mesh = SubResource("ThighMesh")
+surface_material_override/0 = SubResource("PantsMaterial")
+
+[node name="KneeR" type="Node3D" parent="Visual/Pelvis/HipR"]
+position = Vector3(0, -0.38, 0)
+
+[node name="ShinMeshR" type="MeshInstance3D" parent="Visual/Pelvis/HipR/KneeR"]
+position = Vector3(0, -0.17, 0)
+mesh = SubResource("ShinMesh")
+surface_material_override/0 = SubResource("PantsMaterial")
+
+[node name="AnkleR" type="Node3D" parent="Visual/Pelvis/HipR/KneeR"]
+position = Vector3(0, -0.35, 0)
+
+[node name="FootMeshR" type="MeshInstance3D" parent="Visual/Pelvis/HipR/KneeR/AnkleR"]
+position = Vector3(0, -0.04, 0.05)
+mesh = SubResource("FootMesh")
+surface_material_override/0 = SubResource("SneakerMaterial")
+
+[node name="SoleMeshR" type="MeshInstance3D" parent="Visual/Pelvis/HipR/KneeR/AnkleR"]
+position = Vector3(0, -0.095, 0.05)
+mesh = SubResource("SoleMesh")
+surface_material_override/0 = SubResource("SoleMaterial")
 
 [node name="CameraPivot" type="Node3D" parent="."]
 position = Vector3(0, 2.2, 0)

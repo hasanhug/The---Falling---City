@@ -524,6 +524,28 @@ bottom_radius = 0.18
 height = 3.5
 radial_segments = 6
 
+[sub_resource type="StandardMaterial3D" id="WindowMat"]
+albedo_color = Color(0.07, 0.09, 0.12, 1)
+metallic = 0.6
+roughness = 0.2
+
+[sub_resource type="StandardMaterial3D" id="DoorMat"]
+albedo_color = Color(0.12, 0.1, 0.09, 1)
+roughness = 0.7
+
+[sub_resource type="StandardMaterial3D" id="AwningMat"]
+albedo_color = Color(0.45, 0.3, 0.18, 1)
+roughness = 0.8
+
+[sub_resource type="BoxMesh" id="WindowMesh"]
+size = Vector3(1.2, 1.5, 0.08)
+
+[sub_resource type="BoxMesh" id="DoorMesh"]
+size = Vector3(1.4, 2.2, 0.1)
+
+[sub_resource type="BoxMesh" id="AwningMesh"]
+size = Vector3(1.8, 0.08, 0.9)
+
 [sub_resource type="PlaneMesh" id="GroundMesh"]
 size = Vector2(600, 600)
 
@@ -539,7 +561,7 @@ environment = SubResource("Environment_1")
 [node name="Sun" type="DirectionalLight3D" parent="."]
 rotation = Vector3(-0.75, 0.5, 0)
 light_color = Color(1, 0.78, 0.62, 1)
-light_energy = 1.2
+light_energy = 1.0
 shadow_enabled = true
 
 [node name="CityPlatform" type="StaticBody3D" parent="."]
@@ -585,6 +607,32 @@ rotation = Vector3(0, 1.5708, 0)
 scale = Vector3(5, 0.04, 76)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("StreetMaterial")
+
+[node name="CrosswalkN" type="MeshInstance3D" parent="Streets"]
+position = Vector3(0, 0.04, 4)
+scale = Vector3(4.4, 0.02, 1.4)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("TrimCyan")
+
+[node name="CrosswalkS" type="MeshInstance3D" parent="Streets"]
+position = Vector3(0, 0.04, -4)
+scale = Vector3(4.4, 0.02, 1.4)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("TrimCyan")
+
+[node name="CrosswalkE" type="MeshInstance3D" parent="Streets"]
+position = Vector3(4, 0.04, 0)
+rotation = Vector3(0, 1.5708, 0)
+scale = Vector3(4.4, 0.02, 1.4)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("TrimCyan")
+
+[node name="CrosswalkW" type="MeshInstance3D" parent="Streets"]
+position = Vector3(-4, 0.04, 0)
+rotation = Vector3(0, 1.5708, 0)
+scale = Vector3(4.4, 0.02, 1.4)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("TrimCyan")
 
 [node name="LampPosts" type="Node3D" parent="."]
 
@@ -750,6 +798,47 @@ scale = Vector3(11.25, 0.5, 11.25)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimOrange")
 
+[node name="Win1" type="MeshInstance3D" parent="Buildings/G1"]
+position = Vector3(-3, 4, 5.6)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win2" type="MeshInstance3D" parent="Buildings/G1"]
+position = Vector3(0, 4, 5.6)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win3" type="MeshInstance3D" parent="Buildings/G1"]
+position = Vector3(3, 4, 5.6)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win4" type="MeshInstance3D" parent="Buildings/G1"]
+position = Vector3(-3, 8, 5.6)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win5" type="MeshInstance3D" parent="Buildings/G1"]
+position = Vector3(0, 8, 5.6)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win6" type="MeshInstance3D" parent="Buildings/G1"]
+position = Vector3(3, 8, 5.6)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Door" type="MeshInstance3D" parent="Buildings/G1"]
+position = Vector3(0, 1.1, 5.6)
+mesh = SubResource("DoorMesh")
+surface_material_override/0 = SubResource("DoorMat")
+
+[node name="Awning" type="MeshInstance3D" parent="Buildings/G1"]
+position = Vector3(0, 2.5, 6.1)
+rotation = Vector3(0.3, 0, 0)
+mesh = SubResource("AwningMesh")
+surface_material_override/0 = SubResource("AwningMat")
+
 [node name="G2" type="StaticBody3D" parent="Buildings"]
 position = Vector3(30, 0, -30)
 
@@ -781,6 +870,37 @@ scale = Vector3(12.25, 0.5, 12.25)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimCyan")
 
+[node name="Win1" type="MeshInstance3D" parent="Buildings/G2"]
+position = Vector3(-3.2, 5, 6.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win2" type="MeshInstance3D" parent="Buildings/G2"]
+position = Vector3(3.2, 5, 6.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win3" type="MeshInstance3D" parent="Buildings/G2"]
+position = Vector3(-3.2, 10, 6.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win4" type="MeshInstance3D" parent="Buildings/G2"]
+position = Vector3(3.2, 10, 6.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Door" type="MeshInstance3D" parent="Buildings/G2"]
+position = Vector3(0, 1.1, 6.05)
+mesh = SubResource("DoorMesh")
+surface_material_override/0 = SubResource("DoorMat")
+
+[node name="Awning" type="MeshInstance3D" parent="Buildings/G2"]
+position = Vector3(0, 2.5, 6.55)
+rotation = Vector3(0.3, 0, 0)
+mesh = SubResource("AwningMesh")
+surface_material_override/0 = SubResource("AwningMat")
+
 [node name="G3" type="StaticBody3D" parent="Buildings"]
 position = Vector3(-10, 0, -10)
 
@@ -806,6 +926,37 @@ scale = Vector3(10.25, 0.5, 10.25)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimOrange")
 
+[node name="Win1" type="MeshInstance3D" parent="Buildings/G3"]
+position = Vector3(-2.8, 3.5, 5.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win2" type="MeshInstance3D" parent="Buildings/G3"]
+position = Vector3(2.8, 3.5, 5.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win3" type="MeshInstance3D" parent="Buildings/G3"]
+position = Vector3(-2.8, 7, 5.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win4" type="MeshInstance3D" parent="Buildings/G3"]
+position = Vector3(2.8, 7, 5.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Door" type="MeshInstance3D" parent="Buildings/G3"]
+position = Vector3(0, 1.1, 5.05)
+mesh = SubResource("DoorMesh")
+surface_material_override/0 = SubResource("DoorMat")
+
+[node name="Awning" type="MeshInstance3D" parent="Buildings/G3"]
+position = Vector3(0, 2.5, 5.55)
+rotation = Vector3(0.3, 0, 0)
+mesh = SubResource("AwningMesh")
+surface_material_override/0 = SubResource("AwningMat")
+
 [node name="G4" type="StaticBody3D" parent="Buildings"]
 position = Vector3(10, 0, -10)
 
@@ -830,6 +981,37 @@ position = Vector3(0, 5.85, 0)
 scale = Vector3(11.25, 0.5, 11.25)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimCyan")
+
+[node name="Win1" type="MeshInstance3D" parent="Buildings/G4"]
+position = Vector3(-3, 4.5, 5.6)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win2" type="MeshInstance3D" parent="Buildings/G4"]
+position = Vector3(3, 4.5, 5.6)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win3" type="MeshInstance3D" parent="Buildings/G4"]
+position = Vector3(-3, 9, 5.6)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win4" type="MeshInstance3D" parent="Buildings/G4"]
+position = Vector3(3, 9, 5.6)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Door" type="MeshInstance3D" parent="Buildings/G4"]
+position = Vector3(0, 1.1, 5.6)
+mesh = SubResource("DoorMesh")
+surface_material_override/0 = SubResource("DoorMat")
+
+[node name="Awning" type="MeshInstance3D" parent="Buildings/G4"]
+position = Vector3(0, 2.5, 6.1)
+rotation = Vector3(0.3, 0, 0)
+mesh = SubResource("AwningMesh")
+surface_material_override/0 = SubResource("AwningMat")
 
 [node name="G5" type="StaticBody3D" parent="Buildings"]
 position = Vector3(30, 0, -10)
@@ -862,6 +1044,37 @@ scale = Vector3(12.25, 0.5, 12.25)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimOrange")
 
+[node name="Win1" type="MeshInstance3D" parent="Buildings/G5"]
+position = Vector3(-3.2, 6, 6.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win2" type="MeshInstance3D" parent="Buildings/G5"]
+position = Vector3(3.2, 6, 6.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win3" type="MeshInstance3D" parent="Buildings/G5"]
+position = Vector3(-3.2, 12, 6.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win4" type="MeshInstance3D" parent="Buildings/G5"]
+position = Vector3(3.2, 12, 6.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Door" type="MeshInstance3D" parent="Buildings/G5"]
+position = Vector3(0, 1.1, 6.05)
+mesh = SubResource("DoorMesh")
+surface_material_override/0 = SubResource("DoorMat")
+
+[node name="Awning" type="MeshInstance3D" parent="Buildings/G5"]
+position = Vector3(0, 2.5, 6.55)
+rotation = Vector3(0.3, 0, 0)
+mesh = SubResource("AwningMesh")
+surface_material_override/0 = SubResource("AwningMat")
+
 [node name="G6" type="StaticBody3D" parent="Buildings"]
 position = Vector3(-10, 0, 10)
 
@@ -887,6 +1100,37 @@ scale = Vector3(10.25, 0.5, 10.25)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimCyan")
 
+[node name="Win1" type="MeshInstance3D" parent="Buildings/G6"]
+position = Vector3(-2.8, 3, 5.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win2" type="MeshInstance3D" parent="Buildings/G6"]
+position = Vector3(2.8, 3, 5.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win3" type="MeshInstance3D" parent="Buildings/G6"]
+position = Vector3(-2.8, 6, 5.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win4" type="MeshInstance3D" parent="Buildings/G6"]
+position = Vector3(2.8, 6, 5.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Door" type="MeshInstance3D" parent="Buildings/G6"]
+position = Vector3(0, 1.1, 5.05)
+mesh = SubResource("DoorMesh")
+surface_material_override/0 = SubResource("DoorMat")
+
+[node name="Awning" type="MeshInstance3D" parent="Buildings/G6"]
+position = Vector3(0, 2.5, 5.55)
+rotation = Vector3(0.3, 0, 0)
+mesh = SubResource("AwningMesh")
+surface_material_override/0 = SubResource("AwningMat")
+
 [node name="G7" type="StaticBody3D" parent="Buildings"]
 position = Vector3(10, 0, 10)
 
@@ -911,6 +1155,37 @@ position = Vector3(0, 5.4, 0)
 scale = Vector3(11.25, 0.5, 11.25)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimOrange")
+
+[node name="Win1" type="MeshInstance3D" parent="Buildings/G7"]
+position = Vector3(-3, 4, 5.6)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win2" type="MeshInstance3D" parent="Buildings/G7"]
+position = Vector3(3, 4, 5.6)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win3" type="MeshInstance3D" parent="Buildings/G7"]
+position = Vector3(-3, 8, 5.6)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win4" type="MeshInstance3D" parent="Buildings/G7"]
+position = Vector3(3, 8, 5.6)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Door" type="MeshInstance3D" parent="Buildings/G7"]
+position = Vector3(0, 1.1, 5.6)
+mesh = SubResource("DoorMesh")
+surface_material_override/0 = SubResource("DoorMat")
+
+[node name="Awning" type="MeshInstance3D" parent="Buildings/G7"]
+position = Vector3(0, 2.5, 6.1)
+rotation = Vector3(0.3, 0, 0)
+mesh = SubResource("AwningMesh")
+surface_material_override/0 = SubResource("AwningMat")
 
 [node name="G8" type="StaticBody3D" parent="Buildings"]
 position = Vector3(30, 0, 10)
@@ -943,6 +1218,37 @@ scale = Vector3(12.25, 0.5, 12.25)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimCyan")
 
+[node name="Win1" type="MeshInstance3D" parent="Buildings/G8"]
+position = Vector3(-3.2, 5, 6.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win2" type="MeshInstance3D" parent="Buildings/G8"]
+position = Vector3(3.2, 5, 6.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win3" type="MeshInstance3D" parent="Buildings/G8"]
+position = Vector3(-3.2, 10.5, 6.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win4" type="MeshInstance3D" parent="Buildings/G8"]
+position = Vector3(3.2, 10.5, 6.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Door" type="MeshInstance3D" parent="Buildings/G8"]
+position = Vector3(0, 1.1, 6.05)
+mesh = SubResource("DoorMesh")
+surface_material_override/0 = SubResource("DoorMat")
+
+[node name="Awning" type="MeshInstance3D" parent="Buildings/G8"]
+position = Vector3(0, 2.5, 6.55)
+rotation = Vector3(0.3, 0, 0)
+mesh = SubResource("AwningMesh")
+surface_material_override/0 = SubResource("AwningMat")
+
 [node name="G9" type="StaticBody3D" parent="Buildings"]
 position = Vector3(-32, 0, 10)
 
@@ -967,6 +1273,42 @@ position = Vector3(0, 4.5, 0)
 scale = Vector3(10.25, 0.5, 10.25)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimOrange")
+
+[node name="Win1" type="MeshInstance3D" parent="Buildings/G9"]
+position = Vector3(5.05, 3.5, -2.8)
+rotation = Vector3(0, 1.5708, 0)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win2" type="MeshInstance3D" parent="Buildings/G9"]
+position = Vector3(5.05, 3.5, 2.8)
+rotation = Vector3(0, 1.5708, 0)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win3" type="MeshInstance3D" parent="Buildings/G9"]
+position = Vector3(5.05, 7, -2.8)
+rotation = Vector3(0, 1.5708, 0)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win4" type="MeshInstance3D" parent="Buildings/G9"]
+position = Vector3(5.05, 7, 2.8)
+rotation = Vector3(0, 1.5708, 0)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Door" type="MeshInstance3D" parent="Buildings/G9"]
+position = Vector3(5.05, 1.1, 0)
+rotation = Vector3(0, 1.5708, 0)
+mesh = SubResource("DoorMesh")
+surface_material_override/0 = SubResource("DoorMat")
+
+[node name="Awning" type="MeshInstance3D" parent="Buildings/G9"]
+position = Vector3(5.55, 2.5, 0)
+rotation = Vector3(0.3, 1.5708, 0)
+mesh = SubResource("AwningMesh")
+surface_material_override/0 = SubResource("AwningMat")
 
 [node name="G10" type="StaticBody3D" parent="Buildings"]
 position = Vector3(28, 0, 32)
@@ -993,6 +1335,37 @@ scale = Vector3(10.25, 0.5, 10.25)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimCyan")
 
+[node name="Win1" type="MeshInstance3D" parent="Buildings/G10"]
+position = Vector3(-2.8, 3, 5.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win2" type="MeshInstance3D" parent="Buildings/G10"]
+position = Vector3(2.8, 3, 5.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win3" type="MeshInstance3D" parent="Buildings/G10"]
+position = Vector3(-2.8, 6, 5.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win4" type="MeshInstance3D" parent="Buildings/G10"]
+position = Vector3(2.8, 6, 5.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Door" type="MeshInstance3D" parent="Buildings/G10"]
+position = Vector3(0, 1.1, 5.05)
+mesh = SubResource("DoorMesh")
+surface_material_override/0 = SubResource("DoorMat")
+
+[node name="Awning" type="MeshInstance3D" parent="Buildings/G10"]
+position = Vector3(0, 2.5, 5.55)
+rotation = Vector3(0.3, 0, 0)
+mesh = SubResource("AwningMesh")
+surface_material_override/0 = SubResource("AwningMat")
+
 [node name="I1" type="StaticBody3D" parent="Buildings"]
 position = Vector3(-32, 0, -10)
 
@@ -1017,6 +1390,37 @@ position = Vector3(0, 4.95, 0)
 scale = Vector3(10.25, 0.5, 10.25)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimOrange")
+
+[node name="Win1" type="MeshInstance3D" parent="Buildings/I1"]
+position = Vector3(-2.8, 3.5, 5.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win2" type="MeshInstance3D" parent="Buildings/I1"]
+position = Vector3(2.8, 3.5, 5.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win3" type="MeshInstance3D" parent="Buildings/I1"]
+position = Vector3(-2.8, 7.5, 5.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win4" type="MeshInstance3D" parent="Buildings/I1"]
+position = Vector3(2.8, 7.5, 5.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Door" type="MeshInstance3D" parent="Buildings/I1"]
+position = Vector3(0, 1.1, 5.05)
+mesh = SubResource("DoorMesh")
+surface_material_override/0 = SubResource("DoorMat")
+
+[node name="Awning" type="MeshInstance3D" parent="Buildings/I1"]
+position = Vector3(0, 2.5, 5.55)
+rotation = Vector3(0.3, 0, 0)
+mesh = SubResource("AwningMesh")
+surface_material_override/0 = SubResource("AwningMat")
 
 [node name="I2" type="StaticBody3D" parent="Buildings"]
 position = Vector3(10, 0, 30)
@@ -1043,6 +1447,37 @@ scale = Vector3(10.25, 0.5, 10.25)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimOrange")
 
+[node name="Win1" type="MeshInstance3D" parent="Buildings/I2"]
+position = Vector3(-2.8, 2.5, 5.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win2" type="MeshInstance3D" parent="Buildings/I2"]
+position = Vector3(2.8, 2.5, 5.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win3" type="MeshInstance3D" parent="Buildings/I2"]
+position = Vector3(-2.8, 5, 5.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win4" type="MeshInstance3D" parent="Buildings/I2"]
+position = Vector3(2.8, 5, 5.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Door" type="MeshInstance3D" parent="Buildings/I2"]
+position = Vector3(0, 1.1, 5.05)
+mesh = SubResource("DoorMesh")
+surface_material_override/0 = SubResource("DoorMat")
+
+[node name="Awning" type="MeshInstance3D" parent="Buildings/I2"]
+position = Vector3(0, 2.5, 5.55)
+rotation = Vector3(0.3, 0, 0)
+mesh = SubResource("AwningMesh")
+surface_material_override/0 = SubResource("AwningMat")
+
 [node name="I4" type="StaticBody3D" parent="Buildings"]
 position = Vector3(35, 0, 25)
 
@@ -1061,6 +1496,43 @@ position = Vector3(0, 5.85, 0)
 scale = Vector3(5.3, 0.3, 5.3)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimCyan")
+
+[node name="Win1" type="MeshInstance3D" parent="Buildings/I4"]
+position = Vector3(-1.2, 2, 2.55)
+scale = Vector3(0.7, 0.8, 1)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win2" type="MeshInstance3D" parent="Buildings/I4"]
+position = Vector3(1.2, 2, 2.55)
+scale = Vector3(0.7, 0.8, 1)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win3" type="MeshInstance3D" parent="Buildings/I4"]
+position = Vector3(-1.2, 4.2, 2.55)
+scale = Vector3(0.7, 0.8, 1)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win4" type="MeshInstance3D" parent="Buildings/I4"]
+position = Vector3(1.2, 4.2, 2.55)
+scale = Vector3(0.7, 0.8, 1)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Door" type="MeshInstance3D" parent="Buildings/I4"]
+position = Vector3(0, 1.1, 2.55)
+scale = Vector3(0.8, 1, 1)
+mesh = SubResource("DoorMesh")
+surface_material_override/0 = SubResource("DoorMat")
+
+[node name="Awning" type="MeshInstance3D" parent="Buildings/I4"]
+position = Vector3(0, 2.3, 2.95)
+rotation = Vector3(0.3, 0, 0)
+scale = Vector3(0.8, 1, 1)
+mesh = SubResource("AwningMesh")
+surface_material_override/0 = SubResource("AwningMat")
 
 [node name="Parkour" type="Node3D" parent="."]
 
@@ -1407,6 +1879,49 @@ position = Vector3(0, 8.37, 0)
 scale = Vector3(14.25, 0.5, 14.25)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimOrange")
+
+[node name="Win1" type="MeshInstance3D" parent="Tower/Base"]
+position = Vector3(-4, 5, 7.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win2" type="MeshInstance3D" parent="Tower/Base"]
+position = Vector3(4, 5, 7.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win3" type="MeshInstance3D" parent="Tower/Base"]
+position = Vector3(-4, 10, 7.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win4" type="MeshInstance3D" parent="Tower/Base"]
+position = Vector3(4, 10, 7.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win5" type="MeshInstance3D" parent="Tower/Base"]
+position = Vector3(-4, 15, 7.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Win6" type="MeshInstance3D" parent="Tower/Base"]
+position = Vector3(4, 15, 7.05)
+mesh = SubResource("WindowMesh")
+surface_material_override/0 = SubResource("WindowMat")
+
+[node name="Door" type="MeshInstance3D" parent="Tower/Base"]
+position = Vector3(0, 1.6, 7.05)
+scale = Vector3(1.6, 1.4, 1)
+mesh = SubResource("DoorMesh")
+surface_material_override/0 = SubResource("DoorMat")
+
+[node name="Awning" type="MeshInstance3D" parent="Tower/Base"]
+position = Vector3(0, 3.4, 7.55)
+rotation = Vector3(0.3, 0, 0)
+scale = Vector3(1.4, 1, 1)
+mesh = SubResource("AwningMesh")
+surface_material_override/0 = SubResource("AwningMat")
 
 [node name="Core" type="MeshInstance3D" parent="Tower"]
 position = Vector3(0, 25.08, 0)
@@ -2057,12 +2572,33 @@ scale = Vector3(2.5, 14, 2.5)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("WornGrey")
 
+[node name="Ruin1B" type="MeshInstance3D" parent="Earth"]
+position = Vector3(34, 1, 34)
+rotation = Vector3(0.5, 1.2, -0.3)
+scale = Vector3(1.5, 1.2, 1.5)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("PatchDark")
+
+[node name="Ruin1C" type="MeshInstance3D" parent="Earth"]
+position = Vector3(29, 0.8, 42)
+rotation = Vector3(-0.3, 0.5, 0.4)
+scale = Vector3(1.2, 0.9, 1.2)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
 [node name="Ruin2" type="MeshInstance3D" parent="Earth"]
 position = Vector3(-28, 5, 18)
 rotation = Vector3(-0.2, 0.5, -0.15)
 scale = Vector3(2, 10, 2)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("PatchDark")
+
+[node name="Ruin2B" type="MeshInstance3D" parent="Earth"]
+position = Vector3(-25, 0.9, 22)
+rotation = Vector3(0.4, -0.8, 0.3)
+scale = Vector3(1.3, 1, 1.3)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("WornGrey")
 
 [node name="Ruin3" type="MeshInstance3D" parent="Earth"]
 position = Vector3(18, 6, -38)
@@ -2071,12 +2607,26 @@ scale = Vector3(2.2, 12, 2.2)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("WornGrey")
 
+[node name="Ruin3B" type="MeshInstance3D" parent="Earth"]
+position = Vector3(22, 0.9, -34)
+rotation = Vector3(-0.4, 0.9, -0.2)
+scale = Vector3(1.4, 1.1, 1.4)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("PatchDark")
+
 [node name="Ruin4" type="MeshInstance3D" parent="Earth"]
 position = Vector3(-40, 4, -28)
 rotation = Vector3(0.3, 0.9, -0.1)
 scale = Vector3(2, 8, 2)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("PatchDark")
+
+[node name="Ruin4B" type="MeshInstance3D" parent="Earth"]
+position = Vector3(-36, 0.8, -24)
+rotation = Vector3(0.3, -1.1, 0.35)
+scale = Vector3(1.2, 0.9, 1.2)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("WornGrey")
 
 [node name="Ruin5" type="MeshInstance3D" parent="Earth"]
 position = Vector3(48, 1.5, 45)
