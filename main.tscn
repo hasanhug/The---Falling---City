@@ -503,8 +503,26 @@ height = 120.0
 radial_segments = 12
 
 [sub_resource type="StandardMaterial3D" id="GroundMat"]
-albedo_color = Color(0.13, 0.11, 0.1, 1)
+albedo_color = Color(0.3, 0.28, 0.16, 1)
 roughness = 1.0
+
+[sub_resource type="StandardMaterial3D" id="DeadGreenMat"]
+albedo_color = Color(0.3, 0.36, 0.19, 1)
+roughness = 1.0
+
+[sub_resource type="StandardMaterial3D" id="DryBrownMat"]
+albedo_color = Color(0.38, 0.3, 0.2, 1)
+roughness = 1.0
+
+[sub_resource type="StandardMaterial3D" id="DeadWoodMat"]
+albedo_color = Color(0.3, 0.25, 0.2, 1)
+roughness = 1.0
+
+[sub_resource type="CylinderMesh" id="TreeTrunkMesh"]
+top_radius = 0.1
+bottom_radius = 0.18
+height = 3.5
+radial_segments = 6
 
 [sub_resource type="PlaneMesh" id="GroundMesh"]
 size = Vector2(600, 600)
@@ -1948,53 +1966,251 @@ rotation = Vector3(-1.5708, 0, 0)
 mesh = SubResource("GroundMesh")
 surface_material_override/0 = SubResource("GroundMat")
 
-[node name="GroundGlow" type="OmniLight3D" parent="Earth"]
-position = Vector3(0, 3, 0)
-light_color = Color(1, 0.3, 0.1, 1)
-light_energy = 1.2
-omni_range = 55.0
+[node name="Patch1" type="MeshInstance3D" parent="Earth"]
+position = Vector3(25, 0, 20)
+scale = Vector3(16, 0.7, 11)
+mesh = SubResource("PatchMesh")
+surface_material_override/0 = SubResource("DeadGreenMat")
 
-[node name="Crack1" type="MeshInstance3D" parent="Earth"]
-position = Vector3(18, 0.05, 12)
-rotation = Vector3(0, 0.4, 0)
-scale = Vector3(1.2, 1, 1)
-mesh = SubResource("CrackMesh")
-surface_material_override/0 = SubResource("FissureMat")
+[node name="Patch2" type="MeshInstance3D" parent="Earth"]
+position = Vector3(-30, 0, 35)
+scale = Vector3(13, 0.6, 14)
+mesh = SubResource("PatchMesh")
+surface_material_override/0 = SubResource("DryBrownMat")
 
-[node name="Crack2" type="MeshInstance3D" parent="Earth"]
-position = Vector3(-25, 0.05, 30)
-rotation = Vector3(0, 1.2, 0)
-scale = Vector3(0.9, 1, 1)
-mesh = SubResource("CrackMesh")
-surface_material_override/0 = SubResource("FissureMat")
+[node name="Patch3" type="MeshInstance3D" parent="Earth"]
+position = Vector3(-10, 0, -30)
+scale = Vector3(18, 0.8, 12)
+mesh = SubResource("PatchMesh")
+surface_material_override/0 = SubResource("DeadGreenMat")
 
-[node name="Crack3" type="MeshInstance3D" parent="Earth"]
-position = Vector3(-8, 0.05, -28)
-rotation = Vector3(0, -0.5, 0)
-scale = Vector3(1.4, 1, 1)
-mesh = SubResource("CrackMesh")
-surface_material_override/0 = SubResource("FissureMat")
+[node name="Patch4" type="MeshInstance3D" parent="Earth"]
+position = Vector3(40, 0, -20)
+scale = Vector3(12, 0.5, 9)
+mesh = SubResource("PatchMesh")
+surface_material_override/0 = SubResource("DryBrownMat")
 
-[node name="Crack4" type="MeshInstance3D" parent="Earth"]
-position = Vector3(35, 0.05, -15)
-rotation = Vector3(0, 2, 0)
-scale = Vector3(0.7, 1, 1)
-mesh = SubResource("CrackMesh")
-surface_material_override/0 = SubResource("FissureMat")
+[node name="Patch5" type="MeshInstance3D" parent="Earth"]
+position = Vector3(-45, 0, -10)
+scale = Vector3(15, 0.6, 13)
+mesh = SubResource("PatchMesh")
+surface_material_override/0 = SubResource("DeadGreenMat")
 
-[node name="Crack5" type="MeshInstance3D" parent="Earth"]
-position = Vector3(-40, 0.05, -5)
-rotation = Vector3(0, 0.9, 0)
-scale = Vector3(1.1, 1, 1)
-mesh = SubResource("CrackMesh")
-surface_material_override/0 = SubResource("FissureMat")
+[node name="Patch6" type="MeshInstance3D" parent="Earth"]
+position = Vector3(10, 0, 50)
+scale = Vector3(14, 0.6, 10)
+mesh = SubResource("PatchMesh")
+surface_material_override/0 = SubResource("DryBrownMat")
 
-[node name="Crack6" type="MeshInstance3D" parent="Earth"]
-position = Vector3(5, 0.05, 45)
-rotation = Vector3(0, -1.1, 0)
-scale = Vector3(0.8, 1, 1)
-mesh = SubResource("CrackMesh")
-surface_material_override/0 = SubResource("FissureMat")
+[node name="Patch7" type="MeshInstance3D" parent="Earth"]
+position = Vector3(55, 0, 25)
+scale = Vector3(10, 0.5, 12)
+mesh = SubResource("PatchMesh")
+surface_material_override/0 = SubResource("DeadGreenMat")
+
+[node name="Patch8" type="MeshInstance3D" parent="Earth"]
+position = Vector3(-55, 0, 30)
+scale = Vector3(12, 0.6, 9)
+mesh = SubResource("PatchMesh")
+surface_material_override/0 = SubResource("DryBrownMat")
+
+[node name="Patch9" type="MeshInstance3D" parent="Earth"]
+position = Vector3(30, 0, -45)
+scale = Vector3(13, 0.6, 11)
+mesh = SubResource("PatchMesh")
+surface_material_override/0 = SubResource("DeadGreenMat")
+
+[node name="Patch10" type="MeshInstance3D" parent="Earth"]
+position = Vector3(-25, 0, -50)
+scale = Vector3(16, 0.7, 10)
+mesh = SubResource("PatchMesh")
+surface_material_override/0 = SubResource("DryBrownMat")
+
+[node name="Patch11" type="MeshInstance3D" parent="Earth"]
+position = Vector3(0, 0, -15)
+scale = Vector3(10, 0.5, 8)
+mesh = SubResource("PatchMesh")
+surface_material_override/0 = SubResource("DeadGreenMat")
+
+[node name="Patch12" type="MeshInstance3D" parent="Earth"]
+position = Vector3(-18, 0, 5)
+scale = Vector3(9, 0.5, 10)
+mesh = SubResource("PatchMesh")
+surface_material_override/0 = SubResource("DryBrownMat")
+
+[node name="Patch13" type="MeshInstance3D" parent="Earth"]
+position = Vector3(12, 0, 28)
+scale = Vector3(11, 0.5, 8)
+mesh = SubResource("PatchMesh")
+surface_material_override/0 = SubResource("DeadGreenMat")
+
+[node name="Patch14" type="MeshInstance3D" parent="Earth"]
+position = Vector3(-38, 0, -35)
+scale = Vector3(12, 0.6, 10)
+mesh = SubResource("PatchMesh")
+surface_material_override/0 = SubResource("DryBrownMat")
+
+[node name="Ruin1" type="MeshInstance3D" parent="Earth"]
+position = Vector3(32, 7, 38)
+rotation = Vector3(0.25, 0.3, 0.1)
+scale = Vector3(2.5, 14, 2.5)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Ruin2" type="MeshInstance3D" parent="Earth"]
+position = Vector3(-28, 5, 18)
+rotation = Vector3(-0.2, 0.5, -0.15)
+scale = Vector3(2, 10, 2)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("PatchDark")
+
+[node name="Ruin3" type="MeshInstance3D" parent="Earth"]
+position = Vector3(18, 6, -38)
+rotation = Vector3(0.15, -0.4, 0.2)
+scale = Vector3(2.2, 12, 2.2)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Ruin4" type="MeshInstance3D" parent="Earth"]
+position = Vector3(-40, 4, -28)
+rotation = Vector3(0.3, 0.9, -0.1)
+scale = Vector3(2, 8, 2)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("PatchDark")
+
+[node name="Ruin5" type="MeshInstance3D" parent="Earth"]
+position = Vector3(48, 1.5, 45)
+rotation = Vector3(0.05, 0.3, 0.08)
+scale = Vector3(4, 3, 4)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Ruin6" type="MeshInstance3D" parent="Earth"]
+position = Vector3(-15, 1.2, 45)
+rotation = Vector3(0.1, -0.5, -0.05)
+scale = Vector3(3.5, 2.5, 3.5)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("PatchDark")
+
+[node name="Ruin7" type="MeshInstance3D" parent="Earth"]
+position = Vector3(5, 1.5, -55)
+rotation = Vector3(-0.08, 0.7, 0.1)
+scale = Vector3(4, 3, 3.5)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Ruin8" type="MeshInstance3D" parent="Earth"]
+position = Vector3(38, 0.8, -10)
+rotation = Vector3(0.12, 0.2, 0.25)
+scale = Vector3(5, 1.2, 3)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("PatchDark")
+
+[node name="Ruin9" type="MeshInstance3D" parent="Earth"]
+position = Vector3(-50, 0.7, 8)
+rotation = Vector3(-0.15, -0.3, 0.2)
+scale = Vector3(4, 1, 2.5)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Ruin10" type="MeshInstance3D" parent="Earth"]
+position = Vector3(26, 0.8, 52)
+rotation = Vector3(0.4, 0.8, 0.3)
+scale = Vector3(2, 1.4, 1.8)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("PatchDark")
+
+[node name="Ruin11" type="MeshInstance3D" parent="Earth"]
+position = Vector3(-8, 0.7, -20)
+rotation = Vector3(-0.3, 1.2, 0.2)
+scale = Vector3(1.6, 1.2, 1.6)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("WornGrey")
+
+[node name="Ruin12" type="MeshInstance3D" parent="Earth"]
+position = Vector3(55, 0.9, -40)
+rotation = Vector3(0.2, -0.9, -0.3)
+scale = Vector3(2.2, 1.6, 2)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("PatchDark")
+
+[node name="DeadTree1" type="MeshInstance3D" parent="Earth"]
+position = Vector3(44, 1.75, 30)
+rotation = Vector3(0.1, 0, 0.15)
+mesh = SubResource("TreeTrunkMesh")
+surface_material_override/0 = SubResource("DeadWoodMat")
+
+[node name="DeadTree1Branch" type="MeshInstance3D" parent="Earth"]
+position = Vector3(44.6, 3.1, 30)
+rotation = Vector3(0.3, 0.5, 0.7)
+scale = Vector3(1.2, 0.12, 0.12)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("DeadWoodMat")
+
+[node name="DeadTree2" type="MeshInstance3D" parent="Earth"]
+position = Vector3(-35, 1.75, 42)
+rotation = Vector3(-0.08, 0, -0.12)
+mesh = SubResource("TreeTrunkMesh")
+surface_material_override/0 = SubResource("DeadWoodMat")
+
+[node name="DeadTree2Branch" type="MeshInstance3D" parent="Earth"]
+position = Vector3(-35.5, 2.9, 42.3)
+rotation = Vector3(-0.4, 1.1, -0.6)
+scale = Vector3(1.1, 0.12, 0.12)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("DeadWoodMat")
+
+[node name="DeadTree3" type="MeshInstance3D" parent="Earth"]
+position = Vector3(20, 1.75, -52)
+rotation = Vector3(0.12, 0, 0.1)
+mesh = SubResource("TreeTrunkMesh")
+surface_material_override/0 = SubResource("DeadWoodMat")
+
+[node name="DeadTree3Branch" type="MeshInstance3D" parent="Earth"]
+position = Vector3(20.5, 3, -52.4)
+rotation = Vector3(0.5, 0.2, 0.9)
+scale = Vector3(1, 0.12, 0.12)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("DeadWoodMat")
+
+[node name="DeadTree4" type="MeshInstance3D" parent="Earth"]
+position = Vector3(-55, 1.75, -18)
+rotation = Vector3(-0.1, 0, 0.18)
+mesh = SubResource("TreeTrunkMesh")
+surface_material_override/0 = SubResource("DeadWoodMat")
+
+[node name="DeadTree4Branch" type="MeshInstance3D" parent="Earth"]
+position = Vector3(-55.4, 2.8, -18)
+rotation = Vector3(-0.3, 0.8, 0.5)
+scale = Vector3(1.2, 0.12, 0.12)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("DeadWoodMat")
+
+[node name="DeadTree5" type="MeshInstance3D" parent="Earth"]
+position = Vector3(60, 1.75, -5)
+rotation = Vector3(0.06, 0, -0.14)
+mesh = SubResource("TreeTrunkMesh")
+surface_material_override/0 = SubResource("DeadWoodMat")
+
+[node name="DeadTree5Branch" type="MeshInstance3D" parent="Earth"]
+position = Vector3(60.5, 3.2, -5.2)
+rotation = Vector3(0.35, 1.5, -0.8)
+scale = Vector3(1, 0.12, 0.12)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("DeadWoodMat")
+
+[node name="DeadTree6" type="MeshInstance3D" parent="Earth"]
+position = Vector3(-5, 1.75, 60)
+rotation = Vector3(-0.12, 0, 0.16)
+mesh = SubResource("TreeTrunkMesh")
+surface_material_override/0 = SubResource("DeadWoodMat")
+
+[node name="DeadTree6Branch" type="MeshInstance3D" parent="Earth"]
+position = Vector3(-5.4, 3, 60.4)
+rotation = Vector3(-0.45, 0.4, 0.75)
+scale = Vector3(1.1, 0.12, 0.12)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("DeadWoodMat")
 
 [node name="Rock1" type="MeshInstance3D" parent="Earth"]
 position = Vector3(28, 1, 8)
