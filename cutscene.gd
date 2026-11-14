@@ -16,19 +16,19 @@ const TEXT_2_END := 29.5
 ## How long the final fade to black takes.
 const FADE_OUT_TIME := 0.8
 
-## Camera path: [time, position]. Starts deep inside the hollow Earth,
-## rises along a pillar toward the crust hole, ends just inside the opening.
+## Camera path: [time, position]. Starts at ground level on the dead Earth,
+## rises along a pillar, and ends under the island in the sky.
 const PATH := [
-	[0.0, Vector3(45, -250, 60)],
-	[12.0, Vector3(30, -200, 45)],
-	[22.0, Vector3(15, -150, 30)],
-	[30.0, Vector3(8, -118, 14)],
+	[0.0, Vector3(40, -112, 55)],
+	[12.0, Vector3(30, -75, 42)],
+	[22.0, Vector3(16, -35, 32)],
+	[30.0, Vector3(4, 9, 42)],
 ]
 
-## Where the camera looks, blending from the mound in the depths
-## up to the island seen through the hole above.
-const LOOK_EARTH := Vector3(0, -195, 0)
-const LOOK_ISLAND := Vector3(0, 0, 0)
+## Where the camera looks, blending from the cracked ground ahead
+## up to the floating island.
+const LOOK_EARTH := Vector3(0, -110, 10)
+const LOOK_ISLAND := Vector3(0, 4, 0)
 
 ## How violently the camera and pillars shake during the final text.
 const SHAKE_AMOUNT := 0.35
@@ -39,6 +39,7 @@ const IDLE_SWAY := 0.06
 @onready var fade_rect: ColorRect = $UI/FadeRect
 @onready var text_1: Label = $UI/Text1
 @onready var text_2: Label = $UI/Text2
+@onready var skip_hint: Label = $UI/SkipHint
 @onready var player: Node = get_node("../Player")
 @onready var player_camera: Camera3D = get_node("../Player/CameraPivot/Camera3D")
 @onready var pillars: Array = get_node("../Pillars").get_children()
@@ -157,6 +158,7 @@ func _finish() -> void:
 	_finishing = true
 	text_1.modulate.a = 0.0
 	text_2.modulate.a = 0.0
+	skip_hint.modulate.a = 0.0
 	for i in pillars.size():
 		pillars[i].position = _pillar_bases[i]
 
