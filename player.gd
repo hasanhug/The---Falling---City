@@ -16,6 +16,10 @@ const WALK_SWING := 0.7
 const WALK_SPEED := 9.0
 ## How far the player model leans forward while sprinting.
 const SPRINT_LEAN := 0.15
+## How fast the player climbs ridged walls.
+const CLIMB_SPEED := 2.5
+## How long the grip holds on without touching a ridge (between ridges).
+const CLIMB_GRACE := 0.6
 ## Camera zoom limits (metres behind the player) and step per scroll tick.
 const ZOOM_MIN := 3.0
 const ZOOM_MAX := 14.0
@@ -38,9 +42,13 @@ const PITCH_MAX := 0.45
 var _start_position: Vector3
 ## Timers for the walk and climb animation cycles.
 var _walk_time := 0.0
-var _climb_time := 0.0
+var _climb_anim_time := 0.0
 ## Current target distance of the camera behind the player.
 var _zoom := 6.5
+## Climbing state: are we on a wall, and which way does it face?
+var _climbing := false
+var _climb_grace_left := 0.0
+var _wall_normal := Vector3.ZERO
 
 
 func _ready() -> void:
@@ -65,53 +73,103 @@ func _input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	# 1. Apply gravity while the player is in the air (9.8 m/s2, set in project settings).
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-
-	# 2. Jump with Space, but only when standing on ground or a ledge.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
-	# 3. Read the WASD input as a 2D vector (length up to 1).
+	# 1. Read the WASD input and camera-relative direction (climbing needs it too).
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
-
-	# 4. Turn that input into a 3D direction, relative to the camera's facing.
 	var direction := Vector3.ZERO
 	if input_dir != Vector2.ZERO:
 		direction = (camera.global_transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-
-	# 5. Move horizontally; sprint with Shift for extra speed.
 	var sprinting := Input.is_action_pressed("sprint") and direction != Vector3.ZERO
-	var speed := SPEED * (SPRINT_MULTIPLIER if sprinting else 1.0)
-	velocity.x = direction.x * speed
-	velocity.z = direction.z * speed
 
-	# 6. Smoothly turn the player model so it faces where it is going.
-	if direction != Vector3.ZERO:
+	if _climbing:
+		# 2a. Climbing: Space leaps off, S lets go, otherwise keep scaling the wall.
+		if Input.is_action_just_pressed("jump"):
+			_climbing = false
+			velocity = _wall_normal * 3.5 + Vector3.UP * 5.0
+		elif input_dir.y > 0.3:
+			_climbing = false
+			velocity = Vector3.ZERO
+		else:
+			# Press gently into the wall while rising so we stay in contact.
+			velocity = Vector3.UP * CLIMB_SPEED - _wall_normal * 1.0
+			# Face the wall while climbing it.
+			visual.rotation.y = atan2(-_wall_normal.x, -_wall_normal.z)
+	else:
+		# 2b. Normal movement: gravity and jumping.
+		if not is_on_floor():
+			velocity += get_gravity() * delta
+		if Input.is_action_just_pressed("jump") and is_on_floor():
+			velocity.y = JUMP_VELOCITY
+
+	# 3. Horizontal movement (locked while climbing).
+	if not _climbing:
+		var speed := SPEED * (SPRINT_MULTIPLIER if sprinting else 1.0)
+		velocity.x = direction.x * speed
+		velocity.z = direction.z * speed
+
+	# 4. Turn the model toward where it is going (not while climbing).
+	if not _climbing and direction != Vector3.ZERO:
 		var target_yaw := atan2(direction.x, direction.z)
 		visual.rotation.y = lerp_angle(visual.rotation.y, target_yaw, TURN_SPEED * delta)
 
-	# 7. Animate the player based on what it is doing.
-	if is_on_floor():
-		_animate_ground(delta, direction, sprinting)
-	else:
+	# 5. Animate the player based on what it is doing.
+	if _climbing or not is_on_floor():
 		_animate_air(delta)
+	else:
+		_animate_ground(delta, direction, sprinting)
 
-	# 8. Scroll wheel zoom: wheel up pulls the camera in, wheel out moves it back.
+	# 6. Scroll wheel zoom: wheel up pulls the camera in, wheel out moves it back.
 	if Input.is_action_just_pressed("zoom_in"):
 		_zoom = clampf(_zoom - ZOOM_STEP, ZOOM_MIN, ZOOM_MAX)
 	if Input.is_action_just_pressed("zoom_out"):
 		_zoom = clampf(_zoom + ZOOM_STEP, ZOOM_MIN, ZOOM_MAX)
 	camera.position.z = lerpf(camera.position.z, _zoom, 10.0 * delta)
 
-	# 9. Apply the movement (and slide along walls and platforms).
+	# 7. Apply the movement (and slide along walls and platforms).
 	move_and_slide()
 
-	# 10. Fell off the city? Respawn at the start position.
+	# 8. After moving: grab new walls, keep or release the grip, top out.
+	_update_climbing(delta, direction)
+
+	# 9. Fell off the city? Respawn at the start position.
 	if global_position.y < FALL_LIMIT:
 		global_position = _start_position
 		velocity = Vector3.ZERO
+		_climbing = false
+
+
+## Decide whether to start, keep, or stop climbing after the last move.
+func _update_climbing(delta: float, direction: Vector3) -> void:
+	var collision := get_last_slide_collision()
+	var touching_climbable := false
+	if collision != null and collision.get_collider() != null:
+		if collision.get_collider().is_in_group("climbable"):
+			touching_climbable = true
+			_wall_normal = collision.get_normal()
+
+	if _climbing:
+		if is_on_floor():
+			# Landed on something solid: let go.
+			_climbing = false
+		elif collision == null:
+			# Climbed past the top of the wall: hop forward onto the roof.
+			_climbing = false
+			velocity = -_wall_normal * 2.5 + Vector3.UP * 4.5
+		elif touching_climbable:
+			# Still on ridges: refresh the grip.
+			_climb_grace_left = CLIMB_GRACE
+		else:
+			# Between ridges: hold on briefly, drop if it lasts too long.
+			_climb_grace_left -= delta
+			if _climb_grace_left <= 0.0:
+				_climbing = false
+
+	if not _climbing and touching_climbable and direction != Vector3.ZERO:
+		# Pressing toward a climbable wall: grab it.
+		if direction.dot(-_wall_normal) > 0.4:
+			_climbing = true
+			_climb_grace_left = CLIMB_GRACE
+			if velocity.y < 0.0:
+				velocity.y = 0.0
 
 
 ## Limb poses while standing on ground: idle, walking or sprinting.
@@ -139,18 +197,18 @@ func _animate_ground(delta: float, direction: Vector3, sprinting: bool) -> void:
 func _animate_air(delta: float) -> void:
 	visual.rotation.x = lerpf(visual.rotation.x, 0.0, TURN_SPEED * delta)
 
-	# Pushing against a wall while rising reads as climbing the ledges.
-	if is_on_wall() and velocity.y > 0.5:
-		_climb_time += delta * 7.0
-		var reach := sin(_climb_time)
+	# On a wall (or gripping one) while rising reads as climbing.
+	if (is_on_wall() or _climbing) and velocity.y > 0.5:
+		_climb_anim_time += delta * 7.0
+		var reach := sin(_climb_anim_time)
 		_pose(delta, -2.0 + reach * 0.6, -2.0 - reach * 0.6, 0.35 - reach * 0.2, 0.35 + reach * 0.2)
 	# Rising freely: arms reach up, legs tuck — the jump pose.
 	elif velocity.y > 0.5:
-		_climb_time = 0.0
+		_climb_anim_time = 0.0
 		_pose(delta, -2.4, -2.4, 0.55, 0.55)
 	# Falling: arms out to the sides-front for balance.
 	else:
-		_climb_time = 0.0
+		_climb_anim_time = 0.0
 		_pose(delta, -1.2, -1.2, 0.15, -0.15)
 
 
