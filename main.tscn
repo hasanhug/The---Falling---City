@@ -1,0 +1,296 @@
+[gd_scene load_steps=24 format=3]
+
+[ext_resource type="PackedScene" path="res://player.tscn" id="1_player"]
+
+[sub_resource type="ProceduralSkyMaterial" id="SkyMat"]
+sky_top_color = Color(0.12, 0.09, 0.32, 1)
+sky_horizon_color = Color(0.85, 0.42, 0.24, 1)
+sky_curve = 0.1
+ground_bottom_color = Color(0.04, 0.03, 0.08, 1)
+ground_horizon_color = Color(0.55, 0.3, 0.3, 1)
+
+[sub_resource type="Sky" id="Sky_1"]
+sky_material = SubResource("SkyMat")
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 2
+sky = SubResource("Sky_1")
+ambient_light_source = 3
+ambient_light_energy = 1.0
+tonemap_mode = 2
+glow_enabled = true
+glow_strength = 0.9
+glow_bloom = 0.06
+fog_enabled = true
+fog_light_color = Color(0.75, 0.5, 0.45, 1)
+fog_density = 0.006
+
+[sub_resource type="StandardMaterial3D" id="PlazaMaterial"]
+albedo_color = Color(0.18, 0.2, 0.28, 1)
+metallic = 0.4
+roughness = 0.6
+
+[sub_resource type="StandardMaterial3D" id="UndersideMaterial"]
+albedo_color = Color(0.12, 0.1, 0.16, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="BuildingSolidMaterial"]
+albedo_color = Color(0.15, 0.17, 0.26, 1)
+metallic = 0.5
+roughness = 0.55
+
+[sub_resource type="StandardMaterial3D" id="NeonCyanMaterial"]
+albedo_color = Color(0.1, 0.2, 0.25, 1)
+emission_enabled = true
+emission = Color(0.2, 0.85, 1, 1)
+emission_energy_multiplier = 1.6
+
+[sub_resource type="StandardMaterial3D" id="NeonOrangeMaterial"]
+albedo_color = Color(0.25, 0.16, 0.1, 1)
+emission_enabled = true
+emission = Color(1, 0.55, 0.2, 1)
+emission_energy_multiplier = 1.6
+
+[sub_resource type="StandardMaterial3D" id="PlatformMaterial"]
+albedo_color = Color(0.16, 0.19, 0.26, 1)
+metallic = 0.5
+roughness = 0.4
+emission_enabled = true
+emission = Color(0.2, 0.8, 1, 1)
+emission_energy_multiplier = 0.45
+
+[sub_resource type="StandardMaterial3D" id="BeaconMaterial"]
+albedo_color = Color(0.3, 0.1, 0.3, 1)
+emission_enabled = true
+emission = Color(1, 0.3, 0.9, 1)
+emission_energy_multiplier = 2.5
+
+[sub_resource type="CylinderMesh" id="PlazaMesh"]
+top_radius = 9.0
+bottom_radius = 9.0
+height = 1.0
+
+[sub_resource type="CylinderShape3D" id="PlazaShape"]
+height = 1.0
+radius = 9.0
+
+[sub_resource type="CylinderMesh" id="UndersideMesh"]
+top_radius = 9.0
+bottom_radius = 0.6
+height = 7.0
+
+[sub_resource type="BoxMesh" id="UnitBoxMesh"]
+size = Vector3(1, 1, 1)
+
+[sub_resource type="BoxMesh" id="PlatformMesh"]
+size = Vector3(3, 0.5, 3)
+
+[sub_resource type="BoxShape3D" id="PlatformShape"]
+size = Vector3(3, 0.5, 3)
+
+[sub_resource type="BoxMesh" id="GoalMesh"]
+size = Vector3(6, 0.5, 6)
+
+[sub_resource type="BoxShape3D" id="GoalShape"]
+size = Vector3(6, 0.5, 6)
+
+[sub_resource type="CylinderMesh" id="BeaconMesh"]
+top_radius = 0.5
+bottom_radius = 0.5
+height = 4.0
+
+[sub_resource type="BoxShape3D" id="BuildingShape1"]
+size = Vector3(3, 8, 3)
+
+[sub_resource type="BoxShape3D" id="BuildingShape2"]
+size = Vector3(2.5, 7, 2.5)
+
+[sub_resource type="BoxShape3D" id="BuildingShape3"]
+size = Vector3(2, 5, 2)
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+rotation = Vector3(-0.75, 0.5, 0)
+light_color = Color(1, 0.78, 0.62, 1)
+light_energy = 1.2
+shadow_enabled = true
+
+[node name="City" type="Node3D" parent="."]
+
+[node name="Plaza" type="StaticBody3D" parent="City"]
+
+[node name="PlazaMesh" type="MeshInstance3D" parent="City/Plaza"]
+position = Vector3(0, -0.5, 0)
+mesh = SubResource("PlazaMesh")
+surface_material_override/0 = SubResource("PlazaMaterial")
+
+[node name="PlazaCollision" type="CollisionShape3D" parent="City/Plaza"]
+position = Vector3(0, -0.5, 0)
+shape = SubResource("PlazaShape")
+
+[node name="PlazaUnderside" type="MeshInstance3D" parent="City/Plaza"]
+position = Vector3(0, -4.5, 0)
+mesh = SubResource("UndersideMesh")
+surface_material_override/0 = SubResource("UndersideMaterial")
+
+[node name="Building1" type="StaticBody3D" parent="City"]
+position = Vector3(-6, 0, -2)
+
+[node name="Mesh" type="MeshInstance3D" parent="City/Building1"]
+position = Vector3(0, 4, 0)
+scale = Vector3(3, 8, 3)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("BuildingSolidMaterial")
+
+[node name="Collision" type="CollisionShape3D" parent="City/Building1"]
+position = Vector3(0, 4, 0)
+shape = SubResource("BuildingShape1")
+
+[node name="Building2" type="StaticBody3D" parent="City"]
+position = Vector3(6, 0, -5)
+
+[node name="Mesh" type="MeshInstance3D" parent="City/Building2"]
+position = Vector3(0, 3.5, 0)
+scale = Vector3(2.5, 7, 2.5)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("NeonCyanMaterial")
+
+[node name="Collision" type="CollisionShape3D" parent="City/Building2"]
+position = Vector3(0, 3.5, 0)
+shape = SubResource("BuildingShape2")
+
+[node name="Building3" type="StaticBody3D" parent="City"]
+position = Vector3(-5.5, 0, 4)
+
+[node name="Mesh" type="MeshInstance3D" parent="City/Building3"]
+position = Vector3(0, 2.5, 0)
+scale = Vector3(2, 5, 2)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("NeonOrangeMaterial")
+
+[node name="Collision" type="CollisionShape3D" parent="City/Building3"]
+position = Vector3(0, 2.5, 0)
+shape = SubResource("BuildingShape3")
+
+[node name="FloatingBuildings" type="Node3D" parent="City"]
+
+[node name="Tower1" type="MeshInstance3D" parent="City/FloatingBuildings"]
+position = Vector3(-20, 6, -14)
+rotation = Vector3(0, 0.4, 0)
+scale = Vector3(5, 16, 5)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("NeonOrangeMaterial")
+
+[node name="Tower2" type="MeshInstance3D" parent="City/FloatingBuildings"]
+position = Vector3(22, 10, -18)
+rotation = Vector3(0, -0.2, 0)
+scale = Vector3(4, 22, 4)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("NeonCyanMaterial")
+
+[node name="Tower3" type="MeshInstance3D" parent="City/FloatingBuildings"]
+position = Vector3(-26, 2, 6)
+rotation = Vector3(0, 0.9, 0)
+scale = Vector3(6, 10, 6)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("NeonCyanMaterial")
+
+[node name="Tower4" type="MeshInstance3D" parent="City/FloatingBuildings"]
+position = Vector3(18, 0, 8)
+rotation = Vector3(0, -0.5, 0)
+scale = Vector3(3.5, 12, 3.5)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("NeonOrangeMaterial")
+
+[node name="Tower5" type="MeshInstance3D" parent="City/FloatingBuildings"]
+position = Vector3(0, 14, -40)
+scale = Vector3(5, 26, 5)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("NeonCyanMaterial")
+
+[node name="Tower6" type="MeshInstance3D" parent="City/FloatingBuildings"]
+position = Vector3(-12, 18, -30)
+rotation = Vector3(0, 0.7, 0)
+scale = Vector3(3, 20, 3)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("NeonOrangeMaterial")
+
+[node name="FallenSlabs" type="Node3D" parent="City"]
+
+[node name="Slab1" type="MeshInstance3D" parent="City/FallenSlabs"]
+position = Vector3(10, -3, -12)
+rotation = Vector3(0.25, 0.7, 0.15)
+scale = Vector3(8, 0.6, 5)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("PlazaMaterial")
+
+[node name="Slab2" type="MeshInstance3D" parent="City/FallenSlabs"]
+position = Vector3(-12, -6, -20)
+rotation = Vector3(-0.2, -0.4, -0.3)
+scale = Vector3(6, 0.6, 8)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("PlazaMaterial")
+
+[node name="Platforms" type="Node3D" parent="."]
+
+[node name="Platform1" type="StaticBody3D" parent="Platforms"]
+position = Vector3(0, 1.25, -10)
+
+[node name="Mesh" type="MeshInstance3D" parent="Platforms/Platform1"]
+mesh = SubResource("PlatformMesh")
+surface_material_override/0 = SubResource("PlatformMaterial")
+
+[node name="Collision" type="CollisionShape3D" parent="Platforms/Platform1"]
+shape = SubResource("PlatformShape")
+
+[node name="Platform2" type="StaticBody3D" parent="Platforms"]
+position = Vector3(3.5, 2.85, -15)
+
+[node name="Mesh" type="MeshInstance3D" parent="Platforms/Platform2"]
+mesh = SubResource("PlatformMesh")
+surface_material_override/0 = SubResource("PlatformMaterial")
+
+[node name="Collision" type="CollisionShape3D" parent="Platforms/Platform2"]
+shape = SubResource("PlatformShape")
+
+[node name="Platform3" type="StaticBody3D" parent="Platforms"]
+position = Vector3(0, 4.45, -20)
+
+[node name="Mesh" type="MeshInstance3D" parent="Platforms/Platform3"]
+mesh = SubResource("PlatformMesh")
+surface_material_override/0 = SubResource("PlatformMaterial")
+
+[node name="Collision" type="CollisionShape3D" parent="Platforms/Platform3"]
+shape = SubResource("PlatformShape")
+
+[node name="Platform4" type="StaticBody3D" parent="Platforms"]
+position = Vector3(-3.5, 6.05, -25)
+
+[node name="Mesh" type="MeshInstance3D" parent="Platforms/Platform4"]
+mesh = SubResource("PlatformMesh")
+surface_material_override/0 = SubResource("PlatformMaterial")
+
+[node name="Collision" type="CollisionShape3D" parent="Platforms/Platform4"]
+shape = SubResource("PlatformShape")
+
+[node name="GoalPlatform" type="StaticBody3D" parent="Platforms"]
+position = Vector3(0, 7.75, -31)
+
+[node name="Mesh" type="MeshInstance3D" parent="Platforms/GoalPlatform"]
+mesh = SubResource("GoalMesh")
+surface_material_override/0 = SubResource("PlatformMaterial")
+
+[node name="Collision" type="CollisionShape3D" parent="Platforms/GoalPlatform"]
+shape = SubResource("GoalShape")
+
+[node name="Beacon" type="MeshInstance3D" parent="Platforms/GoalPlatform"]
+position = Vector3(0, 2.25, 0)
+mesh = SubResource("BeaconMesh")
+surface_material_override/0 = SubResource("BeaconMaterial")
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector3(0, 1, 4)

@@ -1,0 +1,18 @@
+# Godot 4 generated/cache files
+.godot/
+*.translation
+export.cfg
+export_credentials.cfg
+build_profiles.cfg
+
+# Export builds
+/build/
+export/
+*.exe
+*.pck
+*.zip
+
+# Operating system / editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
