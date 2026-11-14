@@ -56,6 +56,8 @@ func _ready() -> void:
 	var collision := CollisionShape3D.new()
 	var shape := ConcavePolygonShape3D.new()
 	shape.set_faces(_faces)
+	# Solid from both sides, so the floor can never be phased through.
+	shape.backface_collision = true
 	collision.shape = shape
 	add_child(collision)
 
@@ -143,7 +145,11 @@ func _add_wall(tool: SurfaceTool, upper_ring: PackedVector3Array, lower_ring: Pa
 
 
 ## Adds one triangle to the mesh and remembers it for the collision shape.
+## Zero-area (degenerate) triangles are skipped: they render as nothing and
+## can upset the physics engine's shape building.
 func _add_triangle(tool: SurfaceTool, a: Vector3, b: Vector3, c: Vector3) -> void:
+	if (b - a).cross(c - a).length_squared() < 0.000001:
+		return
 	tool.add_vertex(a)
 	tool.add_vertex(b)
 	tool.add_vertex(c)
