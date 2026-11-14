@@ -74,6 +74,10 @@ func _process(delta: float) -> void:
 		propeller.rotation.z += delta * 45.0
 		_speed = move_toward(_speed, TAKEOFF_SPEED, TAKEOFF_ACCEL * delta)
 		global_position += FLIGHT_DIRECTION * _speed * delta
+		# The camera stays exactly where it spawned, but turns in place
+		# to keep watching the plane fly into the horizon.
+		if _static_camera != null:
+			_static_camera.look_at(global_position, Vector3.UP)
 		if global_position.distance_to(_takeoff_from) > WIN_DISTANCE:
 			_next_phase()
 	elif _phase == 4:
