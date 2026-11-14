@@ -95,11 +95,11 @@ position = Vector3(0, 0.7, 2.1)
 mesh = SubResource("FinMesh")
 surface_material_override/0 = SubResource("PlaneRed")
 
-[node name="CameraPivot" type="Node3D" parent="."]
-position = Vector3(0, 1.2, 0)
-rotation = Vector3(-0.2, 0, 0)
+[node name="CameraPivot" type="Node3D" parent="Body"]
+position = Vector3(0, 2.4, 0)
+rotation = Vector3(-0.18, 0, 0)
 
-[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+[node name="Camera3D" type="Camera3D" parent="Body/CameraPivot"]
 position = Vector3(0, 0, 9)
 
 [node name="HintLabel" type="Label3D" parent="."]
