@@ -10,11 +10,11 @@ const BOB_SPEED := 1.2
 ## How fast the holo-rings spin.
 const RING_SPEED := 0.6
 ## How close to the portal counts as reaching the goal.
-const WIN_DISTANCE := 4.0
+const WIN_DISTANCE := 5.0
 
 @onready var player: Node3D = $Player
-@onready var beacon_material: StandardMaterial3D = $Tower/TopPlatform/Beacon.get_active_material(0)
-@onready var portal_material: StandardMaterial3D = $GoalIsland/Portal/Ring.get_active_material(0)
+@onready var beacon_material: StandardMaterial3D = $Tower/TopPlatform/Beacon.get_active_material(0) as StandardMaterial3D
+@onready var portal_material: StandardMaterial3D = $GoalIsland/Portal/Ring.get_active_material(0) as StandardMaterial3D
 @onready var portal: Node3D = $GoalIsland/Portal
 @onready var win_label: Label3D = $GoalIsland/Portal/WinLabel
 @onready var rings: Array[Node3D] = [

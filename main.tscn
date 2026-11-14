@@ -1,9 +1,11 @@
-[gd_scene load_steps=35 format=3]
+[gd_scene load_steps=54 format=3]
+
+[ext_resource type="Script" path="res://main.gd" id="1_main_script"]
 
 [ext_resource type="PackedScene" path="res://player.tscn" id="1_player"]
 
 [sub_resource type="ProceduralSkyMaterial" id="SkyMat"]
-sky_top_color = Color(0.12, 0.09, 0.32, 1)
+sky_top_color = Color(0.05, 0.04, 0.18, 1)
 sky_horizon_color = Color(0.85, 0.42, 0.24, 1)
 sky_curve = 0.1
 ground_bottom_color = Color(0.04, 0.03, 0.08, 1)
@@ -19,8 +21,8 @@ ambient_light_source = 3
 ambient_light_energy = 1.0
 tonemap_mode = 2
 glow_enabled = true
-glow_strength = 0.9
-glow_bloom = 0.06
+glow_strength = 1.2
+glow_bloom = 0.1
 fog_enabled = true
 fog_light_color = Color(0.75, 0.5, 0.45, 1)
 fog_density = 0.006
@@ -139,7 +141,89 @@ size = Vector3(5, 0.5, 5)
 [sub_resource type="BoxShape3D" id="TowerBaseShape"]
 size = Vector3(14, 18.6, 14)
 
+[sub_resource type="StandardMaterial3D" id="PortalMaterial"]
+albedo_color = Color(0.3, 0.1, 0.3, 1)
+emission_enabled = true
+emission = Color(1, 0.3, 0.9, 1)
+emission_energy_multiplier = 1.6
+
+[sub_resource type="StandardMaterial3D" id="PortalDiscMaterial"]
+transparency = 1
+albedo_color = Color(0.3, 0.8, 1, 0.35)
+emission_enabled = true
+emission = Color(0.3, 0.85, 1, 1)
+emission_energy_multiplier = 1.2
+
+[sub_resource type="StandardMaterial3D" id="RingMaterial"]
+albedo_color = Color(0.1, 0.2, 0.25, 1)
+emission_enabled = true
+emission = Color(0.2, 0.85, 1, 1)
+emission_energy_multiplier = 1.5
+
+[sub_resource type="StandardMaterial3D" id="BridgeMaterial"]
+albedo_color = Color(0.16, 0.19, 0.26, 1)
+metallic = 0.5
+roughness = 0.4
+emission_enabled = true
+emission = Color(0.2, 0.8, 1, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StarMaterial"]
+shading_mode = 0
+albedo_color = Color(1, 1, 1, 1)
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 1.4
+billboard_mode = 1
+
+[sub_resource type="StandardMaterial3D" id="MoteMaterial"]
+blend_mode = 1
+shading_mode = 0
+albedo_color = Color(0.6, 0.9, 1, 0.6)
+emission_enabled = true
+emission = Color(0.5, 0.9, 1, 1)
+emission_energy_multiplier = 1.2
+billboard_mode = 1
+
+[sub_resource type="BoxMesh" id="BridgeMesh"]
+size = Vector3(4, 0.5, 4)
+
+[sub_resource type="BoxShape3D" id="BridgeShape"]
+size = Vector3(4, 0.5, 4)
+
+[sub_resource type="BoxMesh" id="RestMesh"]
+size = Vector3(6, 0.5, 6)
+
+[sub_resource type="BoxShape3D" id="RestShape"]
+size = Vector3(6, 0.5, 6)
+
+[sub_resource type="BoxMesh" id="IslandMesh"]
+size = Vector3(40, 2, 40)
+
+[sub_resource type="BoxShape3D" id="IslandShape"]
+size = Vector3(40, 2, 40)
+
+[sub_resource type="TorusMesh" id="RingMesh"]
+inner_radius = 2.2
+outer_radius = 2.5
+
+[sub_resource type="TorusMesh" id="PortalRingMesh"]
+inner_radius = 2.6
+outer_radius = 3.0
+
+[sub_resource type="CylinderMesh" id="PortalDiscMesh"]
+top_radius = 2.55
+bottom_radius = 2.55
+height = 0.1
+
+[sub_resource type="QuadMesh" id="StarQuad"]
+size = Vector2(0.4, 0.4)
+
+[sub_resource type="QuadMesh" id="MoteQuad"]
+size = Vector2(0.08, 0.08)
+
 [node name="Main" type="Node3D"]
+script = ExtResource("1_main_script")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1")
@@ -397,6 +481,12 @@ scale = Vector3(12.25, 0.5, 12.25)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimCyan")
 
+[node name="Band2" type="MeshInstance3D" parent="Buildings/G2"]
+position = Vector3(0, 12, 0)
+scale = Vector3(12.25, 0.5, 12.25)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("TrimCyan")
+
 [node name="G3" type="StaticBody3D" parent="Buildings"]
 position = Vector3(-10, 0, -10)
 
@@ -472,6 +562,12 @@ scale = Vector3(12.25, 0.5, 12.25)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimOrange")
 
+[node name="Band2" type="MeshInstance3D" parent="Buildings/G5"]
+position = Vector3(0, 14.5, 0)
+scale = Vector3(12.25, 0.5, 12.25)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("TrimOrange")
+
 [node name="G6" type="StaticBody3D" parent="Buildings"]
 position = Vector3(-10, 0, 10)
 
@@ -543,6 +639,12 @@ surface_material_override/0 = SubResource("TrimOrange")
 
 [node name="Band" type="MeshInstance3D" parent="Buildings/G8"]
 position = Vector3(0, 6.75, 0)
+scale = Vector3(12.25, 0.5, 12.25)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("TrimCyan")
+
+[node name="Band2" type="MeshInstance3D" parent="Buildings/G8"]
+position = Vector3(0, 11, 0)
 scale = Vector3(12.25, 0.5, 12.25)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("TrimCyan")
@@ -1027,6 +1129,266 @@ rotation = Vector3(-0.2, -0.4, -0.3)
 scale = Vector3(6, 0.6, 8)
 mesh = SubResource("UnitBoxMesh")
 surface_material_override/0 = SubResource("SurfaceMaterial")
+
+[node name="Rings" type="Node3D" parent="."]
+
+[node name="Ring1" type="MeshInstance3D" parent="Rings"]
+position = Vector3(-4, 12.1, 27)
+rotation = Vector3(0, 0.5, 0)
+mesh = SubResource("RingMesh")
+surface_material_override/0 = SubResource("RingMaterial")
+
+[node name="Ring2" type="MeshInstance3D" parent="Rings"]
+position = Vector3(-21, 15.4, 10)
+rotation = Vector3(0, 0.8, 0)
+mesh = SubResource("RingMesh")
+surface_material_override/0 = SubResource("RingMaterial")
+
+[node name="Ring3" type="MeshInstance3D" parent="Rings"]
+position = Vector3(-30, 18.6, -9)
+rotation = Vector3(0, 0.6, 0)
+mesh = SubResource("RingMesh")
+surface_material_override/0 = SubResource("RingMaterial")
+
+[node name="Bridge" type="Node3D" parent="."]
+
+[node name="B1" type="StaticBody3D" parent="Bridge"]
+position = Vector3(0, -0.25, -45)
+
+[node name="Mesh" type="MeshInstance3D" parent="Bridge/B1"]
+mesh = SubResource("BridgeMesh")
+surface_material_override/0 = SubResource("BridgeMaterial")
+
+[node name="Collision" type="CollisionShape3D" parent="Bridge/B1"]
+shape = SubResource("BridgeShape")
+
+[node name="B2" type="StaticBody3D" parent="Bridge"]
+position = Vector3(0, 0.05, -50.5)
+
+[node name="Mesh" type="MeshInstance3D" parent="Bridge/B2"]
+mesh = SubResource("BridgeMesh")
+surface_material_override/0 = SubResource("BridgeMaterial")
+
+[node name="Collision" type="CollisionShape3D" parent="Bridge/B2"]
+shape = SubResource("BridgeShape")
+
+[node name="B3" type="StaticBody3D" parent="Bridge"]
+position = Vector3(0, 0.35, -56)
+
+[node name="Mesh" type="MeshInstance3D" parent="Bridge/B3"]
+mesh = SubResource("BridgeMesh")
+surface_material_override/0 = SubResource("BridgeMaterial")
+
+[node name="Collision" type="CollisionShape3D" parent="Bridge/B3"]
+shape = SubResource("BridgeShape")
+
+[node name="B4" type="StaticBody3D" parent="Bridge"]
+position = Vector3(0, 0.65, -61.5)
+
+[node name="Mesh" type="MeshInstance3D" parent="Bridge/B4"]
+mesh = SubResource("BridgeMesh")
+surface_material_override/0 = SubResource("BridgeMaterial")
+
+[node name="Collision" type="CollisionShape3D" parent="Bridge/B4"]
+shape = SubResource("BridgeShape")
+
+[node name="B5" type="StaticBody3D" parent="Bridge"]
+position = Vector3(0, 0.95, -67)
+
+[node name="Mesh" type="MeshInstance3D" parent="Bridge/B5"]
+mesh = SubResource("RestMesh")
+surface_material_override/0 = SubResource("BridgeMaterial")
+
+[node name="Collision" type="CollisionShape3D" parent="Bridge/B5"]
+shape = SubResource("RestShape")
+
+[node name="B6" type="StaticBody3D" parent="Bridge"]
+position = Vector3(0, 0.65, -72.5)
+
+[node name="Mesh" type="MeshInstance3D" parent="Bridge/B6"]
+mesh = SubResource("BridgeMesh")
+surface_material_override/0 = SubResource("BridgeMaterial")
+
+[node name="Collision" type="CollisionShape3D" parent="Bridge/B6"]
+shape = SubResource("BridgeShape")
+
+[node name="B7" type="StaticBody3D" parent="Bridge"]
+position = Vector3(0, 0.35, -78)
+
+[node name="Mesh" type="MeshInstance3D" parent="Bridge/B7"]
+mesh = SubResource("BridgeMesh")
+surface_material_override/0 = SubResource("BridgeMaterial")
+
+[node name="Collision" type="CollisionShape3D" parent="Bridge/B7"]
+shape = SubResource("BridgeShape")
+
+[node name="B8" type="StaticBody3D" parent="Bridge"]
+position = Vector3(0, 0.05, -83.5)
+
+[node name="Mesh" type="MeshInstance3D" parent="Bridge/B8"]
+mesh = SubResource("BridgeMesh")
+surface_material_override/0 = SubResource("BridgeMaterial")
+
+[node name="Collision" type="CollisionShape3D" parent="Bridge/B8"]
+shape = SubResource("BridgeShape")
+
+[node name="GoalIsland" type="Node3D" parent="."]
+position = Vector3(0, -1, -108)
+
+[node name="IslandBody" type="StaticBody3D" parent="GoalIsland"]
+
+[node name="Mesh" type="MeshInstance3D" parent="GoalIsland/IslandBody"]
+mesh = SubResource("IslandMesh")
+surface_material_override/0 = SubResource("SurfaceMaterial")
+
+[node name="Collision" type="CollisionShape3D" parent="GoalIsland/IslandBody"]
+shape = SubResource("IslandShape")
+
+[node name="EdgeTrim" type="MeshInstance3D" parent="GoalIsland"]
+scale = Vector3(40.8, 0.3, 40.8)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("TrimCyan")
+
+[node name="TowerA" type="MeshInstance3D" parent="GoalIsland"]
+position = Vector3(12, 7, -10)
+scale = Vector3(6, 14, 6)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("NeonCyanMaterial")
+
+[node name="TowerB" type="MeshInstance3D" parent="GoalIsland"]
+position = Vector3(-12, 7, -12)
+scale = Vector3(5, 12, 5)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("NeonOrangeMaterial")
+
+[node name="LampA" type="Node3D" parent="GoalIsland"]
+position = Vector3(6, 1, 8)
+
+[node name="Pole" type="MeshInstance3D" parent="GoalIsland/LampA"]
+position = Vector3(0, 1.5, 0)
+scale = Vector3(0.15, 3, 0.15)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("PoleMaterial")
+
+[node name="Glow" type="MeshInstance3D" parent="GoalIsland/LampA"]
+position = Vector3(0, 3.2, 0)
+scale = Vector3(0.35, 0.35, 0.35)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("LampGlowMaterial")
+
+[node name="LampB" type="Node3D" parent="GoalIsland"]
+position = Vector3(-6, 1, 8)
+
+[node name="Pole" type="MeshInstance3D" parent="GoalIsland/LampB"]
+position = Vector3(0, 1.5, 0)
+scale = Vector3(0.15, 3, 0.15)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("PoleMaterial")
+
+[node name="Glow" type="MeshInstance3D" parent="GoalIsland/LampB"]
+position = Vector3(0, 3.2, 0)
+scale = Vector3(0.35, 0.35, 0.35)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("LampGlowMaterial")
+
+[node name="Portal" type="Node3D" parent="GoalIsland"]
+position = Vector3(0, 4.4, 2)
+
+[node name="Ring" type="MeshInstance3D" parent="GoalIsland/Portal"]
+mesh = SubResource("PortalRingMesh")
+surface_material_override/0 = SubResource("PortalMaterial")
+
+[node name="Disc" type="MeshInstance3D" parent="GoalIsland/Portal"]
+rotation = Vector3(1.5708, 0, 0)
+mesh = SubResource("PortalDiscMesh")
+surface_material_override/0 = SubResource("PortalDiscMaterial")
+
+[node name="WinLabel" type="Label3D" parent="GoalIsland/Portal"]
+position = Vector3(0, 3.8, 0)
+billboard = 1
+text = "YOU MADE IT!"
+font_size = 96
+outline_size = 16
+modulate = Color(0.4, 1, 1, 1)
+
+[node name="PortalLight" type="OmniLight3D" parent="GoalIsland/Portal"]
+position = Vector3(0, 0.6, 0)
+light_color = Color(1, 0.4, 0.9, 1)
+light_energy = 2.0
+omni_range = 12.0
+
+[node name="Stars" type="CPUParticles3D" parent="."]
+position = Vector3(0, 70, 0)
+amount = 300
+lifetime = 3600.0
+one_shot = true
+preprocess = 1.0
+explosiveness = 1.0
+visibility_aabb = AABB(-120, -120, -120, 240, 240, 240)
+emission_shape = 1
+emission_sphere_radius = 110.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.0
+initial_velocity_max = 0.0
+mesh = SubResource("StarQuad")
+
+[node name="Motes" type="CPUParticles3D" parent="."]
+position = Vector3(0, 5, 0)
+amount = 80
+lifetime = 10.0
+visibility_aabb = AABB(-45, -10, -45, 90, 20, 90)
+emission_shape = 1
+emission_sphere_radius = 38.0
+direction = Vector3(0, 1, 0)
+spread = 180.0
+gravity = Vector3(0, -0.02, 0)
+initial_velocity_min = 0.1
+initial_velocity_max = 0.3
+scale_amount_min = 0.5
+scale_amount_max = 1.0
+mesh = SubResource("MoteQuad")
+
+[node name="SpawnLight" type="OmniLight3D" parent="."]
+position = Vector3(0, 5, 30)
+light_color = Color(1, 0.85, 0.7, 1)
+light_energy = 1.2
+omni_range = 18.0
+
+[node name="T7" type="MeshInstance3D" parent="Skyline"]
+position = Vector3(80, 10, 10)
+scale = Vector3(5, 18, 5)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("TrimOrange")
+
+[node name="T8" type="MeshInstance3D" parent="Skyline"]
+position = Vector3(-85, 4, -45)
+scale = Vector3(4, 12, 4)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("TrimCyan")
+
+[node name="T9" type="MeshInstance3D" parent="Skyline"]
+position = Vector3(70, 18, -60)
+scale = Vector3(6, 22, 6)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("TrimCyan")
+
+[node name="T10" type="MeshInstance3D" parent="Skyline"]
+position = Vector3(-70, 16, 55)
+scale = Vector3(5, 20, 5)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("TrimOrange")
+
+[node name="T11" type="MeshInstance3D" parent="Skyline"]
+position = Vector3(100, 6, -20)
+scale = Vector3(7, 14, 7)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("TrimOrange")
+
+[node name="T12" type="MeshInstance3D" parent="Skyline"]
+position = Vector3(-100, 2, 40)
+scale = Vector3(5, 10, 5)
+mesh = SubResource("UnitBoxMesh")
+surface_material_override/0 = SubResource("TrimCyan")
 
 [node name="Player" parent="." instance=ExtResource("1_player")]
 position = Vector3(-2, 0.6, 33)
